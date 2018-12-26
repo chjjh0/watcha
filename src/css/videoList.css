@@ -1,0 +1,203 @@
+/*videoList*/
+.videoList {
+    position: relative;
+    width: 90%;
+    height: 320px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    transition: all 0.6s;
+  }
+  
+  .videoList > p {
+    padding: 20px 20px;
+    color: #888;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .videoList .viewMore {
+    float: right;
+    display: block;
+  }
+  
+  .videoList .video {
+    position: relative;
+    float: left;
+    margin: 0 5px;
+    width: 260px;
+    height: 150px;
+    overflow: hidden;
+    color: white;
+    box-sizing: border-box;
+    transition: all 0.3s;
+  }
+  
+  .videoList .video > h2 {
+    position: absolute;
+    display: block;
+    font-weight: normal;
+    font-size: 20px;
+    bottom: 10px;
+    left: 10px;
+  }
+  /* videoInfo */
+  .video .videoInfo > * {
+    display: none;
+    transition: all 0.3s;
+    padding: 0 10px;
+  }
+  
+  .videoInfo .btnPlayBox {
+    width: 100%;
+    height: 115px;
+    text-align: center;
+    padding-top: 20px;
+    box-sizing: border-box;
+  }
+  
+  .videoInfo .viewMoreBox {
+    text-align: center;
+  }
+  
+  .btnPlayBox a {
+    display: block;
+    width: 100%;
+    height: 115px;
+  }
+  
+  .videoInfo > h2 {
+    margin-bottom: 10px;
+  }
+  
+  .videoInfo > p {
+    margin-top: 5px;
+    font-size: 15px;
+    color: white;
+    padding: 3px 0;
+    line-height: 20px;
+  }
+  
+  .videoInfo > p span {
+    border: 2px solid #d9d7d7;
+    margin: 0 5px;
+    padding: 0 5px;
+    font-weight: 500;
+  }
+  
+  .videoInfo .ratingScore {
+    position: absolute;
+    right: 5px;
+    bottom: 10px;
+    font-size: 20px;
+    width: 25px;
+  }
+  
+  
+  
+  
+  
+  .video .videoInfo img {
+    width: 83px;
+    height: 83px;
+    opacity: 0.6;
+  }
+  
+  .videoInfo h2 {
+    display: block;
+    width: 100%;
+    height: 30px;
+  }
+  /* video hoving */
+  .videoDefault:hover {
+    width: 470px;
+    height: 270px;
+    transform: scale(1);
+    z-index: 1;
+    transition: all 0.3s;
+  }
+  
+  .videoDefault:hover h2 {
+    display: none;
+  }
+  
+  .videoDefault:hover .videoInfo > * {
+    display: block;
+    transition: all 0.3s;
+  }
+  
+  .videoDefault:hover .videoInfo > h2 {
+    font-weight: bold;
+    font-size: 25px;
+    display: block;
+    width: 100%;
+    height: 30px;
+  }
+  
+  .videoClick {
+    cursor: pointer;
+  }
+
+  .videoInfo .viewMoreBox:hover {
+    cursor: pointer;
+  }
+  
+  .viewMoreBox #btnViewMore {
+    font-size: 30px;
+    transform: rotate(-270deg);
+  }
+  
+  .videoDetail-container {
+    display: none;
+    position: relative;
+    float: left;
+    margin: 10px 0;
+    padding: 30px 20px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 0;
+    opacity: 0;
+    border-radius: 10px;
+    /* linear-gradient(to right, #121212 40%, transparent) no-repeat,
+    linear-gradient(top, #121212, transparent, #121212) no-repeat; */
+  }
+
+  .videoDetail-containerBG {
+    background: rgba(0,0,0,0.1);
+  }
+  
+  .videoDetail-container #btnClose,
+  .videoDetail-container #btnClose2  {
+    font-size: 30px;
+    position: absolute;
+    right: 70px; top: 70px;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .videoList .videoPrev,
+  .videoList .videoNext
+  {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    height: 150px;
+    font-size: 45px;
+    color: rgba(255,255,255,0.6);
+    background: rgba(0,0,0,0.1);
+    line-height: 150px;
+    cursor: pointer;
+  }
+
+  .videoList .videoPrev {
+    left: 0;
+  }
+
+  .videoList .videoNext {
+    right: 0;
+  }
+
+.videoList:hover .videoPrev,
+.videoList:hover .videoNext
+{
+    display: block;
+}
