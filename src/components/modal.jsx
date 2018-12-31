@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 // components
-import YouTube from './videoBG.jsx';
 //css
-import '../css/slideArea.css';
+import '../css/modal.css';
 //img
-import Bggradient from '../img/bgGradient.png'
 import $ from 'jquery';
 window.$ = $;
 
 
-class slideArea extends Component {
+class modal extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -25,7 +23,7 @@ class slideArea extends Component {
 
     slideInit(){
         var imgAry = [
-            'gameofthrone.jpg',
+            'GameOfThrone.jpg',
             'ironman.jpg',
             'ifonly.jpg',
             'secret.jpg',
@@ -39,28 +37,28 @@ class slideArea extends Component {
             synopsis: '웨스테로스 대륙의 연맹 국가인 칠 왕국이 통치권과 철 왕좌를 차지하기 위한 싸움을 벌이는 가운데, 장벽 너머에 전설 속의 적이 부활했다는 소문이 모두를 위협한다.'
         });
         this.slideAry.push({
-            image: imgAry[1],
+            image: 'ironman.jpg',
             title: '아이언 맨',
             ratingValue: '3.9',
             rating: '2008 • 12세 • 2시간 5분',
             synopsis: '억만장자 CEO이자 천재 발명가인 토니 스타크는 아프가니스탄에서 납치되어 무기를 만들 것을 강요당하지만, 독창적인 철갑 무장 슈트를 만들어 탈출한 뒤 악에 맞서 싸우기로 다짐한다.'
         });
         this.slideAry.push({
-            image: imgAry[2],
+            image: 'ifonly.jpg',
             title: '이프 온리',
             ratingValue: '3.7',
             rating: '2004 • 15세 • 1시간 35분',
             synopsis: '눈앞에서 사랑하는 여인 사만다를 잃은 이안. 다음 날 아침, 이안은 자신의 옆에서 아무 일 없다는 듯 자고 있는 사만다를 보고 소스라치게 놀란다. '
         });
         this.slideAry.push({
-            image: imgAry[3],
+            image: 'secret.jpg',
             title: '말할 수 없는 비밀',
             ratingValue: '4.2',
             rating: '2007 • 12세 • 1시간 41분',
             synopsis: '예술학교로 전학 온 상륜은 옛 음악실에서 샤오위라는 소녀를 만난다. 가까워질수록 애틋한 마음이 싹트지만 샤오위에 대해 더 알고 싶어 할 때마다 그녀는 어느 샌가 사라져버린다.'
         });
         this.slideAry.push({
-            image: imgAry[4],
+            image: 'toystory3.jpg',
             title: '토이 스토리 3',
             ratingValue: '3.5',
             rating: '2010 • 전체 • 1시간 42분',
@@ -109,40 +107,46 @@ class slideArea extends Component {
 
     render() {
         return (
-        <div className="slideArea">
-            <div>
-                <img className="bgGradient" src={Bggradient} alt=""/>
-            </div>
-            {/* <div id="_youtube-iframe-wrapper">
-                <div id="_youtube-iframe" data-youtubeurl="9ckVh61aFKc"></div>
-            </div> */}
-             {/* <YouTube video="mYFaghHyMKc" autoplay="1" rel="0" modest="1" /> */}
-            <div className="slideEle">
-                <div className="contentInfo ">
-                    <h2></h2>
+            <div className="paymentModal">
+                <div className="modalContent">
+                    <h2>왓챠플레이 이용권 구매</h2>
+                    <p>첫달 무료 무제한 Full-HD 스트리밍</p>
+                    <hr></hr>
                     <p>
-                        <span className="ratingLabel">예상 별점</span>
-                        <span className="ratingValue"></span>
-                        <span className="rating"></span>
+                        <i className="fas fa-tv"></i> Full-HD의 선명한 화질
                     </p>
-                    <p className="synopsis"></p>
-                    <div className="btnBox">
-                        <button className="btnPlay"><i className="far fa-play-circle"></i>재생</button>
-                        <button className="btnWish"><i className="fas fa-plus"></i>보고싶어요</button>
-                        <button className="nop"><i className="fas fa-ban"></i>관심없어요</button>
-                    </div> {/* //btnBox */}
-                </div> {/* //contentInfo */}
-            </div> {/* //slideEle */}
-            {/* chageSlide */}
-            <div className="slidePrev" onClick={this.btnPrev}>
-                <i className="fas fa-chevron-left"></i>
-            </div>
-            <div className="slideNext" onClick={this.btnNext}>
-                <i className="fas fa-chevron-right"></i>
-            </div>
-        </div>
+                    <p>
+                        <i className="fas fa-star"></i> 4억개의 평가 데이터에 기반한 추천 엔진
+                    </p>
+                    <p>
+                        <i className="far fa-play-circle"></i> 모든 영화, 드라마, 다큐 애니 무제한 감상
+                    </p>
+                    <p>
+                        <i className="fas fa-mobile-alt"></i> &quot;다양한 기기에서 끊김없이&quot;
+                    </p>
+                    <p>
+                    <i className="fas fa-exclamation-circle"></i> 설정 메뉴에서 위약금 없이 언제든 해지 가능
+                    </p>
+                    <h3>이용권 선택</h3>
+                    <div className="basicTicket">
+                        <p>기본 이용권</p>
+                        <p>기본 기기에서 합리적으로</p>
+                        <p><strong>지원기기</strong> 모바일/테블릿, PC, 맥</p>
+                        <p>첫달 무료</p>
+                        <p>이후 월 4,900원</p>
+                    </div>
+                    <div className="highTicket">
+                    <p>TV 지원 이용권</p>
+                        <p>TV, 크롭캐스트 등 더 큰 화면에서도</p>
+                        <p><strong>지원기기</strong> 모바일/테블릿, PC, 맥, 크롬캐스트, 스마트 TV</p>
+                        <p>첫달 무료</p>
+                        <p>이후 월 7,900원</p>
+                    </div>
+                    <i id="btnCloseModal" className="fas fa-times"></i>    
+                </div> {/* //modalContent */}
+          </div> 
         );
     }
     }
 
-export default slideArea;
+export default modal;
