@@ -106,6 +106,9 @@ class modal extends Component {
 
 
     render() {
+        {
+            alert('modal')
+        }
         return (
             <div className="paymentModal">
                 <div className="modalContent">

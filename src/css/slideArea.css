@@ -1,32 +1,45 @@
 /* slideArea */
+/* z-index Priority
+  youtubeArea : 0
+  bgGradient : 1
+  slideEle : 2
+  slidePrev, slideNext : 3
+*/
 .slideArea {
-  display: none;
+    display: none;
     position: relative;
     width: 100%;
-    height: 600px;
+    height: 530px;
     padding-top: 60px;
-    /* background: url('../img/secret.jpg') no-repeat right/60%; */
-    /* 
-      linear-gradient(left, #121212 45%, transparent) no-repeat,  
-      linear-gradient(top, transparent 80%, transparent 80%, #121212 100%) no-repeat,
-    */
+    overflow: hidden;
+  }
+
+  .youtubeArea {
+    position: absolute;
+    z-index: 0;
   }
 
   .slideArea .bgGradient {
     position: absolute;
+    z-index: 1;
     width: 100%;
-    height: 100%;
+    height: 600px;
+    background: url("../img/bgGradient.png");
+    overflow: hidden;
   }
   
-  .slideArea > .slideEle {
-    position: absolute;
+  .slideArea .slideEle {
+    position: relative;
+    z-index: 2;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     width: 1400px;
-    height: 100%;
+    /* with slideArea same size */
+    height: 530px;
     margin: 0 auto;
+    overflow: hidden;
   }
   
   /* contentInfo */
@@ -79,7 +92,6 @@
   
   /*btnBox*/
   .btnBox {
-    z-index: 4;
     width: 550px;
     margin: 10px 0 30px;
   }
@@ -116,6 +128,7 @@
 
   .slidePrev, .slideNext {
       position: absolute;
+      z-index: 3;
       top: 50%;
       font-size: 50px;
       color: rgba(255,255,255,0.5);
@@ -139,29 +152,4 @@
   .slideNext:hover {
     color: rgba(255,255,255,0.9);
     cursor: pointer;
-  }
-
-  /* youtube */
-  #_youtube-iframe {
-    position: absolute;
-    z-index: 100;
-    width: 1000px;
-    height: 600px;
-  }
-
-  .fade {
-    -webkit-animation-name: fade;
-    -webkit-animation-duration: 1.5s;
-    animation-name: fade;
-    animation-duration: 1.5s;
-  }
-
-  @-webkit-keyframes fade {
-    from {opacity: .4} 
-    to {opacity: 1}
-  }
-  
-  @keyframes fade {
-    from {opacity: .4} 
-    to {opacity: 1}
   }

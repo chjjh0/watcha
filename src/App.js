@@ -6,6 +6,8 @@ import './css/style.css';
 import ModalPayment from './components/modal.jsx';
 import SlideArea from './components/slideArea.jsx';
 import VideoList from './components/videoList.jsx';
+import YoutubeArea from './components/youtubeArea.jsx';
+// jQuery
 import $ from 'jquery';
 window.$ = $;
 
@@ -85,17 +87,7 @@ class App extends Component {
       <section className="wrap">
       <header>
         <div className="nav">
-          <div className="lnb">
-            <p>EVENT</p>
-            <p>첫 1개월 무료체험 이벤트! 모든작품, 무제한 감상하세요. 마음에 들지 않으면 클릭 1번으로 언제든 해지할 수 있어요.</p>
-            <div className="paymentBox">
-              <div className="payment-bar">이용권 구매</div>
-              
-              <div className="payment-coupon">쿠폰 등록</div>
-            </div>
-            {/* paymentModal */}
-            
-          </div> {/* //lnb */}
+          
           <div className="gnb">
           <div className="gnbInner">
             
@@ -150,8 +142,6 @@ class App extends Component {
       <SlideArea />
     </header>
     <VideoList/>
-    
-    <div className="one">123</div>
   </section>
     );
   }

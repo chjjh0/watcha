@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // components
-import YouTube from './videoBG.jsx';
+import Youtube from '../components/youtubeArea';
 //css
 import '../css/slideArea.css';
 //img
@@ -13,7 +13,8 @@ class slideArea extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            slideNum: 0
+            slideNum: 0,
+            youtubeId: 'BpJYNVhGf1s'
         }
         this.slideAry = [];
         this.slideInit = this.slideInit.bind(this);
@@ -24,43 +25,50 @@ class slideArea extends Component {
      }
 
     slideInit(){
-        var imgAry = [
-            'gameofthrone.jpg',
+        var videoIdAry = [
+            'BpJYNVhGf1s',
             'ironman.jpg',
             'ifonly.jpg',
             'secret.jpg',
             'toystory3.jpg'
         ]
+        // var imgAry = [
+        //     'gameofthrone.jpg',
+        //     'ironman.jpg',
+        //     'ifonly.jpg',
+        //     'secret.jpg',
+        //     'toystory3.jpg'
+        // ]
         this.slideAry.push({
-            image: imgAry[0],
+            videoId: videoIdAry[0],
             title: '왕좌의 게임 시즌 1',
             ratingValue: '4.1',
             rating: '2011 • 청불 • 에피소드 10개',
             synopsis: '웨스테로스 대륙의 연맹 국가인 칠 왕국이 통치권과 철 왕좌를 차지하기 위한 싸움을 벌이는 가운데, 장벽 너머에 전설 속의 적이 부활했다는 소문이 모두를 위협한다.'
         });
         this.slideAry.push({
-            image: imgAry[1],
+            videoId: videoIdAry[1],
             title: '아이언 맨',
             ratingValue: '3.9',
             rating: '2008 • 12세 • 2시간 5분',
             synopsis: '억만장자 CEO이자 천재 발명가인 토니 스타크는 아프가니스탄에서 납치되어 무기를 만들 것을 강요당하지만, 독창적인 철갑 무장 슈트를 만들어 탈출한 뒤 악에 맞서 싸우기로 다짐한다.'
         });
         this.slideAry.push({
-            image: imgAry[2],
+            videoId: videoIdAry[2],
             title: '이프 온리',
             ratingValue: '3.7',
             rating: '2004 • 15세 • 1시간 35분',
             synopsis: '눈앞에서 사랑하는 여인 사만다를 잃은 이안. 다음 날 아침, 이안은 자신의 옆에서 아무 일 없다는 듯 자고 있는 사만다를 보고 소스라치게 놀란다. '
         });
         this.slideAry.push({
-            image: imgAry[3],
+            videoId: videoIdAry[3],
             title: '말할 수 없는 비밀',
             ratingValue: '4.2',
             rating: '2007 • 12세 • 1시간 41분',
             synopsis: '예술학교로 전학 온 상륜은 옛 음악실에서 샤오위라는 소녀를 만난다. 가까워질수록 애틋한 마음이 싹트지만 샤오위에 대해 더 알고 싶어 할 때마다 그녀는 어느 샌가 사라져버린다.'
         });
         this.slideAry.push({
-            image: imgAry[4],
+            videoId: videoIdAry[4],
             title: '토이 스토리 3',
             ratingValue: '3.5',
             rating: '2010 • 전체 • 1시간 42분',
@@ -70,14 +78,16 @@ class slideArea extends Component {
     }
 
     changeSlide(...num) {
-        var slideImg = this.slideAry[num[0]].image;
+        // var slideImg = this.slideAry[num[0]].image;
+        this.state.youtubeId = this.slideAry[num[0]].videoId;
         var title = this.slideAry[num[0]].title;
         var ratingValue = this.slideAry[num[0]].ratingValue;
         var rating = this.slideAry[num[0]].rating;
         var synopsis = this.slideAry[num[0]].synopsis;
         $(function(){
             $(".slideArea").css("display","none");
-            $(".slideArea").css("background", "url('../imgp/"+slideImg+"') no-repeat right/55%")
+            
+            //$(".slideArea").css("background", "url('../imgp/"+slideImg+"') no-repeat right/55%")
             $(".slideEle").find("h2").html(title);
             $(".slideEle").find(".ratingValue").html(ratingValue);
             $(".slideEle").find(".rating").html(rating);
@@ -110,13 +120,12 @@ class slideArea extends Component {
     render() {
         return (
         <div className="slideArea">
-            <div>
-                <img className="bgGradient" src={Bggradient} alt=""/>
+            <div className="bgGradient">
+                {/* <img className="" src={Bggradient} alt=""/> */}
             </div>
-            {/* <div id="_youtube-iframe-wrapper">
-                <div id="_youtube-iframe" data-youtubeurl="9ckVh61aFKc"></div>
-            </div> */}
-             {/* <YouTube video="mYFaghHyMKc" autoplay="1" rel="0" modest="1" /> */}
+            <div className="youtubeArea">
+                <Youtube video={this.state.youtubeId} autoplay="1" rel="0" modest="1" width="90"/>
+            </div>
             <div className="slideEle">
                 <div className="contentInfo ">
                     <h2></h2>

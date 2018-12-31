@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-
+// jQuery
+import $ from 'jquery';
+window.$ = $;
 
 class YouTube extends Component {
 
@@ -11,19 +13,21 @@ class YouTube extends Component {
         var videoSrc = "https://www.youtube.com/embed/" + 
         this.props.video + "?autoplay=" + 
         this.props.autoplay + "&mute=1" + "&controls=0" + "&showinfo=0" + "&rel=" + 
-        this.props.rel + "&modestbranding=" +
+        this.props.rel + "&loop=1" + "&playlist="+ this.props.video + "&modestbranding=" +
         this.props.modest;
+        
         return(
+            <div className="youtubeArea">
                 <iframe 
                     title='a'
                     className="player" 
                     type="text/html" 
-                    width="100%" 
-                    height="100%"
+                    width={this.props.width+"%"} 
+                    height="1300px"
                     src={videoSrc}
                     frameBorder = '0'
                     />
-            
+            </div>
         );
     }
 }
