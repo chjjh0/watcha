@@ -11,7 +11,7 @@ import $ from 'jquery';
 window.$ = $;
 
 
-class videoList extends Component {
+class VideoList extends Component {
 
  constructor(props) {
     super(props);
@@ -401,28 +401,26 @@ btnNext(){
  }
  
     render() {
-        {
-            var newLocal = this;
-            // videoHovered
-            $(function() {
-                $(".videoHoverMode").hover(function() {
-                    newLocal.videoHovered();
-                });
+        var newLocal = this;
+        // videoHovered
+        $(function() {
+            $(".videoHoverMode").hover(function() {
+                newLocal.videoHovered();
             });
-            // videoClickMode
-            $(function() {
-                $(".video").click(function(){
-                    if($(this).hasClass("videoClickMode")) {
-                    var idTemp = $(this).attr("id").valueOf();
-                    var indexTemp = idTemp.substring(idTemp.length-1, idTemp.length);
-                    newLocal.videoSelected(indexTemp);
-                    newLocal.viewMore(indexTemp);
-                    
-                }
-                });
+        });
+        // videoClickMode
+        $(function() {
+            $(".video").click(function(){
+                if($(this).hasClass("videoClickMode")) {
+                var idTemp = $(this).attr("id").valueOf();
+                var indexTemp = idTemp.substring(idTemp.length-1, idTemp.length);
+                newLocal.videoSelected(indexTemp);
+                newLocal.viewMore(indexTemp);
+                
+            }
             });
+        });
         //function end
-        }
         return (
         <div className="videoArea">
         {/* categoryTitle */}
@@ -614,4 +612,4 @@ btnNext(){
     }
     }
 
-export default videoList;
+export default VideoList;

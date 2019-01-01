@@ -8,7 +8,7 @@ import $ from 'jquery';
 window.$ = $;
 
 
-class slideArea extends Component {
+class SlideArea extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -139,9 +139,10 @@ class slideArea extends Component {
             <div className="slideNext" onClick={this.btnNext}>
                 <i className="fas fa-chevron-right"></i>
             </div>
+        {/* //slideArea */}
         </div>
         );
     }
     }
 
-export default slideArea;
+export default SlideArea;

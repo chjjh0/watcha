@@ -8,7 +8,7 @@ import $ from 'jquery';
 window.$ = $;
 
 
-class marvelArea extends Component {
+class MarvelArea extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -117,7 +117,6 @@ class marvelArea extends Component {
     
 
     render() {
-        {
             var newLocal = this;
             $(function(){
                 $(document).on("click", ".marvelPreview", function(){
@@ -133,7 +132,6 @@ class marvelArea extends Component {
                     newLocal.btnMarvelPreview(youtubeId);
                 });
             });
-        }
         return (
         <div className="marvelArea">
             <div className="marvelImg"></div>
@@ -175,4 +173,4 @@ class marvelArea extends Component {
     }
 }
 
-export default marvelArea;
+export default MarvelArea;

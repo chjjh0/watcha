@@ -4,7 +4,7 @@
     position: fixed; 
     overflow: auto;
     z-index: 6; 
-    padding-top: 200px; 
+    padding-top: 100px; 
     left: 0;
     top: 0;
     width: 100%; 
@@ -15,7 +15,7 @@
   .modalContent {
     position: relative;
     width: 500px;
-    height: 600px;
+    height: 550px;
     background: white;
     border-radius: 15px;
     -webkit-animation-name: zoom;
