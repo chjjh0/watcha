@@ -1,21 +1,18 @@
 /* slideArea */
 .slideArea {
-  display: none;
+    display: none;
     position: relative;
     width: 100%;
-    height: 600px;
+    height: 570px;
     padding-top: 60px;
-    /* background: url('../img/secret.jpg') no-repeat right/60%; */
-    /* 
-      linear-gradient(left, #121212 45%, transparent) no-repeat,  
-      linear-gradient(top, transparent 80%, transparent 80%, #121212 100%) no-repeat,
-    */
+    overflow: hidden;
   }
 
   .slideArea .bgGradient {
     position: absolute;
     width: 100%;
     height: 100%;
+    background: url('../img/bgGradient.png') no-repeat top center/100%;
   }
   
   .slideArea > .slideEle {

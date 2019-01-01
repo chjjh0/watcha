@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 // components
-import YouTube from './videoBG.jsx';
 //css
 import '../css/slideArea.css';
 //img

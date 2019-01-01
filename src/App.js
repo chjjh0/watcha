@@ -6,6 +6,7 @@ import './css/style.css';
 import ModalPayment from './components/modal.jsx';
 import SlideArea from './components/slideArea.jsx';
 import VideoList from './components/videoList.jsx';
+import MarvelArea from './components/marvel.jsx';
 import $ from 'jquery';
 window.$ = $;
 
@@ -13,22 +14,27 @@ window.$ = $;
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      marvelvideoId: 'hA6hldpSTF8'
+    }
+    this.marvelImgAry = [
+      'avengers_1.png',
+      'ironman.png'
+    ]
     this.btnCategory = this.btnCategory.bind(this);
     this.initialize = this.initialize.bind(this);
   }
 
-  
   initialize() {
     
   }
-  
+
   btnCategory(cateName) {
     $(".category-container > li").removeClass("active");
     $(".category-container > li > ul").css("display", "none");
     $("."+cateName).addClass("active");
     $("."+cateName+" > ul").css("display", "block");
   }
-
 
   render() {
     {
@@ -150,8 +156,7 @@ class App extends Component {
       <SlideArea />
     </header>
     <VideoList/>
-    
-    <div className="one">123</div>
+    <MarvelArea />
   </section>
     );
   }

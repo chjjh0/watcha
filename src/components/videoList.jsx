@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // components
-import Youtube from '../components/videoBG.jsx';
+import Youtube from './youtube.jsx';
 // css
 import '../css/style.css';
 import '../css/videoList.css';
@@ -45,11 +45,6 @@ viewMore(num) {
     var viewMoreSynopsis = $("#videoIndex"+num+" > .videoDesc > p:eq(1)").html();
 //  video scale >> basic video shape
 //  change videoHoverMode >> videoClickMode
-    // for(var i=0;i<5;i++){
-    //     $("#videoIndex"+i).css("transform","none");
-    //     $("#videoIndex"+i).removeClass("videoHoverMode");
-    //     $("#videoIndex"+i).addClass("videoClickMode");
-    // }
     $(".video").css("transform","none");
     $(".video").removeClass("videoHoverMode");
     $(".video").addClass("videoClickMode");
@@ -419,7 +414,7 @@ btnNext(){
                 $(".video").click(function(){
                     if($(this).hasClass("videoClickMode")) {
                     var idTemp = $(this).attr("id").valueOf();
-                    var indexTemp = idTemp.substring(idTemp.length-1, idTemp.length);;
+                    var indexTemp = idTemp.substring(idTemp.length-1, idTemp.length);
                     newLocal.videoSelected(indexTemp);
                     newLocal.viewMore(indexTemp);
                     
