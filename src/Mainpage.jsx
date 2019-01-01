@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter} from 'react-router-dom';
-
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-
+import App from './App.jsx';
+ 
 class MainPage extends Component {
  
     render() {
@@ -18,8 +15,6 @@ class MainPage extends Component {
         )
     }
  
-} 
-ReactDOM.render(<MainPage />, document.getElementById('root'));
-
-
-serviceWorker.unregister();
+}
+ 
+ReactDOM.render(<MainPage/>, document.getElementById('root'));

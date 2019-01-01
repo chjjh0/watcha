@@ -81,7 +81,7 @@
     float: left;
     width: 230px;
     height: 90px;
-    background: url('../img/logo.PNG') no-repeat center/cover;
+    background: url('../img/logo.png') no-repeat center/cover;
   }
   
   .leftNav > .btnCategory,

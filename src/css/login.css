@@ -1,6 +1,53 @@
 /* login */
 .login {
     width: 100%;
-    height: 100%;
+    height: 770px;
     background: url('../img/login.jpg') no-repeat center/cover;
+}
+/* overlay-login */
+.overlay-login {
+    position: fixed;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+}
+
+/* login-container */
+.login-container {
+    position: relative;
+    z-index: 1;
+    top: 100px;
+    left: 350px;
+    width: 350px;
+    height: 500px;
+    font-size: 22px;
+    color: white;
+}
+
+.login-container hr {
+    width: 300px;
+    margin: 0 auto;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* sign common */
+.signin,
+.signup {
+    width: 350px;
+    height: 70px;
+    margin: 30px 0;
+    text-align: center;
+    line-height: 70px;
+    border: 1px solid rgba(255,255,255,0.7);
+    border-radius: 35px;
+    cursor: pointer;
+}
+/* signin */
+.signin {
+    background: rgba(0, 198, 255, 0.8);
+}
+/* signup */
+.signup {
+    background: rgba(0, 0, 0, 0.7);
 }

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 // components
 import ModalPayment from './modal.jsx';
 // css
@@ -26,9 +28,11 @@ class Nav extends Component {
         
     scrollFunction() {
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            $(".gnb")[0].style.background = "rgba(0,0,0,0.8)";
+            // $(".gnb")[0].style.background = "rgba(0,0,0,0.8)";
+            $(".gnb").css({"background":"rgba(0,0,0,0.8)"});
         } else {
-            $(".gnb")[0].style.background = "transparent";
+            // $(".gnb")[0].style.background = "transparent";
+            $(".gnb").css({"background":"transparent"});
         }
     }
     
@@ -129,7 +133,9 @@ class Nav extends Component {
                                 <input className="searchBar" type="text" placeholder="&#xf02b; 제목,감독,배우로 검색" />
                             </a>
                         <a href="#">보고싶어요</a>
-                        <a href="#">로그인</a>
+                        <Link to="/login">
+                            <a href="#">로그인</a>
+                        </Link>
                         {/* //rightNav */}
                         </div>
                 {/* //gnbInner */}

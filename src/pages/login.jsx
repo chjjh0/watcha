@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // css
-import './css/login.css';
+import '../css/login.css';
+import Logo from '../img/logo.png';
 // components
 // jQuery
 import $ from 'jquery';
@@ -16,10 +17,14 @@ class Login extends Component {
     return (
     <section className="login">
         <div className="overlay-login"></div>
-        <div>
+        <div className="login-container">
             <h1>
-                <img src="../img/logo.PNG" alt="logoImage"></img>
+              <img src={Logo} alt="logoImage"></img>
             </h1>
+            <div className="signin">로그인</div>
+            <hr/>
+            <div className="signup">이메일로 가입</div>
+        {/* //login-container */}
         </div>
     </section>
     );
