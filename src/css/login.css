@@ -51,3 +51,19 @@
 .signup {
     background: rgba(0, 0, 0, 0.7);
 }
+
+/* test */
+input {
+    border: 10px solid transparent;
+    outline: none;
+    padding: 15px;
+    background: transparent;
+    font-size: 25px;
+    -webkit-border-image: url(../img/border.png) 30 round; /* Safari 3.1-5 */
+    -o-border-image: url(../img/border.png) 30 round; /* Opera 11-12.1 */
+    border-image: url(../img/border.png) 30 round;
+}
+
+input::placeholder {
+    color: rgba(0, 198, 255, 0.8);
+}
