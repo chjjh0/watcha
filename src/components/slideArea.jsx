@@ -76,7 +76,7 @@ class SlideArea extends Component {
         var synopsis = this.slideAry[num[0]].synopsis;
         $(function(){
             $(".slideArea").css("display","none");
-            $(".slideArea").css("background", "url('../imgp/"+slideImg+"') no-repeat right/55%")
+            $(".slideArea").css("background", "url('../imgp/"+slideImg+"') no-repeat right 50px/55%")
             $(".slideEle").find("h2").html(title);
             $(".slideEle").find(".ratingValue").html(ratingValue);
             $(".slideEle").find(".rating").html(rating);

@@ -1,22 +1,39 @@
 /* login */
 .login {
     width: 100%;
-    height: 770px;
-    background: url('../img/login.jpg') no-repeat center/cover;
+    height: 100%;
 }
 /* overlay-login */
 .overlay-login {
     position: fixed;
-    z-index: 0;
+    z-index: 1;
     width: 100%;
     height: 100%;
     background: rgba(0,0,0,0.6);
+    overflow: hidden;
+}
+/* backgroundImg */
+.backgroundImg {
+    position: fixed;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    background: purple;
+    overflow: hidden;
+}
+
+.backgroundImg > img {
+    position: relative;
+    top: -200px;
+    widows: 100%;
+    height: 140%;
 }
 
 /* login-container */
 .login-container {
     position: relative;
-    z-index: 1;
+    top: -200px;
+    z-index: 2;
     top: 100px;
     left: 350px;
     width: 350px;

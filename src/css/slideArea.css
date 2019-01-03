@@ -30,7 +30,7 @@
   .contentInfo {
     position: absolute;
     left: 0;
-    bottom: 0;
+    bottom: 60px;
     color: white;
   }
   
@@ -120,11 +120,11 @@
   }
 
   .slidePrev {
-      left: 1%;
+      left: 7%;
   }
 
   .slideNext {
-    right: 1%;
+    right: 7%;
   }
 
   .slideArea:hover .slidePrev,

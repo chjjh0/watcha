@@ -59,8 +59,8 @@ viewMore(num) {
     $(".videoDetail-contentInfo").find(".videoDetail-rating").html(viewMoreRating);
     $(".videoDetail-contentInfo").find(".videoDetail-synopsis").html(viewMoreSynopsis);
 //  smooth change display
-    $(".videoDetail-container").css("display","none");
-    $(".videoDetail-container").fadeIn("fast");
+    
+    $(".videoDetail-container").slideDown("slow");
 }
 
 videoSelected(num) {
@@ -225,7 +225,7 @@ closeVideoDetail() {
     for(;i<end;i++) {
         $("#videoIndex"+i).addClass("videoHoverMode");
     }
-    $(".videoDetail-container").fadeOut("slow");
+    $(".videoDetail-container").slideUp("slow");
 }
 
 btnPrev() {
@@ -424,7 +424,6 @@ btnNext(){
         return (
         <div className="videoArea">
         {/* categoryTitle */}
-        <div className="btnArea">
         <div className="videoList">
         <p>
             <span className="videoLabel_new">새로 올라온 작품</span>
@@ -575,7 +574,10 @@ btnNext(){
             {/* //videoInner */}
             </div>
             
-            <div className="videoDetail-container">
+            
+        {/* //videoList */}
+        </div>
+        <div className="videoDetail-container">
                 <div className="videoDetail-bgGradient"></div>
                 <div className="videoDetail-contentInfo">
                     <h2></h2>
@@ -597,8 +599,6 @@ btnNext(){
                     <i id="videoDetail-btnClose" onClick={this.closeVideoDetail} className="fas fa-times videoDetail-btnClose"></i>
                 {/* //videoDetail */}
                 </div>
-        {/* //videoList */}
-        </div>
         {/* video prev, next */}
         <div className="btnVideoPrev" onClick={this.btnPrev}>
             <i className="fas fa-chevron-left"></i>
@@ -606,7 +606,6 @@ btnNext(){
         <div className="btnVideoNext" onClick={this.btnNext}>
             <i className="fas fa-chevron-right"></i>
         </div> 
-        </div>
         </div> 
         );
     }

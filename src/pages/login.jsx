@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 // css
 import '../css/login.css';
+// img
 import Logo from '../img/logo.png';
-// components
+import LegoBack from '../img/login.jpg'
 // jQuery
 import $ from 'jquery';
 window.$ = $;
@@ -17,6 +18,9 @@ class Login extends Component {
     return (
     <section className="login">
         <div className="overlay-login"></div>
+        <div className="backgroundImg">
+          <img src={LegoBack} alt=""/>
+        </div>
         <div className="login-container">
             <h1>
               <img src={Logo} alt="logoImage"></img>

@@ -22,6 +22,10 @@ class App extends Component {
   render() {
     return (
     <section className="wrap">
+      {/* 
+        header를 유지할 경우 다른 페이지에서 공간을 가지고 있음 
+        header 변경해야함
+      */}
       {/* <header>  */}
         <Route exact path="/" component={Nav} />  
         <Route exact path="/" component={SlideArea} />

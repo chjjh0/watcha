@@ -5,6 +5,7 @@
     height: 220px;
     box-sizing: border-box;
     margin: 0 auto 50px;
+    padding: 0 250px 0 150px;
   }
 
 .videoArea .videoList > p {
@@ -12,6 +13,8 @@
   font-size: 20px;
   font-weight: bold;
   margin: 10px 0;
+  
+  
 }
 
 /* btnArea */
@@ -25,16 +28,24 @@
 /* videoList */
 .videoArea .videoList {
   position: relative;
-  width: 1400px;
-  height: 170px;
+  width: 1600px;
+  height: 270px;
   margin: 0 auto;
+  padding-left: 100px;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .videoList .videoInner {
+  position: relative;
   width: 4000px;
   height: 170px;
 }
+
+.videoList > p {
+  position: relative;
+}
+
 /* video */
 .video {
   position: relative;
@@ -120,20 +131,21 @@
 }
 
 .videoArea .btnVideoPrev {
-  left: 5%;
+  left: 7%;
 }
 .videoArea .btnVideoNext {
-  right: 5%;
+  right: 7%;
 }
 
 /* videoDetail-container */
-.videoList > .videoDetail-container {
+.videoDetail-container {
   display: none;
   position: relative;
   float: left;
   width: 1400px;
   height: 400px;
   background: orange;
+  padding-left: 100px;
 }
 
 .videoDetail-container > .videoDetail-bgGradient {
@@ -149,7 +161,6 @@
   position: absolute;
   z-index: 1;
   top: 30px;
-  left: 30px;
   width: 550px;
   height: 400px;
   color: rgb(238, 238, 238);
@@ -297,8 +308,8 @@
     opacity: 1;
   }
 
-  .btnArea:hover .btnVideoPrev,
-  .btnArea:hover .btnVideoNext {
+  .videoArea:hover .btnVideoPrev,
+  .videoArea:hover .btnVideoNext {
     display: block;
   }
 
