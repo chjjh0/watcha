@@ -52,7 +52,7 @@ viewMore(num) {
     this.videoSelected(num);
 //  viewMore set1
     $(".videoDetail-container").css({
-        "background":"url('imgp/"+viewMoreImage+"') no-repeat right/55%"
+        "background":"url('img/"+viewMoreImage+"') no-repeat right/55%"
     });
 //  viewMore set2
     $(".videoDetail-contentInfo").find("h2").html(viewMoreTitle);
@@ -187,7 +187,7 @@ defaultVideoSet() {
             // video setting
             // background URL 속성이 index.html 이 있는 public 폴더를 기준으로 잡아야 적용 됨
             $(".video").addClass("videoHoverMode");
-            $(".video:eq("+i+")").css({"background":"url('../imgp/"+image+"') center/cover"});
+            $(".video:eq("+i+")").css({"background":"url('img/"+image+"') center/cover"});
             //$(".video:eq("+i+")").css({"background":"url('"+cdnImage+"') center/cover"});
             $(".video:eq("+i+")").find("h2").html(title);
             $(".video:eq("+i+")").find(".videoDesc > h2").html(title);

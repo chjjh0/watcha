@@ -15,8 +15,12 @@ window.$ = $;
 class Nav extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            user: '로그인'
+        }
         this.btnCategory = this.btnCategory.bind(this);
         this.scrollFunction = this.scrollFunction.bind(this);
+        this.isloged = this.isloged.bind(this);
     }
 
     btnCategory(cateName) {
@@ -34,6 +38,13 @@ class Nav extends Component {
             // $(".gnb")[0].style.background = "transparent";
             $(".gnb").css({"background":"transparent"});
         }
+    }
+
+    isloged(logedUser) {
+        console.log('Client isloged')
+        this.setState({
+            user: "로그인 성공"
+        })
     }
     
     render() {
@@ -64,7 +75,16 @@ class Nav extends Component {
         });
         // //function
         });
- 
+
+        // check login
+        // $(function() {
+        //     if(window.sessionStorage.getItem("isLoged")) {
+        //         alert('islogged')
+        //         var logedUser = window.sessionStorage.getItem("isloged");
+        //         alert(window.sessionStorage.getItem("isloged"))
+        //         newLocal.isloged(logedUser)
+        //     }
+        // })
         return (
         <div className="nav">
             <ModalPayment />
@@ -133,9 +153,30 @@ class Nav extends Component {
                                 <input className="searchBar" type="text" placeholder="&#xf02b; 제목,감독,배우로 검색" />
                             </a>
                         <a href="#">보고싶어요</a>
-                        <Link to="/login">
-                            <a href="#">로그인</a>
-                        </Link>
+                        {
+
+                        }
+                        {/* mypage */}
+                        {
+                            sessionStorage.getItem("isLoged") != null ?
+                            <a href="http://127.0.0.1:3001/mypage"> "mypage" </a>
+                            : ""
+                        }
+                        
+                        {
+                            sessionStorage.getItem("isLoged") != null ?
+                            <button onClick={() => {
+                                sessionStorage.removeItem("isLoged")
+                                window.location.href = "http://127.0.0.1:3001/"
+                            }}>로그아웃</button>
+                            : 
+                            <Link to="/login">
+                                <a href="http://127.0.0.1:3001/login">
+                                로그인
+                                </a>
+                            </Link>
+                        }   
+                            
                         {/* //rightNav */}
                         </div>
                 {/* //gnbInner */}

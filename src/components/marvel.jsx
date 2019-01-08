@@ -101,14 +101,14 @@ class MarvelArea extends Component {
                 $(".marvelPreview:eq("+j+")").append("<i class='far fa-play-circle'></i>");
                 $(".marvelPreview:eq("+j+")").attr("id","marvelPreview"+j);
                 $(".marvelPreview:eq("+j+")").attr("name", youtubeTemp[j]);
-                $(".marvelPreview:eq("+j+")").css({"background":"url('../imgp/marvel/"+imgTemp[j]+".jpg') no-repeat center/cover"});
+                $(".marvelPreview:eq("+j+")").css({"background":"url('img/marvel/"+imgTemp[j]+".jpg') no-repeat center/cover"});
                 $(".marvelPreview").css({"display":"block"});
             }
             // $(".marvelPreview").fadeIn();
             
             $(".menuImg").css({
             "display":"none",
-            "background":"url('../imgp/marvel/"+imgTemp[0]+".png') no-repeat center/cover"
+            "background":"url('img/marvel/"+imgTemp[0]+".png') no-repeat center/cover"
             });
             $(".menuImg").fadeIn("slow");
             $(".marvelMenu").css({"background":"#001118"});

@@ -47,6 +47,21 @@
     margin: 0 auto;
     border: 1px solid rgba(255,255,255,0.3);
 }
+/* idInput, passwordInput */
+.idInput, .passwordInput {
+    border: 10px solid transparent;
+    outline: none;
+    padding: 15px;
+    background: transparent;
+    font-size: 25px;
+    -webkit-border-image: url(../img/border.png) 30 round; /* Safari 3.1-5 */
+    -o-border-image: url(../img/border.png) 30 round; /* Opera 11-12.1 */
+    border-image: url(../img/border.png) 30 round;
+}
+.idInput::placeholder,
+.passwordInput::placeholder {
+    color: rgba(0, 198, 255, 0.8);
+}
 
 /* sign common */
 .signin,
@@ -59,6 +74,7 @@
     border: 1px solid rgba(255,255,255,0.7);
     border-radius: 35px;
     cursor: pointer;
+    color: white;
 }
 /* signin */
 .signin {
@@ -70,17 +86,4 @@
 }
 
 /* test */
-input {
-    border: 10px solid transparent;
-    outline: none;
-    padding: 15px;
-    background: transparent;
-    font-size: 25px;
-    -webkit-border-image: url(../img/border.png) 30 round; /* Safari 3.1-5 */
-    -o-border-image: url(../img/border.png) 30 round; /* Opera 11-12.1 */
-    border-image: url(../img/border.png) 30 round;
-}
 
-input::placeholder {
-    color: rgba(0, 198, 255, 0.8);
-}

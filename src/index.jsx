@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter} from 'react-router-dom';
 
 import './index.css';
-import App from './App';
+import App from './App.jsx';
 import * as serviceWorker from './serviceWorker';
 
 class MainPage extends Component {

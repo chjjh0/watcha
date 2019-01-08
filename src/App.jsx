@@ -10,6 +10,7 @@ import VideoList from './components/videoList.jsx';
 import MarvelArea from './components/marvel.jsx';
 // pages
 import LoginPage from './pages/login.jsx';
+import JoinPage from './pages/join.jsx';
 // jQuery
 import Jquery from 'jquery';
 
@@ -29,10 +30,15 @@ class App extends Component {
       {/* <header>  */}
         <Route exact path="/" component={Nav} />  
         <Route exact path="/" component={SlideArea} />
+        <Route exact path="/main" component={Nav} />  
+        <Route exact path="/main" component={SlideArea} />
       {/* </header> */}
       <Route exact path="/" component={VideoList} />
       <Route exact path="/" component={MarvelArea} />
+      <Route exact path="/main" component={VideoList} />
+      <Route exact path="/main" component={MarvelArea} />
       <Route exact path="/login" component={LoginPage} />
+      <Route exact path="/join" component={JoinPage} />
     </section>
     );
   }
