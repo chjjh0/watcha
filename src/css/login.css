@@ -58,8 +58,8 @@
     -o-border-image: url(../img/border.png) 30 round; /* Opera 11-12.1 */
     border-image: url(../img/border.png) 30 round;
 }
-.idInput::placeholder,
-.passwordInput::placeholder {
+.idInput:placeholder,
+.passwordInput:placeholder {
     color: rgba(0, 198, 255, 0.8);
 }
 
