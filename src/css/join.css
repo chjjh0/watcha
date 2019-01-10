@@ -3,7 +3,9 @@ h2 {
 }
 
 /* idInput, passwordInput */
-.idInput, .passwordInput {
+.emailInput,
+.idInput, 
+.passwordInput {
     border: 10px solid transparent;
     outline: none;
     padding: 15px;
@@ -13,6 +15,7 @@ h2 {
     -o-border-image: url(../img/border.png) 30 round; /* Opera 11-12.1 */
     border-image: url(../img/border.png) 30 round;
 }
+.emailInput::placeholder,
 .idInput::placeholder,
 .passwordInput::placeholder {
     color: rgba(0, 198, 255, 0.8);

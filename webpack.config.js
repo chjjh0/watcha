@@ -8,7 +8,7 @@ module.exports = {
     devtool: 'sourcemaps',
     cache: true,
     output: {
-        path: __dirname,
+        path: __dirname+'/mysql/public/',
         filename: 'bundle.js'
     },
     mode: 'none',

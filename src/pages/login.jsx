@@ -27,7 +27,7 @@ class Login extends Component {
     request.post('/login')
     .send(
       {
-        id: this.state.id,
+        userId: this.state.id,
         password: this.state.password
       }
     )
@@ -37,18 +37,19 @@ class Login extends Component {
   }
 
   loadedJSON(err, res) {
-    if(err) return;
-    if(res.body.errMsg) {
-      alert(res.body.errMsg)
+    if(err) {
+      console.log('err: '+err.message)
+      console.log('res.body: '+res.body)
       return;
     }
     console.log(res.body.id)
-    console.log(res.body.passwd)
+    console.log(res.body.password)
     console.log(res.body.email)
-    window.sessionStorage.setItem("isLoged",res.body.id)
+    //window.sessionStorage.setItem("isLoged",res.body.id)
     alert('login success')
-    alert(window.sessionStorage.getItem("isLoged"))
-    this.setState({jump: '/'})
+    //alert(window.sessionStorage.getItem("isLoged"))
+    alert('login ajax end')
+    //this.setState({jump: '/'})
   }
 
   render() {
