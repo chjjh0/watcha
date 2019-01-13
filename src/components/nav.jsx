@@ -66,13 +66,6 @@ class Nav extends Component {
                     $(".payment-bar").removeClass("paymentModal");
                 }
             }
-            // initialize
-            $(".btnCategory").hover(function(){
-            $(".category-container > li").removeClass("active");
-            $(".category-container > li > ul").css("display", "none");
-            $(".category-container > .genre").addClass("active");
-            $(".category-container > .genre > ul").css("display", "block");
-        });
         // //function
         });
 
@@ -103,47 +96,13 @@ class Nav extends Component {
                     <ul className="leftNav">
                         <h1><div className="logo"></div></h1>
                         <li className="btnCategory">
+                            <Link to="/category">
                             <a href="#">카테고리</a>
-                            <ul className="category-container">
-                                <li className="genre">장르
-                                    <ul>
-                                        <li>로맨스</li>
-                                        <li>코메디</li>
-                                        <li>스릴러</li>
-                                        <li>공포</li>
-                                        <li>음악</li>
-                                    {/* //Inside genre */}
-                                    </ul>
-                                {/* //genre */}
-                                </li>
-                                <li className="nation">국가
-                                    <ul>
-                                        <li>프랑스</li>
-                                        <li>이탈리아</li>
-                                        <li>일본</li>
-                                        <li>스페인</li>
-                                        <li>대만</li>
-                                    {/* //Inside nation */}
-                                    </ul>
-                                {/* //nation */}
-                                </li>
-                                <li className="hash">해쉬태그
-                                    <ul>
-                                        <li>성장</li>
-                                        <li>경찰</li>
-                                        <li>영상미</li>
-                                        <li>실종</li>
-                                        <li>독립영화</li>
-                                    {/* //Inside hash */}
-                                    </ul>
-                                {/* //nation */}
-                                </li>
-                            {/* //category-container */}
-                            </ul>
+                            </Link>
                         {/* //btnCategory */}
                         </li>
                         <li className="evaluation">
-                            <a href="#">평가하기</a>
+                            <a href="">평가하기</a>
                         </li>
                         {/* //leftNav */}
                         </ul>

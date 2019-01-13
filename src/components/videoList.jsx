@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-// components
-import Youtube from './youtube.jsx';
 // css
 import '../css/style.css';
 import '../css/videoList.css';

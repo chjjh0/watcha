@@ -1,0 +1,20 @@
+.loading {
+}
+
+.categoryArea {
+  width: 100%;
+}
+
+.categoryList {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.infinite-scroll-component {
+  margin: 50px 0;
+  width: 100%;
+  overflow: unset !important;
+}
+
+
+

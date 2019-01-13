@@ -141,15 +141,6 @@
     text-align: center;
   }
   
-  .category-container > .genre > ul,
-  .category-container > .nation > ul,
-  .category-container > .hash > ul {
-    display: none;
-    position: absolute;
-    top: 50px;
-    left: 10px;
-  }
-  
   .category-container > .active
   {
     color: white;
