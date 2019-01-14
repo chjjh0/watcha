@@ -89,7 +89,7 @@ class Join extends Component {
           .send(
             {
               email: email,
-              userId: userid,
+              id: userid,
               password: password
             }
           )
@@ -101,11 +101,17 @@ class Join extends Component {
 
   loadedJSON(err, res) {
     if(err) return;
-    console.log('join success')
-    //console.log('err: '+err)
-    //console.log('res.body1: '+res.body.id)
-    //console.log('res.body2: '+res.body.message)
-    window.location.href='http://127.0.0.1:3001/login';
+    if(res.body.existsMsg) {
+      alert(res.body.existsMsg)
+    } 
+    if(res.body.successMsg) {
+      alert('가입을 축하합니다.')
+      console.log('join success')
+      //console.log('err: '+err)
+      //console.log('res.body1: '+res.body.id)
+      //console.log('res.body2: '+res.body.message)
+      window.location.href='http://127.0.0.1:3001/login';
+    }
   }
 
   render() {

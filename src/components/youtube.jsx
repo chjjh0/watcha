@@ -14,16 +14,15 @@ class YouTube extends Component {
         this.props.rel + "&loop=1" + "&playlist=" + this.props.video + "&modestbranding=" +
         this.props.modest;
         return(
-                <iframe 
-                    title='a'
-                    className="player" 
-                    type="text/html" 
-                    width="1500px" 
-                    height="2000px"
-                    src={videoSrc}
-                    frameBorder = '0'
-                    />
-            
+            <iframe 
+                title='a'
+                className="player" 
+                type="text/html" 
+                width="1400px"
+                height="1400px"
+                src={videoSrc}
+                frameBorder = '0'
+            />
         );
     }
 }

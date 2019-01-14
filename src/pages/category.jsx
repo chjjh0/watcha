@@ -19,12 +19,48 @@ class Category extends Component {
     constructor(props) {
         super(props);
         this.state = {
-        id: '',
-        password: '',
-        jump: ''
+            videoDescNum: 0,
+            num: 1,
+            ping: false
         }
+        this.videoDesc = [];
+        this.pageInit = this.pageInit.bind(this);
+        this.pageInit();
     }
 
+    pageInit() {
+        request.get('/category/init')
+        .send(
+            {
+                categoryState: "test"
+            }
+        )
+        .end((err, res) => {
+            if(err) {
+                console.log('err.message: '+err.message)
+                console.log('res.body: '+res.body)
+                return;
+            }
+            var vd = res.body.videoTest
+
+            console.log('vdLength: '+vd.length)
+            for(var i=0;i<vd.length;i++) {
+                this.videoDesc.push(vd[i])
+            }
+            console.log('vd: '+vd[0].title)
+            console.log('vd: '+vd[1].title)
+            console.log('videoDescLength: '+this.videoDesc.length)
+            console.log('videoDesc 전체: '+this.videoDesc)
+            console.log('videoDesc: '+this.videoDesc[0].title)
+            console.log('videoDesc: '+this.videoDesc[1].title)
+            this.setState({
+                videoDescNum: vd.length,
+                num: res.body.videoLength,
+                ping: true,
+            })
+        })
+    }
+    
     render() {
         return (
             <section className="categoryPage">
@@ -62,7 +98,15 @@ class Category extends Component {
                         <option>러닝타임 순</option>
                     </select>
                 </div>
-                <Infinite num={1}/>
+                    {
+                        this.state.ping === true ?
+                        <Infinite 
+                            videoDesc={this.videoDesc}
+                            videoDescNum={this.state.videoDescNum}
+                            num={this.state.num}
+                         /> 
+                        : ""   
+                    }
             </section>
         );
     }
