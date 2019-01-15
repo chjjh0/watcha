@@ -137,15 +137,16 @@ class MarvelArea extends Component {
             <div className="marvelImg"></div>
             <div className="youtubeOverlay"></div>
             <div className="youtubeArea">
-                <Youtube video={this.state.marvelvideoId} autoplay="1" rel="1" modest="1" />
+                <Youtube 
+                    video={this.state.marvelvideoId} 
+                    width="1400px"
+                    height="1400px"
+                    autoplay="1"
+                    mute="1" 
+                    rel="1" 
+                    modest="1" />
             </div>
             <div className="marvelVideoArea">
-            {/*
-                Dynamic Create Elements
-                ex) <div id="marvelPreview[index]" className="marvelPreview" name="youtubeId">
-                        <i class='far fa-play-circle'></i>
-                    </div>
-            */}
             {/* //marvelVideArea */}
             </div>
             <div className="marvelMenubar">

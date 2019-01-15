@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import request from 'superagent';
 // components
 import Infinite from '../components/infiniteScroll.jsx';
+import ModalYoutube from '../components/modalYoutube.jsx';
 
 // css
 import '../css/category.css';
@@ -107,6 +108,7 @@ class Category extends Component {
                          /> 
                         : ""   
                     }
+                <ModalYoutube />
             </section>
         );
     }

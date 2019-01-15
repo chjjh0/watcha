@@ -1,5 +1,5 @@
 /* modal */
-.paymentModal {
+.modalPayment {
     display: none;
     position: fixed; 
     overflow: auto;
@@ -10,9 +10,9 @@
     width: 100%; 
     height: 100%; 
     background-color: rgba(0,0,0,0.8); 
-  }
+}
   
-  .modalContent {
+.modalPayment .modalContent {
     position: relative;
     width: 500px;
     height: 650px;
@@ -25,7 +25,7 @@
     margin: auto;
     padding: 40px 70px;
     font-weight: 100;
-  }
+}
   
   @-webkit-keyframes zoom {
     from {-webkit-transform:scale(0)} 
@@ -37,45 +37,45 @@
     to {transform:scale(1)}
   }
   
-  .modalContent > h2 {
+  .modalPayment .modalContent > h2 {
     font-size: 30px;
     color: black;
     margin-bottom: 10px;
   }
   
-  .modalContent > p {
+  .modalPayment .modalContent > p {
     color: #646464;
     font-size: 17px;
     margin-bottom: 10px;
   }
   
-  .modalContent > p:nth-child(2)
+  .modalPayment .modalContent > p:nth-child(2)
   {
     font-size: 17px;
     color: rgb(204, 204, 204);
   }
   
-  .modalContent hr {
+  .modalPayment .modalContent hr {
     margin: 20px 0;
     border: 1px solid rgb(204, 204, 204);
   }
   
-  .modalContent i {
+  .modalPayment .modalContent i {
     font-size: 25px;
     margin-right: 20px;
   }
   
-  .modalContent .fa-mobile-alt {
+  .modalPayment .modalContent .fa-mobile-alt {
     margin-left: 5px;
   }
   
-  .modalContent h3 {
+  .modalPayment .modalContent h3 {
     margin: 20px 0 10px;
     font-size: 16px;
   }
   
   /* basicTicket */
-  .modalContent .basicTicket {
+  .modalPayment .modalContent .basicTicket {
     position: relative;
     width: 500px;
     border: 3px solid rgb(236, 236, 236);
@@ -118,7 +118,7 @@
   }
   
   /* hightTicket */
-  .modalContent .highTicket {
+  .modalPayment .modalContent .highTicket {
     position: relative;
     margin: 20px auto 0;
     width: 500px;

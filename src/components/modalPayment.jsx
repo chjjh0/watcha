@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 // css
-import '../css/modal.css';
+import '../css/modalPayment.css';
 // jQuery
 import $ from 'jquery';
 window.$ = $;
 
 
-class Modal extends Component {
+class ModalPayment extends Component {
     constructor(props) {
         super(props);
      }
@@ -16,17 +16,17 @@ class Modal extends Component {
         // paymentModal
         $(function(){
             $(".payment-bar").click(function(){
-            $(".paymentModal").css({"display":"block"});
+                $(".modalPayment").css({"display":"block"});
             });
         });
         // closeModal
         $(function() {
             $("#btnCloseModal").click(function(){
-              $(".paymentModal").css({"display":"none"});
+                $(".modalPayment").css({"display":"none"});
             });
           });
         return (
-        <div className="paymentModal">
+        <div className="modalPayment">
             <div className="modalContent">
                 <h2>왓챠플레이 이용권 구매</h2>
                 <p>첫달 무료 무제한 Full-HD 스트리밍</p>
@@ -70,4 +70,4 @@ class Modal extends Component {
     }
     }
 
-export default Modal;
+export default ModalPayment;

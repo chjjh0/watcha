@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 // components
-import Youtube from './youtube.jsx';
 // css
 import '../css/infiniteVideo.css'
 // jquery
@@ -14,6 +13,7 @@ class Video extends Component {
         this.videoDataAry = [];
         this.videoImgAry = [];
         this.defaultVideoSet = this.defaultVideoSet.bind(this);
+        this.playYoutube = this.playYoutube.bind(this);
         this.defaultVideoSet();
     }
 
@@ -36,14 +36,19 @@ class Video extends Component {
             });
     }
 
-    
+    playYoutube() {
+        $(function() {
+            $(".modalYoutube").css({"display":"block"});
+        });
+    }
 
     render() {
         return (
         <div id="" className="infiniteVideo">
-            <div className="infiniteVideoImgArea"></div>
-            <Youtube video="67ccXSgqseg"/>
-            <h2>
+            <div className="infiniteVideoImgArea" onClick={this.playYoutube}>
+                <i className="fab fa-youtube"></i>
+            </div>
+            <h2 className="infiniteVideoTitle">
                 {this.props.videoDesc[this.props.index].title}
             </h2>
         {/* //video */}

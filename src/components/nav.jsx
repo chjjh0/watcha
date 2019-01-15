@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 // components
-import ModalPayment from './modal.jsx';
+import ModalPayment from './modalPayment.jsx';
 // css
 import '../css/nav.css';
 // img
