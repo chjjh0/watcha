@@ -42,8 +42,8 @@ class Category extends Component {
                 console.log('res.body: '+res.body)
                 return;
             }
-            var vd = res.body.videoTest
-
+            var vd = res.body.video
+            console.log('vd: '+vd)
             console.log('vdLength: '+vd.length)
             for(var i=0;i<vd.length;i++) {
                 this.videoDesc.push(vd[i])
@@ -106,9 +106,9 @@ class Category extends Component {
                             videoDescNum={this.state.videoDescNum}
                             num={this.state.num}
                          /> 
-                        : ""   
+                        : <h2>비디오 컨텐츠가 없습니다</h2>
                     }
-                <ModalYoutube />
+                <ModalYoutube videoDesc={this.videoDesc} />
             </section>
         );
     }

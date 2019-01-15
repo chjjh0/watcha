@@ -18,8 +18,8 @@ class ModalYoutube extends Component {
         $(function() {
             $("#btnCloseYoutube").click(function(){
                 $(".modalYoutube").css({"display":"none"});
-                $("iframe#player")[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
-                console.log('btncloseyoutebe')
+                $("iframe")[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
+                console.log('btncloseyoutebe');
             });
         });
         return (

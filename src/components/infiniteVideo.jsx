@@ -36,16 +36,17 @@ class Video extends Component {
             });
     }
 
-    playYoutube() {
+    playYoutube(e) {
         $(function() {
-            $(".modalYoutube").css({"display":"block"});
+            console.log(e)
+            //$(".modalYoutube").css({"display":"block"});
         });
     }
 
     render() {
         return (
-        <div id="" className="infiniteVideo">
-            <div className="infiniteVideoImgArea" onClick={this.playYoutube}>
+        <div id={"infiniteIndex"+this.props.index} className="infiniteVideo">
+            <div className="infiniteVideoImgArea" onClick={() => this.playYoutube($(this).attr("class"))} >
                 <i className="fab fa-youtube"></i>
             </div>
             <h2 className="infiniteVideoTitle">

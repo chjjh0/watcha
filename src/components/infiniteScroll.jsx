@@ -43,10 +43,9 @@ class infiniteScl extends Component {
         })
         } else {
         setTimeout(() => {
-        
-        this.setState({
-            items: this.state.items.concat(Array.from({ length: this.state.totalLength }))
-        });
+            this.setState({
+                items: this.state.items.concat(Array.from({ length: this.state.totalLength }))
+            });
         }, 1500)
     }
     };

@@ -13,7 +13,9 @@ class YouTube extends Component {
             "&mute=" + this.props.mute + "&controls=1" + "&showinfo=0" + 
             "&rel=" + this.props.rel + "&loop=1" + 
             "&playlist=" + this.props.video + 
-            "&modestbranding=" + this.props.modest;
+            "&modestbranding=" + this.props.modest +
+            "&enablejsapi=1&version=3&playerapiid=ytplayer"
+            ;
         return(
             <iframe 
                 title='a'
