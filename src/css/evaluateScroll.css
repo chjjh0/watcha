@@ -1,0 +1,74 @@
+.evaluateVideoArea {
+    width: 1400px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+
+.evaluateVideo {
+    position: relative;
+    width: 260px;
+    height: 350px;
+    float: left;
+    margin: 20px 10px;
+    color: #888;
+}
+
+.evaluateVideoImgArea {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 90%;
+    background: #888;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* evaluateHover */
+.evaluateHover {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60%;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: all 0.4s;
+    cursor: pointer;
+}
+
+.evaluateHover .evaluateVideoTitle {
+    color: white;
+    font-size: 20px;
+}
+
+.evaluateHover .evaluateReleaseYear {
+    color: inherit;
+    font-size: 20px;
+}
+
+.evaluateHover .star {
+    position: relative;
+    z-index: 2;
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+    background: gold;
+}
+
+.evaluateHover .starGauge {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: red;
+}
+
+/* hover */
+.evaluateVideoImgArea:hover .evaluateHover {
+    opacity: 1;
+    transition: all 0.4s;
+}

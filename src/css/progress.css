@@ -1,0 +1,7 @@
+.progress {
+    display: none;
+    width: 1400px;
+    height: 100px;
+    margin: 0 auto;
+    text-align: center;
+}

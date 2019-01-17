@@ -12,6 +12,7 @@ import MarvelArea from './components/marvel.jsx';
 import LoginPage from './pages/login.jsx';
 import JoinPage from './pages/join.jsx';
 import CategoryPage from './pages/category.jsx';
+import EvaluatePage from './pages/evaluate.jsx';
 // jQuery
 import Jquery from 'jquery';
 
@@ -29,14 +30,16 @@ class App extends Component {
         header 변경해야함
       */}
       {/* <header>  */}
-      <Route exact path="/" component={Nav} />
-      <Route exact path="/category" component={Nav} />
+      <Route exact path="/*" component={Nav} />
+      {/* <Route exact path="/category" component={Nav} />
+      <Route exact path="/" component={Nav} /> */}
       <Route exact path="/" component={SlideArea} />
       <Route exact path="/" component={VideoList} />
       <Route exact path="/" component={MarvelArea} />
       <Route exact path="/login" component={LoginPage} />
       <Route exact path="/join" component={JoinPage} />
-      <Route exact path="/category" component={CategoryPage} num={2}/>
+      <Route exact path="/category" component={CategoryPage}/>
+      <Route exact path="/evaluate" component={EvaluatePage}/>
     </section>
     );
   }

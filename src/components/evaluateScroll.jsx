@@ -2,7 +2,9 @@ import React, { Component } from "react";
 // components
 import Progress from './progress.jsx';
 // css
-import '../css/infiniteScroll.css';
+import '../css/evaluateScroll.css';
+// img
+import evaluateStar from '../img/evaluate_star.png';
 // jquery
 import $ from 'jquery';
 window.$ = $;
@@ -30,15 +32,20 @@ class infiniteScl extends Component {
     appendMachine() {
         console.log('Machine')
         console.log('videoIndex: '+this.videoIndex)
-        $(".infiniteVideoArea").append(
-            '<div class="infiniteVideo">' +
-            '<div id=infiniteIndex' + this.videoIndex + ' class="infiniteVideoImgArea">' +
-                '<i class="fab fa-youtube"></i>' +
-            '</div>' +
-            '<h2 class="infiniteVideoTitle">' + this.props.videoDesc[this.videoIndex].title + '</h2>' +
+        $(".evaluateVideoArea").append(
+            '<div class="evaluateVideo">' +
+                '<div id=evaluateIndex' + this.videoIndex + ' class="evaluateVideoImgArea">' +
+                    '<div class="evaluateHover">' +
+                        '<h2 class="evaluateVideoTitle">' + this.props.videoDesc[this.videoIndex].title + '</h2>' +
+                        '<p class="evaluateReleaseYear">' + this.props.videoDesc[this.videoIndex].releaseYear  + '</p>' +
+                        '<div class="starImgArea>' +
+                            '<img src="/img/evaluate_star.png" alt="별점"></img>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
             '</div>'
         );
-        $("#infiniteIndex" + this.videoIndex).css({
+        $("#evaluateIndex" + this.videoIndex).css({
             "background": "url('/img/" + this.props.videoDesc[this.videoIndex].image + "') #888 no-repeat center/cover"
         });
         this.videoIndex++;
@@ -56,7 +63,7 @@ class infiniteScl extends Component {
     }
 
     render() {
-        console.log('=======infiniteScroll')
+        console.log('=======evaluate')
         console.log('전달확인 1 videoDESC: ' + this.props.videoDesc)
         console.log('전달확인 1 num: ' + this.props.videoDescNum)
         var newLocal = this;
@@ -84,7 +91,7 @@ class infiniteScl extends Component {
 
         return (
             <div>
-                <div className="infiniteVideoArea"></div>
+                <div className="evaluateVideoArea"></div>
                 <div className="progress">
                     <Progress />
                 </div>

@@ -14,7 +14,7 @@
 
 .selectArea {
     position: relative;
-    width: 90%;
+    width: 1400px;
     height: 100px;
     margin: 200px auto 0;
 }
@@ -33,11 +33,9 @@
     padding-left: 5px;
 }
 
-.categoryArea {
-    width: 1400px;
-    height: 100%;
-    margin: 0 auto;
-}
+/* infiniteVideoArea는 infiniteScroll.css 에 설정 */
+
+
 
 /* hover */
 .selectArea select option:hover {

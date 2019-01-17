@@ -97,12 +97,14 @@ class Nav extends Component {
                         <h1><div className="logo"></div></h1>
                         <li className="btnCategory">
                             <Link to="/category">
-                            <a href="#">카테고리</a>
+                                <a href="#">카테고리</a>
                             </Link>
                         {/* //btnCategory */}
                         </li>
                         <li className="evaluation">
-                            <a href="">평가하기</a>
+                            <Link to="/evaluate">
+                                <a href="">평가하기</a>
+                            </Link>
                         </li>
                         {/* //leftNav */}
                         </ul>
