@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 // components
+import ModalYoutube from '../components/modalYoutube.jsx';
+
 // css
 import '../css/infiniteVideo.css'
 // jquery
@@ -7,55 +9,41 @@ import $ from 'jquery';
 window.$ = $;
 
 
-class Video extends Component {
+class InfiniteVideo extends Component {
     constructor(props) {
         super(props);
-        this.videoDataAry = [];
-        this.videoImgAry = [];
         this.defaultVideoSet = this.defaultVideoSet.bind(this);
-        this.playYoutube = this.playYoutube.bind(this);
         this.defaultVideoSet();
     }
 
     defaultVideoSet() {
         var newLocal = this;
-        console.log('=====infiniteVideo')
-        console.log('index: '+this.props.index)
-        console.log('전체 전달 확인2: '+this.props.videoDesc)
-        console.log('0000 전달 확인2: '+this.props.videoDesc[0].title)
-        console.log('0000 전달 확인2: '+this.props.videoDesc[0].image)
-        console.log('1111 전달 확인2: '+this.props.videoDesc[1].title)
-        console.log('1111 전달 확인2: '+this.props.videoDesc[1].image)
-
-        $(function() {
-            console.log('========function')
-            console.log('========index: '+newLocal.props.index)
-            $(".infiniteVideoImgArea:eq("+newLocal.props.index+")").css({
+        // 상위 component 에서 videoDesc 전체를 던지지 않고 index에 따라 던지면
+        // 객체가 하나씩 던저지기때문에 index가 필요 없음
+        // videoDesc[index].image 문법이 아닌 videoDesc.image 문법으로 적용
+        $(function () {
+            $(".infiniteVideoImgArea:eq(" + newLocal.props.index + ")").css({
                 "background":
-                    "url('/img/"+newLocal.props.videoDesc[newLocal.props.index].image+"') no-repeat center/cover"});
+                    "url('/img/" + newLocal.props.videoDesc.image + "') no-repeat center/cover"
             });
-    }
-
-    playYoutube(e) {
-        $(function() {
-            console.log(e)
-            //$(".modalYoutube").css({"display":"block"});
         });
     }
 
+
     render() {
+        console.log('=====infinite Video=====')
         return (
-        <div id={"infiniteIndex"+this.props.index} className="infiniteVideo">
-            <div className="infiniteVideoImgArea" onClick={() => this.playYoutube($(this).attr("class"))} >
-                <i className="fab fa-youtube"></i>
+            <div className="infiniteVideo">
+                <div className="infiniteVideoImgArea">
+                    <i id={"infiniteIndex" + this.props.index} className="fab fa-youtube"></i>
+                </div>
+                <h2 className="infiniteVideoTitle">
+                    {this.props.videoDesc.title}
+                </h2>
+                {/* //video */}
             </div>
-            <h2 className="infiniteVideoTitle">
-                {this.props.videoDesc[this.props.index].title}
-            </h2>
-        {/* //video */}
-        </div>
         );
     }
 }
 
-export default Video;
+export default InfiniteVideo;

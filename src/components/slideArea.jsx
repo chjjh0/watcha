@@ -49,7 +49,7 @@ class SlideArea extends Component {
             title: '이프 온리',
             ratingValue: '3.7',
             rating: '2004 • 15세 • 1시간 35분',
-            synopsis: '눈앞에서 사랑하는 여인 사만다를 잃은 이안. 다음 날 아침, 이안은 자신의 옆에서 아무 일 없다는 듯 자고 있는 사만다를 보고 소스라치게 놀란다. '
+            synopsis: '눈앞에서 사랑하는 여인 사만다를 잃은 이안. 다음 날 아침, 이안은 자신의 옆에서 아무 일 없다는 듯 자고 있는 사만다를 보고 소스라치게 놀란다.'
         });
         this.slideAry.push({
             image: imgAry[3],

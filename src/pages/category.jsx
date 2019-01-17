@@ -54,15 +54,27 @@ class Category extends Component {
             console.log('videoDesc 전체: '+this.videoDesc)
             console.log('videoDesc: '+this.videoDesc[0].title)
             console.log('videoDesc: '+this.videoDesc[1].title)
+            console.log('youtubeId: '+this.videoDesc[1].youtubeId)
+
             this.setState({
                 videoDescNum: vd.length,
-                num: res.body.videoLength,
+                totalIndex: res.body.videoLength,
                 ping: true,
             })
         })
     }
     
     render() {
+        $(function() {
+            $(document).on('click', '#btnCloseYoutube', function () {
+                $(".modalYoutube").css({ "display": "none" });
+                $("iframe")[0]
+                    .contentWindow
+                    .postMessage('{"event":"command","func":"' +
+                        'stopVideo' + '","args":""}', '*');
+                console.log('btncloseyoutebe');
+            });
+        })
         return (
             <section className="categoryPage">
                 <div className="selectArea">
@@ -104,11 +116,11 @@ class Category extends Component {
                         <Infinite 
                             videoDesc={this.videoDesc}
                             videoDescNum={this.state.videoDescNum}
-                            num={this.state.num}
+                            totalIndex={this.state.totalIndex}
                          /> 
                         : <h2>비디오 컨텐츠가 없습니다</h2>
                     }
-                <ModalYoutube videoDesc={this.videoDesc} />
+                {/* <ModalYoutube /> */}
             </section>
         );
     }

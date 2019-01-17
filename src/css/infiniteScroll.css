@@ -1,20 +1,12 @@
-.loading {
-}
-
-.categoryArea {
+.big-box {
   width: 100%;
+  background-color: gray;
+  height: 100vh;
+  border-top: 1px solid black;
+  font-size: 30px;
 }
 
-.categoryList {
-  width: 90%;
-  margin: 0 auto;
+body { 
+  margin: 0px;
+  padding: 0px;
 }
-
-.infinite-scroll-component {
-  margin: 50px 0;
-  width: 100%;
-  overflow: unset !important;
-}
-
-
-

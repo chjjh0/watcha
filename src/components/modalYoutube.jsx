@@ -11,35 +11,30 @@ window.$ = $;
 class ModalYoutube extends Component {
     constructor(props) {
         super(props);
-     }
-
+    }
+  
     render() {
-        // closeModal
-        $(function() {
-            $("#btnCloseYoutube").click(function(){
-                $(".modalYoutube").css({"display":"none"});
-                $("iframe")[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
-                console.log('btncloseyoutebe');
-            });
-        });
+        
+        console.log('2 props: ', this.props.videoId)
         return (
-        <div className="modalYoutube">
-            <div className="modalYoutubeContent">
-                <Youtube
-                    video="Vq-0l2EU8IM" 
-                    width="100%"
-                    height="100%"
-                    autoplay="0"
-                    mute="0"  
-                    rel="1" 
-                    modest="0" />
-            <i id="btnCloseYoutube" className="fas fa-times"></i>    
-            {/* //modalContent */}
+            <div className="modalYoutube">
+                <div className="modalYoutubeContent">
+                    <h2>{this.props.videoId}</h2>
+                    <Youtube
+                        video={this.props.videoId}
+                        width="100%"
+                        height="100%"
+                        autoplay="0"
+                        mute="0"
+                        rel="1"
+                        modest="0" />
+                    <i id="btnCloseYoutube" className="fas fa-times"></i>
+                    {/* //modalContent */}
+                </div>
+                {/* //paymentModal */}
             </div>
-        {/* //paymentModal */}
-        </div> 
         );
     }
-    }
+}
 
 export default ModalYoutube;
