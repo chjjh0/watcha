@@ -38,9 +38,8 @@ class infiniteScl extends Component {
                     '<div class="evaluateHover">' +
                         '<h2 class="evaluateVideoTitle">' + this.props.videoDesc[this.videoIndex].title + '</h2>' +
                         '<p class="evaluateReleaseYear">' + this.props.videoDesc[this.videoIndex].releaseYear  + '</p>' +
-                        '<div class="starImgArea>' +
-                            '<img src="/img/evaluate_star.png" alt="별점"></img>' +
-                        '</div>' +
+                        '<div class="starEvalBefore">★★★★★</div>' +
+                        '<div class="starEvalAfter">★★★★★</div>' +
                     '</div>' +
                 '</div>' +
             '</div>'
@@ -87,8 +86,34 @@ class infiniteScl extends Component {
                         $(".progress").css({"display": "none"});
                     }, 2000);
                 }
-            })
-
+            });
+            // mouse 위치값
+            $(function() {
+                $(".evaluateVideoImgArea").hover(function() {
+                    console.log('hover')
+                    // mouseEnter
+                        console.log('welcome')
+                        var offset = $(this).offset();
+                        $(".starEvalAfter").css({"opacity": "0"});
+                        console.log('마우스무브')
+                        $(window).mousemove(function(event){
+                            var te = (event.pageX - offset.left);
+                            console.log('X Axis : ' + event.pageX);
+                            console.log('te : ', te);
+                            if(event.pageX >= 400) {
+                                $(".starEvalAfter").css({
+                                    "opacity": "1"
+                                });
+                            }
+                            // mouseLeave
+                            $(".evaluateVideoImgArea").on('mouseleave', function() {
+                                console.log('byebyebye');
+                                $(this).off('mousemove mouseleave');
+                            });
+                        });
+                    
+                });
+            });
         return (
             <div>
                 <div className="evaluateVideoArea"></div>

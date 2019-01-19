@@ -65,16 +65,7 @@ class Category extends Component {
     }
     
     render() {
-        $(function() {
-            $(document).on('click', '#btnCloseYoutube', function () {
-                $(".modalYoutube").css({ "display": "none" });
-                $("iframe")[0]
-                    .contentWindow
-                    .postMessage('{"event":"command","func":"' +
-                        'stopVideo' + '","args":""}', '*');
-                console.log('btncloseyoutebe');
-            });
-        })
+        
         return (
             <section className="categoryPage">
                 <div className="selectArea">

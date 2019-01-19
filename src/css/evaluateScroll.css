@@ -58,14 +58,27 @@
     background: gold;
 }
 
-.evaluateHover .starGauge {
+/* star */
+.evaluateHover .starEvalBefore {
     position: absolute;
-    z-index: 0;
-    top: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
-    background: red;
+    height: 30px;
+    font-size: 40px;
+    text-align: center;
 }
+
+.evaluateHover .starEvalAfter {
+    position: absolute;
+    opacity: 0;
+    z-index: 1;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    font-size: 40px;
+    color: yellow;
+}
+
 
 /* hover */
 .evaluateVideoImgArea:hover .evaluateHover {

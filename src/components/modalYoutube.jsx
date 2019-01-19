@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropsTypes from 'prop-types';
 // components
 import Youtube from './youtube.jsx';
 // css
@@ -7,15 +8,13 @@ import '../css/modalYoutube.css';
 import $ from 'jquery';
 window.$ = $;
 
-
 class ModalYoutube extends Component {
+    
     constructor(props) {
         super(props);
     }
   
     render() {
-        
-        console.log('2 props: ', this.props.videoId)
         return (
             <div className="modalYoutube">
                 <div className="modalYoutubeContent">
