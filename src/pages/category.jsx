@@ -38,23 +38,12 @@ class Category extends Component {
         )
         .end((err, res) => {
             if(err) {
-                console.log('err.message: '+err.message)
-                console.log('res.body: '+res.body)
                 return;
             }
             var vd = res.body.video
-            console.log('vd: '+vd)
-            console.log('vdLength: '+vd.length)
             for(var i=0;i<vd.length;i++) {
                 this.videoDesc.push(vd[i])
             }
-            console.log('vd: '+vd[0].title)
-            console.log('vd: '+vd[1].title)
-            console.log('videoDescLength: '+this.videoDesc.length)
-            console.log('videoDesc 전체: '+this.videoDesc)
-            console.log('videoDesc: '+this.videoDesc[0].title)
-            console.log('videoDesc: '+this.videoDesc[1].title)
-            console.log('youtubeId: '+this.videoDesc[1].youtubeId)
 
             this.setState({
                 videoDescNum: vd.length,

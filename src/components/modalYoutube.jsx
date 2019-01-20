@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import PropsTypes from 'prop-types';
+import request from 'superagent';
+
 // components
 import Youtube from './youtube.jsx';
 // css
@@ -13,12 +14,16 @@ class ModalYoutube extends Component {
     constructor(props) {
         super(props);
     }
-  
+
     render() {
         return (
             <div className="modalYoutube">
                 <div className="modalYoutubeContent">
-                    <h2>{this.props.videoId}</h2>
+                    <div className="videoInfo">
+                        <h2>{this.props.videoTitle}</h2>
+                        <p>{this.props.releaseYear}</p>
+                        <i id="btnCloseYoutube" className="fas fa-times"></i>
+                    </div>
                     <Youtube
                         video={this.props.videoId}
                         width="100%"
@@ -27,7 +32,7 @@ class ModalYoutube extends Component {
                         mute="0"
                         rel="1"
                         modest="0" />
-                    <i id="btnCloseYoutube" className="fas fa-times"></i>
+                    
                     {/* //modalContent */}
                 </div>
                 {/* //paymentModal */}

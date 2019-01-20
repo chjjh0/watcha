@@ -90,28 +90,27 @@ class infiniteScl extends Component {
             // mouse 위치값
             $(function() {
                 $(".evaluateVideoImgArea").hover(function() {
-                    console.log('hover')
                     // mouseEnter
-                        console.log('welcome')
+                    $(".starEvalAfter").css({"opacity": "0"});
+                    $(document).on('mouseenter', '.starEvalAfter', function() {
+                        console.log('enter')
                         var offset = $(this).offset();
                         $(".starEvalAfter").css({"opacity": "0"});
-                        console.log('마우스무브')
-                        $(window).mousemove(function(event){
-                            var te = (event.pageX - offset.left);
+                        $(this).on('mousemove', function(event){
+                            // star init
+                            var mouseNow = (event.pageX - offset.left);
                             console.log('X Axis : ' + event.pageX);
-                            console.log('te : ', te);
-                            if(event.pageX >= 400) {
-                                $(".starEvalAfter").css({
-                                    "opacity": "1"
-                                });
+                            console.log('mouseNow : ', mouseNow);
+                            if(mouseNow >= 30 || mouseNow <=45) {
+                                                                
                             }
-                            // mouseLeave
-                            $(".evaluateVideoImgArea").on('mouseleave', function() {
-                                console.log('byebyebye');
-                                $(this).off('mousemove mouseleave');
-                            });
                         });
-                    
+                    });
+                    // mouseLeave
+                    $(this).one('mouseleave', function() {
+                        console.log('byebyebye');
+                        $(this).off('mousemove mouseleave');
+                    });
                 });
             });
         return (

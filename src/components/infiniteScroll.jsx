@@ -12,37 +12,30 @@ class InfiniteScl extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            videoTitle: '',
+            releaseYear: '',
             youtubeId: '8hYlB38asDY'
         }
         this.defaultVideo = 20;
         this.videoIndex = 0;
+        // 작동 중 확인
         this.isScrolling = false;
-        this.defaultVideoSet = this.defaultVideoSet.bind(this);
+        this.modalOn = false;
         this.appendMachine = this.appendMachine.bind(this);
         this.openModalYoutube = this.openModalYoutube.bind(this);
     }
 
-    defaultVideoSet() {
-        var newLocal = this;
-        console.log('default')
-        for(var i=0; i < this.defaultVideo; i++) {
-            newLocal.appendMachine();
-        }
-    }
-
     appendMachine() {
-        console.log('Machine')
-        console.log('videoIndex: '+this.videoIndex)
-        
         if($("#infiniteIndex"+this.videoIndex).hasClass("infiniteVideoImgArea")) {
-            console.log('이미 있음')
-            return;
+            // 이미 있는 경우 추가 생성 오작동 방지
         } else {
             $(".infiniteVideoArea").append(
-                '<div class="infiniteVideo" name="' + 
-                    this.props.videoDesc[this.videoIndex].youtubeId + '">' +
-                '<div id=infiniteIndex' + this.videoIndex + ' class="infiniteVideoImgArea">' +
-                    '<i class="fab fa-youtube"></i>' +
+                '<div data-videoIndex="' + this.videoIndex 
+                    + '" class="infiniteVideo" name=' + 
+                        this.props.videoDesc[this.videoIndex].youtubeId + '>' +
+                    '<div id=infiniteIndex' + this.videoIndex + 
+                        ' class="infiniteVideoImgArea">' +
+                        '<i class="fab fa-youtube"></i>' +
                 '</div>' +
                 '<h2 class="infiniteVideoTitle">' + this.props.videoDesc[this.videoIndex].title + '</h2>' +
                 '</div>'
@@ -51,19 +44,19 @@ class InfiniteScl extends Component {
                 "background": "url('/img/" + this.props.videoDesc[this.videoIndex].image + "') #888 no-repeat center/cover"
             });
             this.videoIndex++;
-            console.log('isScrolling is ture????', this.isScrolling)
-            console.log('videoIndex: ', this.videoIndex)
-
         }
     }
 
-
-    openModalYoutube(videoId) {
+    openModalYoutube(videoIndex, videoId) {
+        console.log(videoIndex)
         this.setState({
-            youtubeId: videoId
+            videoTitle: this.props.videoDesc[videoIndex].title,
+            releaseYear: this.props.videoDesc[videoIndex].releaseYear,
+            youtubeId: videoId,
         });
         // open modalYoutube
         $(".modalYoutube").css({"display": "block"});
+        this.modalOn = true;
     }
 
     componentDidMount() {
@@ -78,18 +71,17 @@ class InfiniteScl extends Component {
     }
 
     render() {
-        console.log('=======infiniteScroll')
-        console.log('전달확인 1 videoDESC: ' + this.props.videoDesc)
-        console.log('전달확인 1 num: ' + this.props.videoDescNum)
-        console.log('전달확인 1 youtubeId: ' + this.props.videoDesc[0].youtubeId)
         var newLocal = this;
         // infinite scroll
         $(window).scroll(function () {
+            // modalYoutube 작동 중에는 infiniScroll 작동 방지
+            if(newLocal.modalOn === false) {
             if ((parseInt($(window).scrollTop()) + 1) >= ($(document).height() - $(window).height())) {
                 // isScrolling의 용도는 스크롤이 작동 중일 때 
                 // 재 스크롤 조작으로 요청이 중첩됨으로 인한 오작동을 방지
                 if(newLocal.videoIndex < newLocal.props.totalIndex 
                     && newLocal.isScrolling === false) {
+                    // isScrolling on
                     newLocal.isScrolling = true;
                     $(".progress").css({"display": "block"});
                     // .progress가 보여진 후 위치값을 계산하여
@@ -105,32 +97,41 @@ class InfiniteScl extends Component {
                                     newLocal.appendMachine();
                                 }
                             }
-                        } 
-                        console.log('동작 완료');
+                        }
+                        // isScrolling off
                         newLocal.isScrolling = false;
                         $(".progress").css({"display": "none"});
                     }, 2000);
                 } else {
-                    console.log('end')
+                    // 더 이상 video가 없습니다
                 }
             }
+        }
         });
+        
         // open modalYoutube
-        $(document).on("click", ".infiniteVideo", function() {
-            // videoId가 null일 경우를 대비해
-            // 기본값으로 '8hYlB38asDY' 세팅
-            var videoId = '8hYlB38asDY';
-            if(!$(this).attr("name")) {
-                videoId = $(this).attr("name");
+        // click이 한 번만 발생하게 하여 여러 번 호출되는 것을 방지
+        $(document).one("click", ".infiniteVideo", function() {
+            // videoIndex 추출
+            var videoIndex = $(this).attr("data-videoIndex");
+            // youtubeId 기본값 설정
+            // null일 경우를 대비해
+            // 기본값을 '8hYlB38asDY' 세팅
+            var youtubeId = '8hYlB38asDY';
+            // youtubeId null check
+            // 동적 태그 생성 시 boolean이 아닌 
+            // "null" 이라는 문자열로 삽입되었기에
+            // "null" 문자열로 null 체크
+            if($(this).attr("name") === "null") {
+                // youtubeId is null
             } 
             else {
-                console.log('videoId is Null');
+                youtubeId = $(this).attr("name");
             }
-            newLocal.openModalYoutube(videoId);
+            newLocal.openModalYoutube(videoIndex, youtubeId);
         });
         // close modalYoutube
-        $(function() {
-            $("#btnCloseYoutube").click(function() {
+            $(document).on('click', "#btnCloseYoutube", function() {
                 // youtube background에서 작동 방지
                 $("iframe")[0]
                      .contentWindow
@@ -138,16 +139,20 @@ class InfiniteScl extends Component {
                          'stopVideo' + '","args":""}', '*');
                 // close modalYoutbe
                 $(".modalYoutube").css({"display": "none"});
+                // modalOn off
+                newLocal.modalOn = false;
             });
-        });    
-
         return (
             <div>
                 <div className="infiniteVideoArea"></div>
                 <div className="progress">
                     <Progress />
                 </div>
-                <ModalYoutube videoId={this.state.youtubeId}/>
+                <ModalYoutube 
+                    videoTitle={this.state.videoTitle}
+                    releaseYear={this.state.releaseYear}
+                    videoId={this.state.youtubeId}
+                />
             </div>
         );
     }
