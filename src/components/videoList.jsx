@@ -414,7 +414,6 @@ btnNext(){
                 var indexTemp = idTemp.substring(idTemp.length-1, idTemp.length);
                 newLocal.videoSelected(indexTemp);
                 newLocal.viewMore(indexTemp);
-                
             }
             });
         });

@@ -48,7 +48,9 @@ class InfiniteScl extends Component {
     }
 
     openModalYoutube(videoIndex, videoId) {
-        console.log(videoIndex)
+        // video에 click 발생 시 
+        // videoIndex에 따라 video에 맞는 videoId를 통해
+        // youtube 예고편 및 영화정보가 바뀜
         this.setState({
             videoTitle: this.props.videoDesc[videoIndex].title,
             releaseYear: this.props.videoDesc[videoIndex].releaseYear,

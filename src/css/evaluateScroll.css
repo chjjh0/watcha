@@ -79,12 +79,12 @@
 
 
 /* hover */
-.evaluateVideoImgArea:hover .evaluateHover {
+.evaluateVideoImgArea.hoverMode:hover .evaluateHover {
     opacity: 1;
     transition: all 0.4s;
 }
 
 /* click */
-.evaluateHover.clickMode {
-    display: block;
+.evaluateVideoImgArea.clickMode .evaluateHover{
+    opacity: 1;
 }
