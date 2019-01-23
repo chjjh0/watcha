@@ -139,8 +139,8 @@ class MarvelArea extends Component {
             <div className="youtubeArea">
                 <Youtube 
                     video={this.state.marvelvideoId} 
-                    width="1400px"
-                    height="1400px"
+                    width="1600px"
+                    height="1950px"
                     autoplay="1"
                     mute="1" 
                     rel="1" 

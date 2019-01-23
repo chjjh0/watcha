@@ -30,7 +30,6 @@ class VideoList extends Component {
     this.viewMore = this.viewMore.bind(this);
     this.btnPrev = this.btnPrev.bind(this);
     this.btnNext = this.btnNext.bind(this);
-    this.btnPreview = this.btnPreview.bind(this);
     this.defaultVideoSet = this.defaultVideoSet.bind(this);
     this.closeVideoDetail = this.closeVideoDetail.bind(this);
     this.defaultVideoSet();
@@ -42,37 +41,41 @@ viewMore(num) {
     var viewMoreRating = $("#videoIndex"+num+" > .videoDesc > p:eq(0)").html();
     var viewMoreSynopsis = $("#videoIndex"+num+" > .videoDesc > p:eq(1)").html();
 //  video scale >> basic video shape
-//  change videoHoverMode >> videoClickMode
-    $(".video").css("transform","none");
+
+    // #1
+    // hoverMode로 인한 transform이 아직 돌아가지 않은 시점에서
+    // viewMore 가 click 되어 원상태로 돌아가지 못하는 걸 방지
+    $(".video").css({"transform": "none"});
+    // #2
+    // hoverMode > clickMode로 전환
     $(".video").removeClass("videoHoverMode");
     $(".video").addClass("videoClickMode");
-//  border of video change color
+    $(".videoArea .videoList").animate({"height": "220px"});
+    // #3
+    // 클릭 시 선택되어진 요소의 border color: white로 변경
     this.videoSelected(num);
-//  viewMore set1
+    // #4
+    // .videoArea height 변환
+    $(".videoArea").animate({"height": "620"});
+    // viewMore 배경이미지 set
     $(".videoDetail-container").css({
         "background":"url('img/"+viewMoreImage+"') no-repeat right/55%"
     });
-//  viewMore set2
+    // viewMore 영화 정보 set
     $(".videoDetail-contentInfo").find("h2").html(viewMoreTitle);
     $(".videoDetail-contentInfo").find(".videoDetail-rating").html(viewMoreRating);
     $(".videoDetail-contentInfo").find(".videoDetail-synopsis").html(viewMoreSynopsis);
-//  smooth change display
-    
+    // viewMore 느리게 보이기
     $(".videoDetail-container").slideDown("slow");
 }
 
 videoSelected(num) {
-    // Change video border color
+    // .video가 있는 모든 요소들의 border color: #121212로 초기화
+    // 클릭 시 선택되어진 요소의 border color: white로 변경
     $(".video").css("border","4px solid #121212");
     $("#videoIndex"+num).css({
         "border":"4px solid white"
     })
-}
-
-btnPreview(videoId) {
-    this.setState({
-        video: videoId
-    });
 }
 
 
@@ -176,7 +179,6 @@ defaultVideoSet() {
     $(function(){
         for(var i=0;i<10;i++){
             var image = newLocal.videoDataAry[i].image;
-            var cdnImage = "https://lh5.googleusercontent.com/bcWan-ZZ3g-xSZPhp9CPfIrsBmmrHXCBYLA4daB8ua2PknoCEyFVHfw5WUwUrAGiHH41CWqxH7_wwg=w1920-h953-rw";
             var title = newLocal.videoDataAry[i].title;
             var releaseYear = newLocal.videoDataAry[i].releaseYear;
             var ratingAge = newLocal.videoDataAry[i].ratingAge;
@@ -184,7 +186,6 @@ defaultVideoSet() {
             var synopsis = newLocal.videoDataAry[i].synopsis;
             // video setting
             // background URL 속성이 index.html 이 있는 public 폴더를 기준으로 잡아야 적용 됨
-            $(".video").addClass("videoHoverMode");
             $(".video:eq("+i+")").css({"background":"url('img/"+image+"') center/cover"});
             //$(".video:eq("+i+")").css({"background":"url('"+cdnImage+"') center/cover"});
             $(".video:eq("+i+")").find("h2").html(title);
@@ -201,35 +202,41 @@ defaultVideoSet() {
 
 closeVideoDetail() {
     var slideNum = this.state.videoSlideNum;
-    var i = 0;
+    var begin = 0;
     var end = 0;
     $(".video").css("border","4px solid #121212");
     $(".video").removeClass("videoClickMode");
     $(".video").removeClass("videoHoverMode");
+    // clickMode > hoverMode 전환
+    // 현재 슬라이드 num에 따라 hoverMode로 전환
     switch(slideNum) {
         case 1:
-        i = 0;
-        end = 5;
-        break;
+            begin = 0;
+            end = 5;
+            break;
         case 2:
-        i = 5;
-        end = 10;
-        break;
-        case 3:
-        break;
+            begin = 5;
+            end = 10;
+            break;
         default :
-        break;
     }
-    for(;i<end;i++) {
-        $("#videoIndex"+i).addClass("videoHoverMode");
+    for(;begin<end;begin++) {
+        $("#videoIndex"+begin).addClass("videoHoverMode");
     }
+    // videoDetail-container 감추기
     $(".videoDetail-container").slideUp("slow");
+    setTimeout(function() {
+        // videoArea 원상태로 복원
+        // videoList 원상태로 복원
+        $(".videoArea .videoList").animate({"height": "270px"});
+        $(".videoArea").animate({"height": "230px"});
+    }, 500);
 }
 
 btnPrev() {
     var newLocal = this;
     var slideNum = this.state.videoSlideNum-1;
-    var i = 0;
+    var begin = 0;
     var end = 0;
     if(slideNum === 0 || 1) {
         slideNum = 1;
@@ -237,173 +244,134 @@ btnPrev() {
         slideNum--;
     }
     if(slideNum === 1) {
-        i = 0;
+        begin = 0;
         end = 5;
     } else if(slideNum === 2) {
-        i = 5;
+        begin = 5;
         end = 9;
     }
     this.state.videoSlideNum = slideNum;
     $(function(){
         $(".video").removeClass("videoHoverMode");
         if($(".video").hasClass("videoClickMode")) {
+            // clickMode 시
+            // 처리 X
         } else {
-        for(;i<end;i++) {
-            $("#videoIndex"+i).addClass("videoHoverMode");
-        } // //for
-    } // //else
-    $(".video").css({
-        "left":"0",
-        "transition":"all 1s"
-    });
+            for(;begin<end;begin++) {
+                $("#videoIndex"+begin).addClass("videoHoverMode");
+            } // //for
+        } // //else
+        console.log("prev css")
+        $(".video").animate({
+            "left":"0",
+        });
     });
     
 }
 
 btnNext(){
-    const newLocal = this;
-    var i = 0;
+    var begin = 0;
     var end = 0;
     var slideNum = this.state.videoSlideNum+1;
     if(slideNum === 1) {
-        i = 0;
+        begin = 0;
         end = 5;
     } else if(slideNum === 2) {
-        i = 5;
+        begin = 5;
         end = 10;
     }
     this.state.videoSlideNum = slideNum;
-     $(function(){
+    $(function(){
         $(".video").removeClass("videoHoverMode");
-        if($(".video").hasClass("videoClickMode")) {
-        } else {
-            for(;i<end;i++){
-                $("#videoIndex"+i).addClass("videoHoverMode");
+        // if($(".video").hasClass("videoClickMode")) {
+        // } else {
+            for(;begin<end;begin++){
+                $("#videoIndex"+begin).addClass("videoHoverMode");
             } // //for
-        } // //else
-        $(".video").css({
+        //} // //else
+        console.log("next css")
+        $(".video").animate({
             "left":"-1670px",
-            "transition":"all 1s"
         });
      });
  }
 
- videoHovered() {
-    $(function(){
-        if($(".video").hasClass("videoClickMode")) {
-        } else {
-    // video:eq(0)
-        $(".videoHoverMode:eq(0)").hover(function(){
-            for(var j=1;j<5;j++) {
-                $(".videoHoverMode:eq("+j+")").css({
-                "transform":"translate(80px, 0)", 
-                "transition":"all 0.5s"})
-            }
-        }, function() {
-            for(var i=1;i<5;i++) {
-                $(".videoHoverMode:eq("+i+")").css({
-                    "transform": "none"
-                });
-            }
-        });
-    // video:eq(1)
-        $(".videoHoverMode:eq(1)").hover(function(){
-            $(".videoHoverMode:eq(0)").css({
-                "transform":"translate(-80px, 0)",
-                "transition":"all 0.5s"
-            });
-            for(var j=2;j<5;j++) {
-                $(".videoHoverMode:eq("+j+")").css({
-                "transform":"translate(80px, 0)", 
-                "transition":"all 0.5s"})
-            }
-        }, function() {
-            $(".videoHoverMode:eq(0)").css({
-                "transform":"none",
-                "transition":"all 0.5s"
-            });
-            for(var i=2;i<5;i++) {
-                $(".videoHoverMode:eq("+i+")").css({
-                    "transform": "none"
-                });
-            }
-        });
-    // video:eq(2)
-        $(".videoHoverMode:eq(2)").hover(function(){
-            for(var i=0;i<2;i++) {
-                $(".videoHoverMode:eq("+i+")").css({
+ videoHovered(index) {
+    // index에 따라 요소들을 이동
+    $(function() {
+        switch(index) {
+            case 0:
+                for(var j=1;j<5;j++) {
+                    $(".videoHoverMode:eq("+j+")").css({
+                        "transform":"translate(80px, 0)",
+                         "transition":"all 0.5s"});
+                }
+                break;
+            case 1:
+                $(".videoHoverMode:eq(0)").css({
                     "transform":"translate(-80px, 0)",
                     "transition":"all 0.5s"
                 });
-            }
-            for(var j=3;j<5;j++) {
-                $(".videoHoverMode:eq("+j+")").css({
-                "transform":"translate(80px, 0)", 
-                "transition":"all 0.5s"})
-            }
-        }, function() {
-            for(var i=0;i<2;i++) {
-                $(".videoHoverMode:eq("+i+")").css({
-                    "transform":"none",
+                for(var j=2;j<5;j++) {
+                    $(".videoHoverMode:eq("+j+")").css({
+                    "transform":"translate(80px, 0)", 
+                    "transition":"all 0.5s"})
+                }
+            break;
+            case 2:
+                for(var i=0;i<2;i++) {
+                    $(".videoHoverMode:eq("+i+")").css({
+                        "transform":"translate(-80px, 0)",
+                        "transition":"all 0.5s"
+                    });
+                }
+                for(var j=3;j<5;j++) {
+                    $(".videoHoverMode:eq("+j+")").css({
+                    "transform":"translate(80px, 0)", 
+                    "transition":"all 0.5s"})
+                }
+            break;
+            case 3:
+                for(var i=0;i<3;i++) {
+                    $(".videoHoverMode:eq("+i+")").css({
+                        "transform":"translate(-80px, 0)",
+                        "transition":"all 0.5s"
+                    });
+                }
+                $(".videoHoverMode:eq(4)").css({
+                    "transform":"translate(80px, 0)",
                     "transition":"all 0.5s"
                 });
-            }
-            for(var i=3;i<5;i++) {
-                $(".videoHoverMode:eq("+i+")").css({
-                    "transform": "none"
-                });
-            }
-        });
-    // video:eq(3)
-        $(".videoHoverMode:eq(3)").hover(function(){
-            for(var i=0;i<3;i++) {
-                $(".videoHoverMode:eq("+i+")").css({
-                    "transform":"translate(-80px, 0)",
-                    "transition":"all 0.5s"
-                });
-            }
-            $(".videoHoverMode:eq(4)").css({
-                "transform":"translate(80px, 0)",
-                "transition":"all 0.5s"
-            });
-        }, function() {
-            for(var i=0;i<3;i++) {
-                $(".videoHoverMode:eq("+i+")").css({
-                    "transform":"none",
-                    "transition":"all 0.5s"
-                });
-            }
-            $(".videoHoverMode:eq(4)").css({
-                "transform":"none",
-                "transition":"all 0.5s"
-            });
-        });
-    // video:eq(4)
-        $(".videoHoverMode:eq(4)").hover(function(){
-            for(var i=0;i<4;i++) {
-                $(".videoHoverMode:eq("+i+")").css({
-                    "transform":"translate(-80px, 0)",
-                    "transition":"all 0.5s"
-                });
-            }
-        }, function() {
-            for(var i=0;i<4;i++) {
-                $(".videoHoverMode:eq("+i+")").css({
-                    "transform":"none",
-                    "transition":"all 0.5s"
-                });
-            }
-        });
-    }
+            break;
+            case 4:
+                for(var i=0;i<4;i++) {
+                    $(".videoHoverMode:eq("+i+")").css({
+                        "transform":"translate(-80px, 0)",
+                        "transition":"all 0.5s"
+                    });
+                }
+            break;
+            default:
+        }
     });
  }
  
     render() {
         var newLocal = this;
         // videoHovered
-        $(function() {
-            $(".videoHoverMode").hover(function() {
-                newLocal.videoHovered();
+        $(document).on('mouseenter', ".videoHoverMode", function() {
+            // $(this) = .videoHoverMode
+            // .videoHoverMode class를 가지고 있는 건 총 5개
+            // 5개의 index 0~4에 따라 다른 요소들의 움직임 결정
+            var index = $(this).index(".videoHoverMode");
+            newLocal.videoHovered(index);
+            // .videoHoverMode 영역에서 마우스가 나갔을 때
+            // videoHovered() 에서 이동시킨 요소들을 원위치
+            $(this).on('mouseleave', function() {
+                $(".videoHoverMode").css({
+                    "transform":"none",
+                    "transition":"all 0.5s"
+                });
             });
         });
         // videoClickMode
@@ -426,7 +394,7 @@ btnNext(){
             <span className="videoLabel_new">새로 올라온 작품</span>
         </p>
             <div className="videoInner">
-                <div id="videoIndex0" className="video">
+                <div id="videoIndex0" className="video videoHoverMode">
                     <h2>Title</h2>
                     <div>
                         <img className="video-bgGradient" src={VideoBG} alt=""/>
@@ -442,7 +410,7 @@ btnNext(){
                     </div>
                 {/* //video */}
                 </div>
-                <div id="videoIndex1" className="video">
+                <div id="videoIndex1" className="video videoHoverMode">
                     <h2>Title</h2>
                     <div className="videoDesc">
                         <div className="preview"></div>
@@ -456,7 +424,7 @@ btnNext(){
                     </div>
                 {/* //video */}
                 </div>
-                <div id="videoIndex2" className="video">
+                <div id="videoIndex2" className="video videoHoverMode">
                     <h2>Title</h2>
                     <div className="videoDesc">
                         <div className="preview"></div>
@@ -470,7 +438,7 @@ btnNext(){
                     </div>
                 {/* //video */}
                 </div>
-                <div id="videoIndex3" className="video">
+                <div id="videoIndex3" className="video videoHoverMode">
                     <h2>Title</h2>
                     <div className="videoDesc">
                         <div className="preview"></div>
@@ -484,7 +452,7 @@ btnNext(){
                     </div>
                 {/* //video */}
                 </div>
-                <div id="videoIndex4" className="video">
+                <div id="videoIndex4" className="video videoHoverMode">
                     <h2>Title</h2>
                     <div className="videoDesc">
                         <div className="preview"></div>

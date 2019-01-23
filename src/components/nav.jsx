@@ -49,6 +49,12 @@ class Nav extends Component {
     
     render() {
         var newLocal = this;
+        // prevent
+        $(document).on('click', "a[href='#']", function(event) {
+            event.preventDefault();
+        });
+
+
         // Scrolling change gnb 
         window.onscroll = function() {
             newLocal.scrollFunction();
@@ -82,11 +88,12 @@ class Nav extends Component {
         <div className="nav">
             <ModalPayment />
             <div className="lnb">
-                <p>EVENT</p>
-                <p>첫 1개월 무료체험 이벤트! 모든작품, 무제한 감상하세요. 마음에 들지 않으면 클릭 1번으로 언제든 해지할 수 있어요.</p>
+                <p>EVENT
+                    <span>첫 1개월 무료체험 이벤트! 모든작품, 무제한 감상하세요. 마음에 들지 않으면 클릭 1번으로 언제든 해지할 수 있어요.</span>
+                </p>
                 <div className="paymentBox">
-                    <div className="payment-bar">이용권 구매</div>
-                    <div className="payment-coupon">쿠폰 등록</div>
+                    <a href="#" alt="이용권 구매" className="payment-bar">이용권 구매</a>
+                    <a href="#" alt="쿠폰 등록" className="payment-coupon">쿠폰 등록</a>
                 {/* //paymentBox */}
                 </div>
             {/* //lnb */}                
@@ -94,16 +101,16 @@ class Nav extends Component {
             <div className="gnb">
                 <div className="gnbInner">
                     <ul className="leftNav">
-                        <h1><div className="logo"></div></h1>
+                        <h1><a href="/" alt="logo" className="logo">로고</a></h1>
                         <li className="btnCategory">
                             <Link to="/category">
-                                <a href="#">카테고리</a>
+                                <a href="/category" alt="카테고리">카테고리</a>
                             </Link>
                         {/* //btnCategory */}
                         </li>
                         <li className="evaluation">
                             <Link to="/evaluate">
-                                <a href="">평가하기</a>
+                                <a href="/evaluate" alt="평가하기">평가하기</a>
                             </Link>
                         </li>
                         {/* //leftNav */}
