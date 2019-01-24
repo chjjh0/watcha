@@ -1,3 +1,5 @@
+@import "//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css";
+
 /* nav */
 .nav {
     position: fixed;
@@ -93,6 +95,7 @@
   .leftNav > .evaluation {
     display: inline-block;
     line-height: 90px;
+    margin: 0 20px;
   }
   
   /*rightNav*/
@@ -108,12 +111,14 @@
   }
   
   .rightNav a > .searchBar {
+    font-family: FontAwesome;
     width: 0;
     height: 30px;
     opacity: 0;
     font-size: 15px;
     color: #888;
     transition: all 0.4s;
+    padding: 5px;
   }
   
   /* btnCategory */

@@ -65,7 +65,7 @@ class Login extends Component {
         </div>
         <div className="login-container">
             <h1>
-              <a href="http://127.0.0.1:3001">
+              <a href="/">
                 <img src={Logo} alt="logoImage"></img>
               </a>
             </h1>

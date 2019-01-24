@@ -26,8 +26,8 @@ class ModalYoutube extends Component {
                     </div>
                     <Youtube
                         video={this.props.videoId}
-                        width="100%"
-                        height="100%"
+                        width="900px"
+                        height="350px"
                         autoplay="0"
                         mute="0"
                         rel="1"

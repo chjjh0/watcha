@@ -22,10 +22,13 @@ class Category extends Component {
         this.state = {
             videoDescNum: 0,
             num: 1,
-            ping: false
+            ping: false,
+            videoDesc: [],
+            videoDescBasic: [],
+            changeNum: 1
         }
-        this.videoDesc = [];
         this.pageInit = this.pageInit.bind(this);
+        this.alignChange = this.alignChange.bind(this);
         this.pageInit();
     }
 
@@ -42,7 +45,7 @@ class Category extends Component {
             }
             var vd = res.body.video
             for(var i=0;i<vd.length;i++) {
-                this.videoDesc.push(vd[i])
+                this.state.videoDesc.push(vd[i])
             }
 
             this.setState({
@@ -52,9 +55,46 @@ class Category extends Component {
             })
         })
     }
+
+    alignChange(value) {
+        var newLocal = this;
+        var selected = value.target.value;
+        switch(selected) {
+            case "recommendation":
+                console.log('추천 순');
+                break;
+            case "starpoint":
+                console.log('별점 순');
+                break;
+            case "new":
+                // 최신 순
+                // newLocal.setState({
+                //     videoDesc: newLocal.state.videoDescBasic,
+                //     changeNum: 3
+                // })
+                break;
+            case "runningtime":
+                // runningtime 긴 순
+                $(function() {
+                    var temp =
+                    newLocal.state.videoDesc.sort(function(a, b) {
+                        // runningtime 짧은 순서 '<' 긴 순서 '>'
+                        return a.runningtime > b.runningtime ? -1 : a.runningtime > b.runningtime ? 1 : 0;
+                    });
+                    newLocal.setState({
+                        videoDesc: temp,
+                        changeNum: 4
+                    });
+                });
+                
+                break;
+            default:
+        }
+        console.log('1 지금 배열 상태::: ', this.state.videoDescBasic[0].title )
+        console.log('2 지금 배열 상태::: ', this.state.videoDesc[0].title )
+    }
     
     render() {
-        
         return (
             <section className="categoryPage">
                 <div className="selectArea">
@@ -84,19 +124,20 @@ class Category extends Component {
                         <option>중세배경</option>
                         <option>닌자</option>
                     </select>
-                    <select className="alignment">
-                        <option>추천 순</option>
-                        <option>평균별점 순</option>
-                        <option>최신작품 순</option>
-                        <option>러닝타임 순</option>
+                    <select className="alignment" onChange={this.alignChange}>
+                        <option value="recommendation">추천 순</option>
+                        <option value="starpoint">평균별점 순</option>
+                        <option value="new">최신작품 순</option>
+                        <option value="runningtime">러닝타임 순</option>
                     </select>
                 </div>
                     {
                         this.state.ping === true ?
                         <Infinite 
-                            videoDesc={this.videoDesc}
+                            videoDesc={this.state.videoDesc}
                             videoDescNum={this.state.videoDescNum}
                             totalIndex={this.state.totalIndex}
+                            changeNum={this.state.changeNum}
                          /> 
                         : <h2>비디오 컨텐츠가 없습니다</h2>
                     }

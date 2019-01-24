@@ -26,13 +26,12 @@ class InfiniteScl extends Component {
     }
 
     appendMachine() {
-        console.log('1 appendmachine')
-
         if($("#infiniteIndex"+this.videoIndex).hasClass("infiniteVideoImgArea")) {
             // 이미 있는 경우 추가 생성 오작동 방지
         } else {
             $(".infiniteVideoArea").append(
-                '<div data-videoIndex="' + this.videoIndex + '" class="infiniteVideo" name=' + 
+                '<div data-videoIndex="' + this.videoIndex 
+                    + '" class="infiniteVideo" name=' + 
                         this.props.videoDesc[this.videoIndex].youtubeId + '>' +
                     '<div id=infiniteIndex' + this.videoIndex + 
                         ' class="infiniteVideoImgArea">' +
@@ -63,7 +62,7 @@ class InfiniteScl extends Component {
     }
 
     componentDidMount() {
-        // 생성자로 호출 시 렌더링 전이라 .infiniteVideoArea가 없어서 추가가 되지 않음
+        // defaultVideoSet() 으로 호출 시 렌더링 전이라 .infiniteVideoArea가 없어서 추가가 되지 않음
         // componentDidMount로 첫 렌더링이 된 .infiniteVideoArea가 만들어진 후여야
         // 정상적으로 초기 video 들이 동적 할당 됨
         var newLocal = this;
@@ -74,28 +73,9 @@ class InfiniteScl extends Component {
     }
 
     render() {
-        console.log(this.props.videoDesc[0].title)
-        if(this.props.changeNum === 3) {
-            console.log('3 here')
-            this.videoIndex = 0;
-            $(".infiniteVideo").remove();
-            for(var i=0; i < this.defaultVideo; i++) {
-                this.appendMachine();
-            }
-        } else if(this.props.changeNum === 4) {
-            this.videoIndex = 0;
-            $(".infiniteVideo").remove();
-            for(var i=0; i < this.defaultVideo; i++) {
-                this.appendMachine();
-            }
-        }
         var newLocal = this;
         // infinite scroll
         $(window).scroll(function () {
-            if(newLocal.videoIndex > newLocal.props.totalIndex) {
-                // 휠 오작동으로 인한 무한로딩 방지용
-                $(window).off('scroll');
-            }
             // modalYoutube 작동 중에는 infiniScroll 작동 방지
             if(newLocal.modalOn === false) {
             if ((parseInt($(window).scrollTop()) + 1) >= ($(document).height() - $(window).height())) {

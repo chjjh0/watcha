@@ -62,16 +62,19 @@ class Nav extends Component {
         // search
         $(function(){
             $(".search-container i").click(function(){   
-                $(".rightNav i").css({"opacity": "0", "transition": "all 0.1s"});
+                console.log('여기 어때')
+                $(".rightNav i").css({"display": "none", "transition": "all 0.1s"});
                 $(".searchBar").css({"opacity": "1", "width": "200px"});
             });
-            window.onclick = function(event) {
-                if (!event.target.matches('.search-container i')) {
-                    $(".searchBar").css({"opacity": "0", "width": "0"});
-                    $(".rightNav i").css({"opacity": "1", "transition": "all 0.9s"});
-                    $(".payment-bar").removeClass("paymentModal");
-                }
-            }
+                // $(document).onClick = function(event) {
+                //     console.log('event::: ', event)
+                //     console.log('target::: ', event.target)
+                //     if (!event.target.matches('.searchBar')) {
+                //         $(".searchBar").css({"opacity": "0", "width": "0"});
+                //         $(".rightNav i").css({"display": "inline", "transition": "all 0.9s"});
+                //         $(".payment-bar").removeClass("paymentModal");
+                //     }
+                // };
         // //function
         });
 
@@ -118,7 +121,7 @@ class Nav extends Component {
                         <div className="rightNav">
                             <a href="#" className="search-container">
                                 <i className="fas fa-search"> 검색</i>
-                                <input className="searchBar" type="text" placeholder="&#xf02b; 제목,감독,배우로 검색" />
+                                <input className="searchBar" type="text" placeholder="&#61442; 제목,감독,배우로 검색" />
                             </a>
                         <a href="#">보고싶어요</a>
                         {

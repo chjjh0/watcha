@@ -4,7 +4,6 @@
     position: fixed; 
     overflow: auto;
     z-index: 6; 
-    padding-top: 100px; 
     left: 0;
     top: 0;
     width: 100%; 
@@ -14,8 +13,8 @@
 /* modalYoutubeContent */
 .modalYoutubeContent {
     position: relative;
-    width: 60%;
-    height: 40%;
+    width: 900px;
+    height: 450px;
     background: black;
     border-top: 1px solid #121212;
     border-radius: 15px;
