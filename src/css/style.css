@@ -46,10 +46,9 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-background-color: red;
-outline: 1px solid slategrey;
+  background-color: red;
+  outline: 1px solid slategrey;
 }
-/* //scrollbar customizing */
 
 
 /* hover */

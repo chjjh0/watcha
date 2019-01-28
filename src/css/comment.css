@@ -1,0 +1,11 @@
+.commentInput {
+    background: transparent;
+    color: #888;
+    width: 300px;
+    border: 0;
+    resize: none;
+    height: 18px;
+    max-height: 80px;
+    outline: 0;
+    padding: 0;
+}

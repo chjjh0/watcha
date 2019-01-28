@@ -16,9 +16,11 @@ class InfiniteScl extends Component {
             releaseYear: '',
             youtubeId: '8hYlB38asDY'
         }
+        // 초기 표현할 video 값
         this.defaultVideo = 20;
+        // 무한 스크롤로 인해 video가 중복되지 않게 출력되기 위한 index
         this.videoIndex = 0;
-        // 작동 중 확인
+        // scroll or modal 작동 여부 확인
         this.isScrolling = false;
         this.modalOn = false;
         this.appendMachine = this.appendMachine.bind(this);
@@ -50,8 +52,8 @@ class InfiniteScl extends Component {
 
     openModalYoutube(videoIndex, videoId) {
         // video에 click 발생 시 
-        // videoIndex에 따라 video에 맞는 videoId를 통해
-        // youtube 예고편 및 영화정보가 바뀜
+        // videoIndex에 따라 video에 매핑 된 videoId를 통해
+        // youtube 예고편 및 영화정보가 변화
         this.setState({
             videoTitle: this.props.videoDesc[videoIndex].title,
             releaseYear: this.props.videoDesc[videoIndex].releaseYear,
@@ -74,15 +76,34 @@ class InfiniteScl extends Component {
     }
 
     render() {
-        console.log(this.props.videoDesc[0].title)
+        console.log('3 넘어온 값',this.props.videoDesc[0].title)
+        // genre 선택에 따른 처리
+        if(this.props.genre === true) {
+            // defaultVideo 는 항상 20개를 유지
+            this.videoIndex = 0;
+            this.defaultVideo = 20;
+            // 현재 보여지는 video 전부 삭제
+            $(".infiniteVideo").remove();
+            console.log("여기 맞지????")
+            if(this.props.totalIndex < this.defaultVideo) {
+                // video 개수가 20개 미만 시 처리
+                this.defaultVideo = this.props.totalIndex;
+            } 
+            for(var i=0; i < this.defaultVideo; i++) {
+                this.appendMachine();
+            }
+        }
+
+        // 정렬에 따른 처리
         if(this.props.changeNum === 3) {
-            console.log('3 here')
+            // 최신 순
             this.videoIndex = 0;
             $(".infiniteVideo").remove();
             for(var i=0; i < this.defaultVideo; i++) {
                 this.appendMachine();
             }
         } else if(this.props.changeNum === 4) {
+            // 러닝타임 긴 순
             this.videoIndex = 0;
             $(".infiniteVideo").remove();
             for(var i=0; i < this.defaultVideo; i++) {

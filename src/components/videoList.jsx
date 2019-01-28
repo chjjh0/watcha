@@ -14,7 +14,6 @@ class VideoList extends Component {
  constructor(props) {
     super(props);
     this.state = {
-        videoSlideNum: 1,
         video: 'cMpWP5P_f2s',
         title: '1',
         releaseYear: '2',
@@ -23,6 +22,7 @@ class VideoList extends Component {
         synopsis: '5',
         moveNum: 1,
     }
+    this.videoSlideNum = 1;
     this.videoDataAry = [];
     this.videoImgAry = [];
     this.videoSelected = this.videoSelected.bind(this);
@@ -39,8 +39,8 @@ viewMore(num) {
     var viewMoreImage = this.videoImgAry[num];
     var viewMoreTitle = $("#videoIndex"+num+" > h2").html();
     var viewMoreRating = $("#videoIndex"+num+" > .videoDesc > p:eq(0)").html();
-    var viewMoreSynopsis = $("#videoIndex"+num+" > .videoDesc > p:eq(1)").html();
-//  video scale >> basic video shape
+    var viewMoreSynopsis = this.videoDataAry[num].synopsis;
+    //  video scale >> basic video shape
 
     // #1
     // hoverMode로 인한 transform이 아직 돌아가지 않은 시점에서
@@ -165,7 +165,7 @@ defaultVideoSet() {
         releaseYear: '2002',
         ratingAge: '12세',
         runningTime: '1시간 58분',
-        synopsis: '이탈리아 어부들이 지중해 한 가운데에서 등에 두 발의 총상을 입은 채 표류하고 있는 한 남자(Jason Bourne: 맷 데이먼 분)를 구하게 된다. 그는 의식을 찾게 되지만 기억 상실증에 걸려 자신이 누구인지 조차 모른다. 그가 누구인지 알 수 있는 단서는 등에 입은 총상과 살 속에 숨겨져 있던 스위스 은행의 계좌번호 뿐...',
+        synopsis: '이탈리아 어부들이 지중해 한 가운데에서 등에 두 발의 총상을 입은 채 표류하고 있는 한 남자(Jason Bourne: 맷 데이먼 분)를 구하게 된다. 그는 의식을 찾게 되지만 기억 상실증에 걸려 자신이 누구인지 조차 모른다. 그가 누구인지 알 수 있는 단서는 등에 입은 총상과 살 속에 숨겨져 있던 스위스 은행의 계좌번호 뿐',
     });
     this.videoDataAry.push({
         image: this.videoImgAry[9],
@@ -184,6 +184,10 @@ defaultVideoSet() {
             var ratingAge = newLocal.videoDataAry[i].ratingAge;
             var runningTime = newLocal.videoDataAry[i].runningTime;
             var synopsis = newLocal.videoDataAry[i].synopsis;
+            // synopsis 가 80글자 이상일 경우 80자까지 이상은 ... 으로 표기
+            if(synopsis.length > 80) {
+                synopsis = synopsis.substr(0, 81)+"...";
+            }
             // video setting
             // background URL 속성이 index.html 이 있는 public 폴더를 기준으로 잡아야 적용 됨
             $(".video:eq("+i+")").css({"background":"url('img/"+image+"') center/cover"});
@@ -201,14 +205,14 @@ defaultVideoSet() {
 
 
 closeVideoDetail() {
-    var slideNum = this.state.videoSlideNum;
+    var slideNum = this.videoSlideNum;
     var begin = 0;
     var end = 0;
     $(".video").css("border","4px solid #121212");
     $(".video").removeClass("videoClickMode");
     $(".video").removeClass("videoHoverMode");
     // clickMode > hoverMode 전환
-    // 현재 슬라이드 num에 따라 hoverMode로 전환
+    // 현재 슬라이드 번호에 따라 hoverMode로 전환
     switch(slideNum) {
         case 1:
             begin = 0;
@@ -234,120 +238,156 @@ closeVideoDetail() {
 }
 
 btnPrev() {
-    var newLocal = this;
-    var slideNum = this.state.videoSlideNum-1;
+    // video의 개수는 총 10개 (0번 ~ 9번)
+    // default slide 1번, 총 slide 수 2개
+    // slide 1번에서는 0 ~ 4번 slide 2번에는 5 ~ 9번에 hoverMode class 부여
+    // videoList 영역에서 overflow: hidden 속성으로 감춰져 있더라도 
+    // video가 hoverMode class를 가지고 있으면 움직임이 발생하는 것을 방지하기 위해
+    // slide 숫자에 따라 현재 보이는 영역에서의 video 만 hoverMode를 부여하여 움직임을 허용
+    var slideNum = this.videoSlideNum - 1;
     var begin = 0;
     var end = 0;
-    if(slideNum === 0 || 1) {
+    if(slideNum <= 0 || slideNum === 1) {
+        // slide 번호의 제일 작은 수는 1
         slideNum = 1;
-    } else {
-        slideNum--;
-    }
-    if(slideNum === 1) {
         begin = 0;
         end = 5;
-    } else if(slideNum === 2) {
-        begin = 5;
-        end = 9;
-    }
-    this.state.videoSlideNum = slideNum;
+    } 
+    this.videoSlideNum = slideNum;
     $(function(){
-        $(".video").removeClass("videoHoverMode");
         if($(".video").hasClass("videoClickMode")) {
-            // clickMode 시
-            // 처리 X
+            // clickMode 시 처리내용 없음
         } else {
+            // hoverMode class 초기화
+            $(".video").removeClass("videoHoverMode");
+            // hoverMode class 할당
             for(;begin<end;begin++) {
                 $("#videoIndex"+begin).addClass("videoHoverMode");
-            } // //for
-        } // //else
-        console.log("prev css")
-        $(".video").animate({
-            "left":"0",
-        });
+            } // /for
+        } // /else
+        $(".video").animate({"left": "0"});
     });
-    
 }
 
 btnNext(){
+    // video의 개수는 총 10개 (0번 ~ 9번)
+    // default slide 1번, 총 slide 수 2개
+    // slide 1번에서는 0 ~ 4번 slide 2번에는 5 ~ 9번에 hoverMode class 부여
+    // videoList 영역에서 overflow: hidden 속성으로 감춰져 있더라도 
+    // video가 hoverMode class를 가지고 있으면 움직임이 발생하는 것을 방지하기 위해
+    // slide 숫자에 따라 현재 보이는 영역에서의 video 만 hoverMode를 부여하여 움직임을 허용
     var begin = 0;
     var end = 0;
-    var slideNum = this.state.videoSlideNum+1;
+    var slideNum = this.videoSlideNum + 1;
     if(slideNum === 1) {
         begin = 0;
         end = 5;
     } else if(slideNum === 2) {
         begin = 5;
         end = 10;
+    } else {
+        // slide 번호가 2 이상일 경우 처리
+        slideNum = 2;
+        begin = 5;
+        end = 10;
     }
-    this.state.videoSlideNum = slideNum;
+    // 변화에 따른 자동 렌더링이 필요 없어 직접 접근하여 변경
+    this.videoSlideNum = slideNum;
     $(function(){
-        $(".video").removeClass("videoHoverMode");
-        // if($(".video").hasClass("videoClickMode")) {
-        // } else {
+        if($(".video").hasClass("videoClickMode")) {
+            // clickMode일 경우 videoHoverMode class를 추가하지 않음
+        } else {
+            // hoverMode일 경우에만 진입
+            $(".video").removeClass("videoHoverMode");
             for(;begin<end;begin++){
                 $("#videoIndex"+begin).addClass("videoHoverMode");
-            } // //for
-        //} // //else
-        console.log("next css")
-        $(".video").animate({
-            "left":"-1670px",
-        });
+            } // /for
+        } // /else
+        // .videoList의 width만큼 이동
+        $(".video").animate({"left": -($(".videoList").width())});
      });
  }
 
  videoHovered(index) {
     // index에 따라 요소들을 이동
+    // index는 0 ~ 4
     $(function() {
         switch(index) {
             case 0:
+                // 0번 scale 및 overflow:hidden에 걸리지 않게 오른쪽 이동
+                $(".videoHoverMode:eq(0)").css({
+                    "transform": "translate(90px, 0) scale(1.7)",
+                    "transition": "all 0.5s"});
                 for(var j=1;j<5;j++) {
                     $(".videoHoverMode:eq("+j+")").css({
-                        "transform":"translate(80px, 0)",
-                         "transition":"all 0.5s"});
+                        "transform": "translate(180px, 0)",
+                        "transition": "all 0.5s"});
                 }
                 break;
             case 1:
+                // 0번 왼쪽 이동
                 $(".videoHoverMode:eq(0)").css({
-                    "transform":"translate(-80px, 0)",
-                    "transition":"all 0.5s"
+                    "transform": "translate(-80px, 0)",
+                    "transition": "all 0.5s"
                 });
+                // 1번 scale
+                $(".videoHoverMode:eq(1)").css({
+                    "transform": "scale(1.7)",
+                    "transition": "all 0.5s"});
+                // 2~4번 오른쪽 이동
                 for(var j=2;j<5;j++) {
                     $(".videoHoverMode:eq("+j+")").css({
-                    "transform":"translate(80px, 0)", 
-                    "transition":"all 0.5s"})
+                        "transform": "translate(80px, 0)", 
+                        "transition": "all 0.5s"})
                 }
             break;
             case 2:
+                // 0~1번 왼쪽 이동
                 for(var i=0;i<2;i++) {
                     $(".videoHoverMode:eq("+i+")").css({
-                        "transform":"translate(-80px, 0)",
-                        "transition":"all 0.5s"
+                        "transform": "translate(-80px, 0)",
+                        "transition": "all 0.5s"
                     });
                 }
+                // 2번 scale
+                $(".videoHoverMode:eq(2)").css({
+                    "transform": "scale(1.7)",
+                    "transition": "all 0.5s"});
+                // 3~4번 오른쪽 이동
                 for(var j=3;j<5;j++) {
                     $(".videoHoverMode:eq("+j+")").css({
-                    "transform":"translate(80px, 0)", 
-                    "transition":"all 0.5s"})
+                        "transform": "translate(80px, 0)", 
+                        "transition": "all 0.5s"})
                 }
             break;
             case 3:
+                // 0~2번 왼쪽 이동
                 for(var i=0;i<3;i++) {
                     $(".videoHoverMode:eq("+i+")").css({
-                        "transform":"translate(-80px, 0)",
-                        "transition":"all 0.5s"
+                        "transform": "translate(-80px, 0)",
+                        "transition": "all 0.5s"
                     });
                 }
+                // 3번 scale
+                $(".videoHoverMode:eq(3)").css({
+                    "transform": "scale(1.7)",
+                    "transition": "all 0.5s"});
+                // 4번 오른쪽 이동
                 $(".videoHoverMode:eq(4)").css({
-                    "transform":"translate(80px, 0)",
-                    "transition":"all 0.5s"
+                    "transform": "translate(80px, 0)",
+                    "transition": "all 0.5s"
                 });
             break;
             case 4:
+                // 4번 scale 및 overflow:hidden에 걸리지 않게 왼쪽 이동
+                $(".videoHoverMode:eq(4)").css({
+                    "transform": "translate(-90px, 0) scale(1.7)",
+                    "transition": "all 0.5s"});
+                // 0~3번 왼쪽 이동
                 for(var i=0;i<4;i++) {
                     $(".videoHoverMode:eq("+i+")").css({
-                        "transform":"translate(-80px, 0)",
-                        "transition":"all 0.5s"
+                        "transform": "translate(-180px, 0)",
+                        "transition": "all 0.5s"
                     });
                 }
             break;
@@ -357,6 +397,7 @@ btnNext(){
  }
  
     render() {
+        
         var newLocal = this;
         // videoHovered
         $(document).on('mouseenter', ".videoHoverMode", function() {
@@ -376,6 +417,7 @@ btnNext(){
         });
         // videoClickMode
         $(function() {
+            console.log($(".videoList").width());
             $(".video").click(function(){
                 if($(this).hasClass("videoClickMode")) {
                 var idTemp = $(this).attr("id").valueOf();

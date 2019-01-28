@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import request from 'superagent';
-
 // components
+import Comment from './comment.jsx';
 import Youtube from './youtube.jsx';
 // css
 import '../css/modalYoutube.css';
@@ -20,9 +20,12 @@ class ModalYoutube extends Component {
             <div className="modalYoutube">
                 <div className="modalYoutubeContent">
                     <div className="videoInfo">
+                        {/* 영화 제목 */}
                         <h2>{this.props.videoTitle}</h2>
+                        {/* 개봉일 */}
                         <p>{this.props.releaseYear}</p>
                         <i id="btnCloseYoutube" className="fas fa-times"></i>
+                    {/* /videoInfo */}
                     </div>
                     <Youtube
                         video={this.props.videoId}
@@ -32,10 +35,10 @@ class ModalYoutube extends Component {
                         mute="0"
                         rel="1"
                         modest="0" />
-                    
-                    {/* //modalContent */}
+                    <Comment />
+                {/* /modalYoutubeContent */}
                 </div>
-                {/* //paymentModal */}
+            {/* /modalYoutube */}
             </div>
         );
     }
