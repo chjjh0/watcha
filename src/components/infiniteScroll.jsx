@@ -114,14 +114,15 @@ class InfiniteScl extends Component {
         // infinite scroll
         $(window).scroll(function () {
             if(newLocal.videoIndex > newLocal.props.totalIndex) {
-                // 휠 오작동으로 인한 무한로딩 방지용
+                // 휠 오작동으로 인한 무한로딩 방지
                 $(window).off('scroll');
             }
             // modalYoutube 작동 중에는 infiniScroll 작동 방지
             if(newLocal.modalOn === false) {
             if ((parseInt($(window).scrollTop()) + 1) >= ($(document).height() - $(window).height())) {
-                // isScrolling의 용도는 스크롤이 작동 중일 때 
-                // 재 스크롤 조작으로 요청이 중첩됨으로 인한 오작동을 방지
+                // isScrolling의 용도
+                // 스크롤이 작동 중일 때 재 스크롤 조작으로
+                // 요청이 중첩됨으로 인한 오작동 방지
                 if(newLocal.videoIndex < newLocal.props.totalIndex 
                     && newLocal.isScrolling === false) {
                     // isScrolling on
@@ -155,18 +156,19 @@ class InfiniteScl extends Component {
         // open modalYoutube
         // click이 한 번만 발생하게 하여 여러 번 호출되는 것을 방지
         $(document).one("click", ".infiniteVideo", function() {
+            console.log("click 한번만 됨?????")
             // videoIndex 추출
             var videoIndex = $(this).attr("data-videoIndex");
-            // youtubeId 기본값 설정
-            // null일 경우를 대비해
-            // 기본값을 '8hYlB38asDY' 세팅
-            var youtubeId = '8hYlB38asDY';
+            var youtubeId = '';
             // youtubeId null check
             // 동적 태그 생성 시 boolean이 아닌 
             // "null" 이라는 문자열로 삽입되었기에
             // "null" 문자열로 null 체크
             if($(this).attr("name") === "null") {
-                // youtubeId is null
+                // youtubeId 기본값 설정
+                // null일 경우를 대비해
+                // 기본값을 '8hYlB38asDY' 세팅
+                youtubeId = '8hYlB38asDY';
             } 
             else {
                 youtubeId = $(this).attr("name");

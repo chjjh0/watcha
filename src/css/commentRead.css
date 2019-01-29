@@ -1,0 +1,48 @@
+/* profile class 관련 설정은 comment.css에 존재 */
+
+.commentReadArea {
+    margin: 30px 0;
+    color: white;
+}
+
+.commentBox {
+    margin: 20px 0;
+    min-height: 100px;
+    max-height: 200px;
+    box-sizing: border-box;
+}
+
+/* 댓글 작성자, 작성일 */
+.commentReadArea p {
+    /* comment.css의 commentInput과 width 동일 */
+    width: 730px;
+    float: left;
+    line-height: 40px;
+}
+
+/* 수정, 삭제 버튼 활성화 */
+.btnOption {
+    display: block;
+    float: right;
+    cursor: pointer;
+}
+
+/* 수정, 삭제 버튼 */
+.optionBox {
+    display: none;
+    float: right;
+}
+
+.optionBox a {
+    color: white;
+    width: 30px;
+    height: 40px;
+    margin-right: 20px;
+}
+
+/* 댓글 내용 */
+.commentReadArea .commentContent {
+    float: left;
+    width: 100%;
+    padding: 10px 5px;
+}

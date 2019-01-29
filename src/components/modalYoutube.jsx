@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import request from 'superagent';
 // components
-import Comment from './comment.jsx';
+import Comment from './commentArea.jsx';
 import Youtube from './youtube.jsx';
 // css
 import '../css/modalYoutube.css';
