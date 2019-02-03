@@ -3,12 +3,15 @@ import { Link } from 'react-router-dom';
 
 // components
 import ModalPayment from './modalPayment.jsx';
+import request from 'superagent';
+
 // css
 import '../css/nav.css';
 // img
 
 // jQuery
 import $ from 'jquery';
+import { ServerResponse } from 'http';
 window.$ = $;
 
 
@@ -16,11 +19,14 @@ class Nav extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: '로그인'
+            isLogged: false,
+            loginId: ''
         }
         this.btnCategory = this.btnCategory.bind(this);
         this.scrollFunction = this.scrollFunction.bind(this);
         this.isloged = this.isloged.bind(this);
+        this.btnLogout = this.btnLogout.bind(this);
+        this.isloged();
     }
 
     btnCategory(cateName) {
@@ -40,21 +46,61 @@ class Nav extends Component {
         }
     }
 
-    isloged(logedUser) {
-        console.log('Client isloged')
-        this.setState({
-            user: "로그인 성공"
-        })
+    isloged() {
+        console.log('isLogged::: ', this.state.isLogged)
+        request.get('/isLogin')
+        .end((err, res) => {
+            if(err) {
+                console.log('err: '+err.message)
+                console.log('res.body: '+res.body)
+                alert(res.body)
+                return;
+            }
+            if(res.body.message) {
+                // 로그인 전
+                console.log(res.body.message)
+            } else {
+                console.log(res.body.user[0].id+'님이 로그인 중입니다')
+                this.setState({
+                    isLogged: true,
+                })
+                // sessionStorage
+                sessionStorage.setItem('id', res.body.user[0].id)
+            }
+        });
+    }
+
+    btnLogout() {
+        request.get('/logout')
+        .end((err, res) => {
+            if(err) {
+                console.log('err: '+err.message)
+                console.log('res.body: '+res.body)
+                alert(res.body)
+                return;
+            }
+            this.setState({
+                isLogged: false,
+            })
+            // remove sessionStorage 
+            sessionStorage.removeItem('id')
+            console.log('logout sessionStorage::: ',sessionStorage.getItem('id'))
+            // redirect home
+            window.location.href = '/';
+        });
     }
     
     render() {
         var newLocal = this;
+        if(this.state.isloged === false) {
+            console.log(this.state.isLogged)
+        }
         // prevent
         $(document).on('click', "a[href='#']", function(event) {
             event.preventDefault();
         });
 
-
+        
         // Scrolling change gnb 
         window.onscroll = function() {
             newLocal.scrollFunction();
@@ -66,27 +112,8 @@ class Nav extends Component {
                 $(".rightNav i").css({"display": "none", "transition": "all 0.1s"});
                 $(".searchBar").css({"opacity": "1", "width": "200px"});
             });
-                // $(document).onClick = function(event) {
-                //     console.log('event::: ', event)
-                //     console.log('target::: ', event.target)
-                //     if (!event.target.matches('.searchBar')) {
-                //         $(".searchBar").css({"opacity": "0", "width": "0"});
-                //         $(".rightNav i").css({"display": "inline", "transition": "all 0.9s"});
-                //         $(".payment-bar").removeClass("paymentModal");
-                //     }
-                // };
-        // //function
         });
 
-        // check login
-        // $(function() {
-        //     if(window.sessionStorage.getItem("isLoged")) {
-        //         alert('islogged')
-        //         var logedUser = window.sessionStorage.getItem("isloged");
-        //         alert(window.sessionStorage.getItem("isloged"))
-        //         newLocal.isloged(logedUser)
-        //     }
-        // })
         return (
         <div className="nav">
             <ModalPayment />
@@ -123,23 +150,17 @@ class Nav extends Component {
                                 <i className="fas fa-search"> 검색</i>
                                 <input className="searchBar" type="text" placeholder="&#61442; 제목,감독,배우로 검색" />
                             </a>
-                        <a href="#">보고싶어요</a>
+                                                
                         {
-
-                        }
-                        {/* mypage */}
-                        {
-                            sessionStorage.getItem("isLoged") != null ?
-                            <a href="http://127.0.0.1:3001/mypage"> "mypage" </a>
-                            : ""
+                            this.state.isLogged === true ? 
+                            <Link to="/favorite">
+                                <a href="http://127.0.0.1:3001/favorite">보고싶어요</a>
+                            </Link> : ''
                         }
                         
                         {
-                            sessionStorage.getItem("isLoged") != null ?
-                            <button onClick={() => {
-                                sessionStorage.removeItem("isLoged")
-                                window.location.href = "http://127.0.0.1:3001/"
-                            }}>로그아웃</button>
+                            this.state.isLogged === true ?
+                            <button onClick={this.btnLogout}>{this.state.loginId}로그아웃</button>
                             : 
                             <Link to="/login">
                                 <a href="http://127.0.0.1:3001/login">

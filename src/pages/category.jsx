@@ -59,10 +59,10 @@ class Category extends Component {
         })
     }
 
-    changeGenre(value) {
+    changeGenre(e) {
         // 장르에 따른 ajax 처리
         // 모든 장르 선택 시 /category/init 재활용
-        var selectedGenre = value.target.value;
+        var selectedGenre = e.target.value;
         console.log(selectedGenre)
         if(selectedGenre === 'all') {
             this.pageInit();

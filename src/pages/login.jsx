@@ -38,18 +38,10 @@ class Login extends Component {
 
   loadedJSON(err, res) {
     if(err) {
-      console.log('err: '+err.message)
-      console.log('res.body: '+res.body)
+      alert(res.body)
       return;
     }
-    console.log(res.body.id)
-    console.log(res.body.password)
-    console.log(res.body.email)
-    //window.sessionStorage.setItem("isLoged",res.body.id)
-    alert('login success')
-    //alert(window.sessionStorage.getItem("isLoged"))
-    alert('login ajax end')
-    //this.setState({jump: '/'})
+    window.location.href='http://127.0.0.1:8000/';
   }
 
   render() {

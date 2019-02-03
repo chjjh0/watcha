@@ -13,6 +13,7 @@ import LoginPage from './pages/login.jsx';
 import JoinPage from './pages/join.jsx';
 import CategoryPage from './pages/category.jsx';
 import EvaluatePage from './pages/evaluate.jsx';
+import FavoritePage from './pages/favorite.jsx';
 // jQuery
 import Jquery from 'jquery';
 
@@ -40,6 +41,7 @@ class App extends Component {
       <Route exact path="/join" component={JoinPage} />
       <Route exact path="/category" component={CategoryPage}/>
       <Route exact path="/evaluate" component={EvaluatePage}/>
+      <Route exact path="/favorite" component={FavoritePage}/>
     </section>
     );
   }

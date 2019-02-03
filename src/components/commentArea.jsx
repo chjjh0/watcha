@@ -41,6 +41,8 @@ class CommentArea extends Component {
     }
 
     validationComment() {
+        // comment 페이지에 .commentInput이 1개여서 jquery로 잡아도 괜찮지만, 
+        // 해당 객체에서 이벤트가 발생했을 때 해당객체의 값만 가져오게 변경하기
         var commentText = $(".commentInput").val();
         var commentTextCount = commentText.length;
         // 댓글 내용이 있다면 버튼 활성화

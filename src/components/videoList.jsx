@@ -417,7 +417,6 @@ btnNext(){
         });
         // videoClickMode
         $(function() {
-            console.log($(".videoList").width());
             $(".video").click(function(){
                 if($(this).hasClass("videoClickMode")) {
                 var idTemp = $(this).attr("id").valueOf();

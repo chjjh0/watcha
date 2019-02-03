@@ -171,10 +171,10 @@ class infiniteScl extends Component {
                     // isScrolling on
                     newLocal.isScrolling = true;
                     $(".progress").css({"display": "block"});
-                    // .progress가 보여진 후 위치값을 계산하여
-                    // 스크롤 위치를 .progress가 보이는 위치로 이동
-                    var offset = $(".progress").offset();
-                    $("html, body").animate({scrollTop: offset.top}, 500);
+                    // // .progress가 보여진 후 위치값을 계산하여
+                    // // 스크롤 위치를 .progress가 보이는 위치로 이동
+                    // var offset = $(".progress").offset();
+                    // $("html, body").animate({scrollTop: offset.top}, 500);
                     setTimeout(function() {
                         if(newLocal.videoIndex < newLocal.props.totalIndex) {
                             for(var i=0; i<5; i++) {
