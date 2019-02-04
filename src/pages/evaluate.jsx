@@ -16,47 +16,29 @@ window.$ = $;
 class Category extends Component {
     constructor(props) {
         super(props);
+        // videoDesc = ajax 통신 후 얻은 배열, sort등으로 인한 수정되지 않은 '기본배열'
+        // loadingComplete = infiniteScroll component에 데이터 전달 전 정상처리 여부를 확인하는 용도
         this.state = {
-            videoDescNum: 0,
-            num: 1,
-            ping: false
+            videoDesc: [],
+            totalIndex: 0,
+            loadingComplete: false,
         }
-        this.videoDesc = [];
         this.pageInit = this.pageInit.bind(this);
         this.pageInit();
     }
 
     pageInit() {
         request.get('/category/init')
-        .send(
-            {
-                categoryState: "test"
-            }
-        )
         .end((err, res) => {
             if(err) {
                 console.log('err.message: '+err.message)
                 console.log('res.body: '+res.body)
                 return;
             }
-            var vd = res.body.video
-            console.log('vd: '+vd)
-            console.log('vdLength: '+vd.length)
-            for(var i=0;i<vd.length;i++) {
-                this.videoDesc.push(vd[i])
-            }
-            console.log('vd: '+vd[0].title)
-            console.log('vd: '+vd[1].title)
-            console.log('videoDescLength: '+this.videoDesc.length)
-            console.log('videoDesc 전체: '+this.videoDesc)
-            console.log('videoDesc: '+this.videoDesc[0].title)
-            console.log('videoDesc: '+this.videoDesc[1].title)
-            console.log('youtubeId: '+this.videoDesc[1].youtubeId)
-
+            this.state.videoDesc = res.body.video
             this.setState({
-                videoDescNum: vd.length,
-                totalIndex: res.body.videoLength,
-                ping: true,
+                totalIndex: this.state.videoDesc.length,
+                loadingComplete: true,
             })
         })
     }
@@ -69,10 +51,9 @@ class Category extends Component {
                     <p>그래요. 기왕 이렇게 된 거 500개 갑시다!</p>
                 </div>
                     {
-                        this.state.ping === true ?
+                        this.state.loadingComplete === true ?
                         <EvaluateScroll 
-                            videoDesc={this.videoDesc}
-                            videoDescNum={this.state.videoDescNum}
+                            videoDesc={this.state.videoDesc}
                             totalIndex={this.state.totalIndex}
                          /> 
                         : <h2>비디오 컨텐츠가 없습니다</h2>

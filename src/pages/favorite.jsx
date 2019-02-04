@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import request from 'superagent';
 // components
+import FavoriteVideoArea from '../components/favoriteArea.jsx';
 // css
 import '../css/favoritePage.css';
 // img
@@ -13,11 +14,15 @@ class FavoritePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            videoIndex: '1'
+            totalIndex: 0,
+            favoriteVideo: [],
+            loadingComplete: false
         }
+        this.pageInit = this.pageInit.bind(this);
+        this.pageInit();
     }
-    
-    componentDidMount() {
+
+    pageInit() {
         var userId = sessionStorage.getItem('id');
         request.get('/readFavorite')
         .query({userId: userId})
@@ -29,19 +34,18 @@ class FavoritePage extends Component {
                 return;
             }
             if(res.body.message) {
-                alert(res.body.message)
-                var favoriteTemp = res.body.favoriteVideo;
-                console.log(favoriteTemp.length);
+                this.state.favoriteVideo = res.body.favoriteVideo;
                 this.setState({
-                    videoIndex: res.body.favoriteVideo[0].title
-                })
-
+                    totalIndex: this.state.favoriteVideo.length,
+                    loadingComplete: true
+                });
             } else {
                 console.log('readFavorite 없어')
             }
+            
         });
     }
-
+    
     render() {
         return (
             <section className="favoritePage">
@@ -54,11 +58,12 @@ class FavoritePage extends Component {
                     </h2>
                 {/* /welcomeArea */}
                 </div>
-                <div className="favoriteVideoArea">
-                    <div className="favoriteVideo">
-                        {this.state.videoIndex} 번 비디오입니다.
-                    </div>
-                </div>
+                { this.state.loadingComplete === true ?
+                    <FavoriteVideoArea 
+                        totalIndex={this.state.totalIndex}
+                        favVideo={this.state.favoriteVideo}
+                    /> : '정상적으로 처리되지 않았습니다'
+                }
             {/* /favoritePage */}
             </section>
         );

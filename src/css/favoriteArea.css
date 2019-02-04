@@ -1,0 +1,84 @@
+.favoriteVideoArea {
+    width: 1400px;
+    height: 300px;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+.favVideo {
+    position: relative;
+    width: 305px;
+    height: 350px;
+    float: left;
+    margin-right: 60px;
+    margin-bottom: 60px;
+    box-sizing: border-box;
+}
+
+/* 
+한 페이지 당 한 줄에 4개씩 총 4줄을 보여줄 예정이기에
+4, 8, 12, 16번째 요소에 margin을 삭제하여 오른쪽에 달라붙게
+*/
+.favVideo:nth-child(4),
+.favVideo:nth-child(8),
+.favVideo:nth-child(12),
+.favVideo:nth-child(16) {
+    margin-right: 0;
+}
+
+.favVideo .videoInfo {
+    position: absolute;
+    z-index: 1;
+    top: 150px;
+    width: 100%;
+    height: 150px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 2px 1px #121212;
+    transition-delay: 0.5s;
+}
+
+.videoInfo .releaseYear {
+    font-size: 20px;
+}
+
+.favVideo .heartIcon:after {
+    content: '♥';
+    position: absolute;
+    z-index: 1;
+    top: 20px;
+    right: 30px;
+    font-size: 50px;
+    color: rgb(255, 81, 81);
+    cursor: pointer;
+}
+
+.favVideo .heartIcon.noHeart:after {
+    content: '♡';
+    color: white;
+    position: absolute;
+    z-index: 1;
+    top: 20px;
+    right: 30px;
+    font-size: 50px;
+    cursor: pointer;
+}
+
+.favVideo .favPoster {
+    width: 100%;
+    height: 100%;
+    filter: blur(2px);
+    transition: all 0.5s;
+}
+
+/* hover */
+.favVideo:hover .favPoster {
+    filter: none;
+    transition: all 0.5s;
+}
+
+.favVideo:hover .videoInfo {
+    opacity: 0;
+    transition: all 0.5s;
+}
+

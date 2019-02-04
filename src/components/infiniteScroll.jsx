@@ -43,6 +43,7 @@ class InfiniteScl extends Component {
                 '<h2 class="infiniteVideoTitle">' + this.props.videoDesc[this.videoIndex].title + '</h2>' +
                 '</div>'
             );
+            // 동적 태그 할당 후 background image 할당
             $("#infiniteIndex" + this.videoIndex).css({
                 "background": "url('/img/" + this.props.videoDesc[this.videoIndex].image + "') #888 no-repeat center/cover"
             });

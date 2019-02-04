@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import request from 'superagent';
+
 // css
 import '../css/style.css';
 import '../css/videoList.css';
@@ -25,12 +27,13 @@ class VideoList extends Component {
     this.videoSlideNum = 1;
     this.videoDataAry = [];
     this.videoImgAry = [];
+    this.defaultVideoSet = this.defaultVideoSet.bind(this);
     this.videoSelected = this.videoSelected.bind(this);
     this.videoHovered = this.videoHovered.bind(this);
     this.viewMore = this.viewMore.bind(this);
     this.btnPrev = this.btnPrev.bind(this);
     this.btnNext = this.btnNext.bind(this);
-    this.defaultVideoSet = this.defaultVideoSet.bind(this);
+    this.btnFavorite = this.btnFavorite.bind(this);
     this.closeVideoDetail = this.closeVideoDetail.bind(this);
     this.defaultVideoSet();
  }
@@ -40,8 +43,7 @@ viewMore(num) {
     var viewMoreTitle = $("#videoIndex"+num+" > h2").html();
     var viewMoreRating = $("#videoIndex"+num+" > .videoDesc > p:eq(0)").html();
     var viewMoreSynopsis = this.videoDataAry[num].synopsis;
-    //  video scale >> basic video shape
-
+    var viewMoreVideoIndex = this.videoDataAry[num].videoIndex;
     // #1
     // hoverMode로 인한 transform이 아직 돌아가지 않은 시점에서
     // viewMore 가 click 되어 원상태로 돌아가지 못하는 걸 방지
@@ -65,6 +67,7 @@ viewMore(num) {
     $(".videoDetail-contentInfo").find("h2").html(viewMoreTitle);
     $(".videoDetail-contentInfo").find(".videoDetail-rating").html(viewMoreRating);
     $(".videoDetail-contentInfo").find(".videoDetail-synopsis").html(viewMoreSynopsis);
+    $(".videoDetail-contentInfo").find(".videoDetail-btnWish").attr("name", viewMoreVideoIndex);
     // viewMore 느리게 보이기
     $(".videoDetail-container").slideDown("slow");
 }
@@ -101,6 +104,7 @@ defaultVideoSet() {
         ratingAge: '15세',
         runningTime: '1시간 41분',
         synopsis: '아내 설희를 살해하고 완전범죄를 계획한 진한. 그런데 몇 시간 후, 국과수 사체 보관실에서 설희의 시체가 흔적도 없이 사라지고 진한에게는 문자 한 통이 도착한다.',
+        videoIndex: '6'
     });
     this.videoDataAry.push({
         image: this.videoImgAry[1],
@@ -109,6 +113,7 @@ defaultVideoSet() {
         ratingAge: '12세',
         runningTime: '2시간 48분',
         synopsis: '플라잉 더치맨 호와 데비 존스를 이용하여 해적을 소탕하고 다니는 동인도 회사에 맞서, 윌 터너와 엘리자베스 스완, 바르보사 선장은 해적 연맹을 소집한다.',
+        videoIndex: '7'
     });
     this.videoDataAry.push({
         image: this.videoImgAry[2],
@@ -117,6 +122,7 @@ defaultVideoSet() {
         ratingAge: '12세',
         runningTime: '2시간 18분',
         synopsis: '다스 베이더가 사망한 지 약 30년 후, 마지막 제다이인 루크 스카이워커가 사라진다. 저항군의 파일럿 포는 루크가 있는 곳의 지도를 얻지만, 스톰트루퍼들에게 붙잡히고 만다.',
+        videoIndex: '12'
     });
     this.videoDataAry.push({
         image: this.videoImgAry[3],
@@ -125,6 +131,7 @@ defaultVideoSet() {
         ratingAge: '12세',
         runningTime: '1시간 46분',
         synopsis: '깊은 산골짜기 시골 마을에 사는 미츠하와 도쿄에 사는 타키. 만날 리 없던 두 사람은 어느 날 서로의 몸과 마음이 바뀐 신기한 꿈속에서 서로의 존재를 알게 된다.',
+        videoIndex: '13'
     });
     this.videoDataAry.push({
         image: this.videoImgAry[4],
@@ -133,6 +140,7 @@ defaultVideoSet() {
         ratingAge: '12세',
         runningTime: '2시간 12분',
         synopsis: '일곱 살의 지능을 가진 샘은 딸 루시와 즐거운 나날을 보내고 있다. 그러나 루시가 일곱 살이 되자 사회 복지 기관 전문가가 샘이 루시를 부양할 수 있는지 검증이 필요하다며 끼어든다.',
+        videoIndex: '8'
     });
     // video 5-9
     this.videoDataAry.push({
@@ -142,6 +150,7 @@ defaultVideoSet() {
         ratingAge: '12세',
         runningTime: '3시간 20분',
         synopsis: '간달프는 사우론의 군대와의 전투를 위해 흩어져 있던 병사들을 모은다. 그들은 중간계를 지키려는 사명감과 반지 운반자에게 임무를 끝낼 기회를 주기 위해 어둠의 군대를 향해 돌진한다.',
+        videoIndex: '9'
     });
     this.videoDataAry.push({
         image: this.videoImgAry[6],
@@ -150,6 +159,7 @@ defaultVideoSet() {
         ratingAge: '12세',
         runningTime: '2시간 46분',
         synopsis: '80세의 외모로 태어나 부모에게 버려진 벤자민 버튼은 자신이 점점 젊어진다는 것을 알게 된다. 12살이 되어 60대의 외모가 된 어느 날, 소녀 데이지를 만나고 그녀를 잊지 못한다.',
+        videoIndex: '14'
     });
     this.videoDataAry.push({
         image: this.videoImgAry[7],
@@ -158,6 +168,7 @@ defaultVideoSet() {
         ratingAge: '12세',
         runningTime: '1시간 28분',
         synopsis: '외계인 셀리나에 의해 지구가 위기에 놓이게 되자, MIB 요원 J는 은퇴하면서 자신의 기억을 모두 지워버린 베테랑 요원 K를 찾아가 그의 기억을 복구시키고자 갖은 애를 쓴다.',
+        videoIndex: '14'
     });
     this.videoDataAry.push({
         image: this.videoImgAry[8],
@@ -165,7 +176,8 @@ defaultVideoSet() {
         releaseYear: '2002',
         ratingAge: '12세',
         runningTime: '1시간 58분',
-        synopsis: '이탈리아 어부들이 지중해 한 가운데에서 등에 두 발의 총상을 입은 채 표류하고 있는 한 남자(Jason Bourne: 맷 데이먼 분)를 구하게 된다. 그는 의식을 찾게 되지만 기억 상실증에 걸려 자신이 누구인지 조차 모른다. 그가 누구인지 알 수 있는 단서는 등에 입은 총상과 살 속에 숨겨져 있던 스위스 은행의 계좌번호 뿐',
+        synopsis: '총상을 입은 채 표류하고 있는 한 남자를 구하게 된다. 의식을 찾게 되지만 기억을 잃어 자신이 누구인지 조차 모른다. 그가 누구인지 알 수 있는 단서는 등에 입은 총상 뿐.',
+        videoIndex: '67'
     });
     this.videoDataAry.push({
         image: this.videoImgAry[9],
@@ -174,6 +186,7 @@ defaultVideoSet() {
         ratingAge: '12세',
         runningTime: '1시간 36분',
         synopsis: '성현에게 2년 후로부터 온 이상한 편지가 도착하고, 그 내용들이 현실 속에 나타난다. 자신의 편지가 2년 전으로 갔다는 것을 믿게 된 은주는 그곳으로 편지를 보내기 시작한다.',
+        videoIndex: '68'
     });
 
     $(function(){
@@ -307,6 +320,37 @@ btnNext(){
         $(".video").animate({"left": -($(".videoList").width())});
      });
  }
+btnFavorite(e) {
+    console.log('btnFavorite===')
+    console.log(e.target.name)
+    if(sessionStorage.getItem('id')) {
+        // sessionStorage를 통해 login 여부 확인
+        // login 상태라면 보고싶어요 작업 수행
+        request.post('/addFavorite')
+        .send({
+            userId: sessionStorage.getItem('id'),
+            videoIndex: e.target.name
+        })
+        .end((err, res) => {
+            if(err) {
+                console.log('err: '+err.message)
+                console.log('res.body: '+res.body)
+                alert(res.body)
+                return;
+            }
+            if(res.body.message) {
+                alert(res.body.message);
+            } 
+        })
+    } else {
+        // login 상태가 아니라면 login 페이지 이동 여부 확인
+        if(window.confirm('로그인이 필요합니다 로그인 페이지로 이동할까요?')) {
+            window.location.href = '/login'
+        } else {
+            // login 페이지 이동 X
+        }
+    }
+}
 
  videoHovered(index) {
     // index에 따라 요소들을 이동
@@ -596,7 +640,7 @@ btnNext(){
                     </p>
                     <div className="videoDetail-btnBox">
                         <button className="videoDetail-btnPlay"><i className="far fa-play-circle"></i> 재생</button>
-                        <button className="videoDetail-btnWish"><i className="fas fa-plus"></i> 보고싶어요</button>
+                        <button className="videoDetail-btnWish" onClick={this.btnFavorite}><i className="fas fa-plus"></i> 보고싶어요</button>
                         <button className="videoDetail-nop"><i className="fas fa-ban"></i> 관심없어요</button>
                     {/* //btnBox */}
                     </div> 

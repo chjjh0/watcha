@@ -17,14 +17,15 @@ window.$ = $;
 
 
 class Category extends Component {
-    // videoDescBasic = ajax 통신 후 얻은 기본값 배열, sort등으로 인한 수정되지 않은 original 배열
+    // videoDescBasic = ajax 통신 후 얻은 배열, sort등으로 인한 수정되지 않은 '기본배열'
     // videoDescSorting = sort 작업에 사용되는 배열
-    // videoDescResult = infiniteScroll component로 기본 배열/sort 결과물을 넘겨주기 위한 배열
+    // videoDescResult = '기본배열' or sort 결과물을 넘겨주기 위한 배열
+    // loadingComplete = infiniteScroll component에 데이터 전달 전 정상처리 여부를 확인하는 용도
     constructor(props) {
         super(props);
         this.state = {
             num: 1,
-            lodingComplete: false,
+            loadingComplete: false,
             videoDescBasic: [],
             videoDescSorting: [],
             videoDescResult: [],
@@ -45,16 +46,12 @@ class Category extends Component {
                 console.log('error 발생::: ', err)
                 return;
             }
-            var videoTemp = res.body.video;
-            // 모든 장르 선택 상황을 대비한 초기화
-            this.state.videoDescBasic = [];
-            for(var i=0;i<videoTemp.length;i++) {
-                this.state.videoDescBasic.push(videoTemp[i])
-            }
+            // '모든 장르' 선택 상황을 대비한 sort에 변질되지 않을 배열
+            this.state.videoDescBasic = res.body.video;
             this.setState({
                 videoDescResult: this.state.videoDescBasic.slice(0),
                 totalIndex: res.body.videoLength,
-                lodingComplete: true,
+                loadingComplete: true,
             });
         })
     }
@@ -84,7 +81,7 @@ class Category extends Component {
                 this.setState({
                     videoDescResult: this.state.videoDescBasic.slice(0),
                     totalIndex: res.body.videoLength,
-                    lodingComplete: true,
+                    loadingComplete: true,
                     genre: true
                 });
                 console.log("새로운 배열::: ",this.state.videoDescBasic)
@@ -172,7 +169,7 @@ class Category extends Component {
                     </select>
                 </div>
                     {
-                        this.state.lodingComplete === true ?
+                        this.state.loadingComplete === true ?
                         <Infinite 
                             videoDesc={this.state.videoDescResult}
                             totalIndex={this.state.totalIndex}

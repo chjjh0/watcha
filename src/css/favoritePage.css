@@ -19,11 +19,3 @@
     color: white;
 }
 
-.favoriteVideoArea {
-    width: 1400px;
-    height: 300px;
-    padding: 50px;
-    background: red;
-    box-sizing: border-box;
-    margin: 0 auto;
-}
