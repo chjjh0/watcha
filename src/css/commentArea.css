@@ -1,0 +1,53 @@
+.commentArea {
+    padding: 50px;
+}
+
+.profile {
+    border-radius: 200px;
+    margin-right: 20px;
+    width: 40px;
+    height: 40px;
+    float: left;
+    background: url("../img/iamsam.jpg") no-repeat center/cover;
+}
+
+.commentInput {
+    background: transparent;
+    float: right;
+    color: #888;
+    width: 730px;
+    border: 0;
+    resize: none;
+    height: 25px;
+    font-size: 20px;
+    outline: 0;
+    padding: 0;
+    margin-bottom: 10px;
+    transition: all 0.5s;
+    border-bottom: 3px solid #121212;
+    outline-color: transparent;
+}
+
+.commentInput:focus {
+    border-bottom: 3px solid white;
+    transition: all 0.5s;
+}
+
+
+/* fotter */
+.btnWriteArea {
+    display: none;
+}
+
+.btnWriteCancel,
+.btnWriteComment {
+    float: right;
+    margin-left: 10px;
+    width: 70px;
+    height: 40px;
+    border: 0;
+    color: #888;
+    font-size: 18px;
+    background: black;
+    cursor: pointer;
+}

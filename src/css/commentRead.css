@@ -1,0 +1,103 @@
+/* profile class 관련 CSS는 commentArea.css에 명시
+commentArea 및 commentRead 두 곳 모두에 적용하기 위함 */
+
+.commentReadArea {
+    margin: 100px 0 0;
+    color: white;
+}
+
+.commentBox {
+    margin: 20px 0;
+    min-height: 100px;
+    max-height: 200px;
+    box-sizing: border-box;
+}
+
+/* 댓글 작성자, 작성일 */
+.commentReadArea p {
+    /* comment.css의 commentInput과 width 동일 */
+    width: 730px;
+    float: left;
+    line-height: 40px;
+}
+
+.commentBox .commentWriter:after {
+    content: '·';
+    vertical-align: middle;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+/* 수정, 삭제 버튼 펼치기 */
+.btnOption {
+    display: block;
+    width: 20px;
+    height: 40px;
+    float: right;
+    padding-left: 5px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.btnOption i {
+    width: 100%;
+    height: 100%;
+}
+
+
+/* 수정, 삭제 버튼 */
+.optionBox {
+    display: none;
+    float: right;
+    width: 150px;
+    height: 40px;
+}
+/* 수정 textarea */
+.updateInput {
+    background: transparent;
+    float: right;
+    color: #888;
+    width: 100%;
+    border: 0;
+    resize: none;
+    height: 25px;
+    font-size: 20px;
+    outline: 0;
+    padding: 0;
+    margin: 10px 0;
+    transition: all 0.5s;
+    border-bottom: 3px solid #121212;
+    outline-color: transparent;
+}
+.updateInput:focus {
+    border-bottom: 3px solid white;
+    transition: all 0.5s;
+}
+.btnUpdateSubmit {
+    float: right;
+    color: white;
+    width: 50px;
+    height: 40px;
+    margin: 10px 0;
+}
+
+
+.optionBox.on {
+    display: block;
+}
+
+.optionBox a {
+    color: white;
+    width: 50px;
+    height: 40px;
+    font-size: 18px;
+    padding: 0 5px 0;
+}
+
+/* 댓글 내용 */
+.commentReadArea .commentContent {
+    float: left;
+    width: 100%;
+    padding: 10px 5px;
+}
