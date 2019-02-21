@@ -13,6 +13,7 @@ class commentDyn extends Component {
         super(props);
         this.state = {
             updating: false,
+            updateToggle: false,
             userId: '',
             comment: '',
             commentIndex: '',
@@ -54,29 +55,25 @@ class commentDyn extends Component {
     }
     // 수정 버튼
     btnUpdate(e) {
-        this.state.updating = false
-        console.log('수정 버튼 눌렀음')
-        console.log(e.target)
-        var userId = $(e.target).parent().parent().find(".commentWriter").html() 
-        var comment = $(e.target).parent().parent().next().html()
-        var commentIndex = e.target.name
-        var commentContent = $(e.target).parent().parent().parent()
-        console.log("userID::: ",userId)
-        console.log("userID::: ",comment)
-        console.log("userID::: ",commentIndex)
-        console.log("userID::: ",commentContent)
-        console.log("userID::: ",this.state.updating)
-        this.setState({
-            updating: true,
-            userId: userId,
-            comment: comment,
-            commentIndex: commentIndex,
-            commentContent: commentContent
-        })
+            this.state.updateToggle = false
+            // e.target = btnUpdate
+            // 수정 버튼을 누르면 수행 중에는 다시 진입이 불가하게 display: none 처리
+            $(e.target).css({"display": "none"})
+            var userId = $(e.target).parent().parent().find(".commentWriter").html() 
+            var comment = $(e.target).parent().parent().next().html()
+            var commentIndex = e.target.name
+            var commentContent = $(e.target).parent().parent().parent()
+            this.setState({
+                updateToggle: true,
+                userId: userId,
+                comment: comment,
+                commentIndex: commentIndex,
+                commentContent: commentContent
+            })
     }
 
     btnDelete(e) {
-        console.log('삭제 눌렀는가???')
+        var commentBoxNow = $(e.target).parent().parent().parent()
         var writer = $(e.target).parent().parent().find(".commentWriter").html() 
         var commentIndex = e.target.name
         request.post('/deleteComment')
@@ -90,8 +87,7 @@ class commentDyn extends Component {
             }
             if (res.body.message) {
                 console.log(res.body.message)
-                // 수정중 2/20
-                // 삭제 후 재조회 해야하는데 리덕스를 몰라 Read 컴포넌트에 재요청 불가
+                $(commentBoxNow).remove()
             }
         })
         
@@ -99,8 +95,8 @@ class commentDyn extends Component {
     
 
     btnCancel(e) {
-        console.log('취소 눌렀는가??')
-        console.log(e.target)
+        console.log('취소 누름요')
+        $(e.target).parent().find(".btnUpdate").css({"display": "inline"})
         if($(e.target).parent().hasClass("on")) {
             $(e.target).parent().removeClass("on")
         }
@@ -108,12 +104,11 @@ class commentDyn extends Component {
         // 수정완료한 상태에서 취소 버튼을 누른다면 commentArea컴포넌트에서 조회후 받아오지 않아 수정 전 내용이 보임
         // 리덕스를 모르는 상태에서는 여기서 조회를 한 번 더 해주고 false로 바꿔야 제대로 될 듯
         this.setState({
-            updating: false
+            updateToggle: false
         })
     }
 
     render() {
-        console.log('updating::: ', this.state.updating)
         return(
             <section id={"commentIndex" + this.props.commentIndex} className="commentBox">
                 <div className="profile"></div>
@@ -127,7 +122,7 @@ class commentDyn extends Component {
                         <a className="btnCancel" onClick={this.btnCancel} href="#" alt="취소" name={this.props.commentIndex}>취소</a> 
                     </span>
                 </p>
-                {this.state.updating === false ? <div className="commentContent">{this.props.comment}</div> 
+                {this.state.updateToggle === false ? <div className="commentContent">{this.props.comment}</div> 
                 : 
                 <CommentUpdateSubmit 
                         userId = {this.state.userId} 

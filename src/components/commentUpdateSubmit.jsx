@@ -12,15 +12,19 @@ class CommentUpdateSubmit extends Component {
 
     // 수정 완료 버튼
     btnUpdateSubmit(e) {
-        console.log('수정 완료했는가???')
-        console.log($(".updateInput").val())
-        console.log($(e.target).attr("name"))
-        console.log($(e.target).attr("data-userId"))
-        console.log(this.props.commentContent[0])
         var writer = $(e.target).attr("data-userId")
         var commentIndex = $(e.target).attr("name")
         var commentText = $(".updateInput").val()
         var commentContent = this.props.commentContent[0]
+        var optionBox = $(e.target).parent().prev().find(".optionBox")
+        var btnUpdate = $(e.target).parent().prev().find(".optionBox .btnUpdate")
+        console.log('수정 완료했는가???')
+        console.log(btnUpdate)
+        console.log($(".updateInput").val())
+        console.log($(e.target).attr("name"))
+        console.log($(e.target).attr("data-userId"))
+        console.log(this.props.commentContent[0])
+        
         request.post('/updateComment')
         .send({
             writer: writer,
@@ -35,12 +39,10 @@ class CommentUpdateSubmit extends Component {
             if (res.body.message) {
                 $(".updateInput").remove()
                 $(".btnUpdateSubmit").remove()
-                // 수정 중 2/20
-                // 수정 완료버튼을 누르면 개발자도구에서는 보이는 것처럼 보이나
-                // 누른 직후에는 
-
                 console.log('댓글 내용 뭐야???::',commentContent)
                 $(commentContent).find(".commentContent").html(commentText)
+                $(btnUpdate).css({"display": "inline"})
+                $(optionBox).removeClass("on")
             }
 
         });        
