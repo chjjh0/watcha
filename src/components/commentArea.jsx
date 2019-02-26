@@ -73,7 +73,6 @@ class CommentArea extends Component {
     }
 
     createComment () {
-        console.log('1 댓글 작성')
         // 댓글 작성
         var userId = sessionStorage.getItem('id');
         var title = this.props.title;
@@ -100,7 +99,6 @@ class CommentArea extends Component {
     }    
 
     readComment() {
-        console.log('2 댓글 조회')
         // 댓글 조회
         request.get('/readComment')
         .query({
