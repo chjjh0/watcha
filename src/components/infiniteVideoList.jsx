@@ -20,7 +20,10 @@ class InfiniteVideoList extends Component {
         this.backgroundImg()
     }
 
-    componentWillUpdate() {
+    componentDidUpdate() {
+        // category > infiniteScroll > infiniteVideoList 로 
+        // 넘어오는 동안 전달 된 props를 제때 갱신하려면
+        // Did에 해야 된다, Will에 하면 props를 받기 전이다
         this.backgroundImg()
     }
 

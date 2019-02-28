@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import request from 'superagent';
+import 'babel-polyfill';
 // components
 import Infinite from '../components/infiniteScroll.jsx';
 import ModalYoutube from '../components/modalYoutube.jsx';
@@ -36,9 +37,6 @@ class Category extends Component {
         // 댓글처럼 변수들을 state에 두지 말고
         // 밖에 두어 props 전달용으로 사용
         // 하위에서 WillUpdate에서 정상 타이밍에 제대로 받는지 확인해보기
-        this.videoDescResult = [];
-        this.totalIndex = 0;
-        this.genre = false
         this.pageInit = this.pageInit.bind(this);
         this.changeGenre = this.changeGenre.bind(this);
         this.changeAlign = this.changeAlign.bind(this);
@@ -46,79 +44,120 @@ class Category extends Component {
     }
 
     pageInit() {
-        request.get('/category/init')
-        .query({test:"test"})
-        .end((err, res) => {
-            if(err) {
-                console.log('error 발생::: ', err)
-                return;
+        // console.log('1 pageINit')
+        var $this = this;
+        var aRes
+        test();
+        async function test() {
+            try {
+                aRes = await request.get('/category/init')
+                // console.log('2 await 성공적',aRes.body.message);
+                // console.log('2 await 성공적',aRes.body.video);
+                // console.log('2 await 성공적',aRes.body.videoLength);
+            } catch {
+                console.log('await 에러 발생!!!!!')
             }
-            // '모든 장르' 선택 상황을 대비한 sort에 변질되지 않을 배열
-            this.state.videoDescBasic = res.body.video;
-            this.setState({
-                videoDescResult: this.state.videoDescBasic.slice(0),
-                totalIndex: res.body.videoLength,
-                loadingComplete: true,
-            });
-        })
+            //console.log('3 순차적으로 진행???')
+            $this.state.videoDescBasic = aRes.body.video
+            $this.setState({
+                videoDescResult: $this.state.videoDescBasic.slice(0),
+                totalIndex: aRes.body.videoLength,
+                loadingComplete: true
+            })
+        }
+        
+        
     }
+
+    // request.get('/category/init')
+    //             .query({test:"test"})
+    //             .end((err, res) => {
+    //                 if(err) {
+    //                     console.log('error 발생::: ', err)
+    //                     return;
+    //                 }
+    //                 // '모든 장르' 선택 상황을 대비한 sort에 변질되지 않을 배열
+    //                 this.state.videoDescBasic = res.body.video;
+    //                 this.setState({
+    //                     videoDescResult: this.state.videoDescBasic.slice(0),
+    //                     totalIndex: res.body.videoLength,
+    //                     loadingComplete: true,
+    //                 });
+    //             })
 
     changeGenre(e) {
         // 장르에 따른 ajax 처리
         // 모든 장르 선택 시 /category/init 재활용
         var selectedGenre = e.target.value;
-        this.state.loadingComplete = false
-        //this.state.loadingComplete = false
-        console.log('1 category 선택::: ', selectedGenre)
+        var $this = this;
+        var aRes
+        // 부모에서 setState를 통해 Unmount > 자식에서 Didmount 처리 패턴
+        this.setState({
+            loadingComplete: false
+        })
+        // this.state.loadingComplete = false
+        
+        // '모든 장르' 선택 시 this.state.videoDescBasic을 통해 초기화
         if(selectedGenre === 'all') {
             this.pageInit();
         } else {
-            request.get('/category/genre')
-            .query({genre: selectedGenre})
-            .end((err, res) => {
-                if(err) {
-                    console.log('error 발생::: ', err)
-                    return;
-                }
-                var videoTemp = res.body.video;
-                console.log('2 videoTemp::: ',videoTemp)
-                console.log('3 totalIndex', res.body.videoLength)
-                // 초기화
-                this.state.videoDescBasic = [];
-                for(var i=0;i<videoTemp.length;i++) {
-                    this.state.videoDescBasic.push(videoTemp[i])
-                }
-                this.genre = true
-                this.totalIndex = res.body.videoLength
-                this.videoDescResult = this.state.videoDescBasic.slice(0)
-                console.log('4 넘기기 전:::', this.state.videoDescBasic)
-                console.log('totalIndex:::',this.totalIndex)
-                console.log('Result:::',this.videoDescResult)
-                console.log('genre:::',this.genre)
-                this.setState({
+            test();
+            async function test() {
+                aRes = await request.get('/category/genre').query({genre: selectedGenre})
+                console.log('장르 성공적', aRes)
+                $this.state.videoDescBasic = aRes.body.video
+                $this.setState({
+                    genre: true,
+                    totalIndex: aRes.body.videoLength,
+                    videoDescResult: $this.state.videoDescBasic.slice(0),
                     loadingComplete: true
-                });
-                console.log("새로운 배열::: ",this.state.videoDescBasic)
-            });
+                })
+            }
+
+            // request.get('/category/genre')
+            // .query({genre: selectedGenre})
+            // .end((err, res) => {
+            //     if(err) {
+            //         console.log('error 발생::: ', err)
+            //         return;
+            //     }
+            //     var videoTemp = res.body.video;
+            //     // 초기화
+            //     this.state.videoDescBasic = [];
+            //     for(var i=0;i<videoTemp.length;i++) {
+            //         this.state.videoDescBasic.push(videoTemp[i])
+            //     }
+            //     // 갱신
+            //     this.setState({
+            //         genre: true,
+            //         totalIndex: res.body.videoLength,
+            //         videoDescResult: this.state.videoDescBasic.slice(0),
+            //         loadingComplete: true
+            //     });
+            // });
         }
     }
     changeAlign(value) {
-        var newLocal = this;
+        var $this = this;
         // selected = recommendation, starpoint, new, runningtime
         var selected = value.target.value;
+        // #1
         // 정렬로 인해 항상 동일한 결과물을 얻기 위해 
         // basic 배열을 slice 함수를 통해 deep copy
+        // #2
+        // loadingComplete로 비워줌으로 infiniteScroll 컴포넌트를 Unmount 시킨다
+        // 그 이후 요청에 대한 처리가 끝나고 setState로 props 값을 넘기면 DidMount에서 처리가 가능하다
         this.setState({
-            videoDescSorting: this.state.videoDescBasic.slice(0)
+            videoDescSorting: this.state.videoDescBasic.slice(0),
+            loadingComplete: false
         });
-        //this.state.videoDescSorting = this.state.videoDescBasic;
         switch(selected) {
             case "new":
                 // 최신 개봉 순
                 $(function() {
-                    newLocal.setState({
-                        videoDescResult: newLocal.state.videoDescSorting
-                            .sort(function(a, b) {
+                    $this.setState({
+                        loadingComplete: true,
+                        videoDescResult: $this.state.videoDescSorting.sort(function(a, b) {
                             return a.releaseYear > b.releaseYear ? -1 : a.releaseYear > b.releaseYear ? 1 : 0;
                         }),
                         changeNum: 3
@@ -128,8 +167,9 @@ class Category extends Component {
             case "runningtime":
                 // 상영시간 긴 순
                 $(function() {
-                    newLocal.setState({
-                        videoDescResult: newLocal.state.videoDescSorting.sort(function(a, b) {
+                    $this.setState({
+                        loadingComplete: true,
+                        videoDescResult: $this.state.videoDescSorting.sort(function(a, b) {
                             // runningtime 짧은 순서 '<' 긴 순서 '>'
                             return a.runningtime > b.runningtime ? -1 : a.runningtime > b.runningtime ? 1 : 0;
                         }),
@@ -145,8 +185,6 @@ class Category extends Component {
     }
     
     render() {
-        console.log('카테고리::: ', this.state.videoDescResult)
-        console.log('카테고리::: ', this.state.totalIndex)
         return (
             <section className="categoryPage">
                 <div className="selectArea">
@@ -184,18 +222,12 @@ class Category extends Component {
                 </div>
                     {
                         this.state.loadingComplete === true ?
-                            this.genre === false ?
                             <Infinite 
                                 videoDesc={this.state.videoDescResult}
                                 totalIndex={this.state.totalIndex}
-                                changeNum={this.state.changeNum}
+                                alignNum={this.state.changeNum}
                                 genre={this.state.genre}
-                            /> : <Infinite 
-                            videoDesc={this.videoDescResult}
-                            totalIndex={this.totalIndex}
-                            changeNum={this.state.changeNum}
-                            genre={this.genre}
-                        />
+                            /> 
                         : <h2>비디오 컨텐츠가 없습니다</h2>
                     }
             </section>
