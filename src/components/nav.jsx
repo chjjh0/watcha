@@ -27,6 +27,7 @@ class Nav extends Component {
         this.scrollFunction = this.scrollFunction.bind(this);
         this.isloged = this.isloged.bind(this);
         this.btnLogout = this.btnLogout.bind(this);
+        this.modalPaymentOn = this.modalPaymentOn.bind(this);
         this.isloged();
     }
 
@@ -38,6 +39,7 @@ class Nav extends Component {
       }
         
     scrollFunction() {
+        // 상단 nav 영역 배경색 변경
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
             // $(".gnb")[0].style.background = "rgba(0,0,0,0.8)";
             $(".gnb").css({"background":"rgba(0,0,0,0.8)"});
@@ -108,6 +110,11 @@ class Nav extends Component {
         });
     }
 
+    modalPaymentOn() {
+        // open paymentModal
+        $(".modalPayment").css({"display":"block"});
+    }
+
     componentWillUpdate() {
         console.log('nav===========')
         if(this.loggingIn === false) {
@@ -115,18 +122,18 @@ class Nav extends Component {
         }
     }
 
-    render() {
-        var newLocal = this;
+    componentDidMount() {
+        var $this = this;
         // prevent
         $(document).on('click', "a[href='#']", function(event) {
             event.preventDefault();
         });
 
-        
         // Scrolling change gnb 
         window.onscroll = function() {
-            newLocal.scrollFunction();
+            $this.scrollFunction();
         };
+
         // search
         $(function(){
             $(".search-container i").click(function(){   
@@ -134,7 +141,9 @@ class Nav extends Component {
                 $(".searchBar").css({"opacity": "1", "width": "200px"});
             });
         });
+    }
 
+    render() {
         return (
         <header id="header" className="nav">
             <ModalPayment />
@@ -143,11 +152,9 @@ class Nav extends Component {
                     <span>첫 1개월 무료체험 이벤트! 모든작품, 무제한 감상하세요. 마음에 들지 않으면 클릭 1번으로 언제든 해지할 수 있어요.</span>
                 </p>
                 <div className="paymentBox">
-                    <a href="#" alt="이용권 구매" className="payment-bar">이용권 구매</a>
+                    <a href="#" alt="이용권 구매" className="payment-bar" onClick={this.modalPaymentOn}>이용권 구매</a>
                     <a href="#" alt="쿠폰 등록" className="payment-coupon">쿠폰 등록</a>
-                {/* //paymentBox */}
                 </div>
-            {/* //lnb */}                
             </div>
             <div className="gnb">
                 <div className="gnbInner">
@@ -157,14 +164,12 @@ class Nav extends Component {
                             <Link to="/category">
                                 <a href="/category" alt="카테고리">카테고리</a>
                             </Link>
-                        {/* //btnCategory */}
                         </li>
                         <li className="evaluation">
                             <Link to="/evaluate">
                                 <a href="/evaluate" alt="평가하기">평가하기</a>
                             </Link>
                         </li>
-                        {/* //leftNav */}
                         </ul>
                         <div className="rightNav">
                             <a href="#" className="search-container">
@@ -173,15 +178,14 @@ class Nav extends Component {
                             </a>
                                                 
                         {
-                            // 로그인 여부에 따른 표시
+                            // 로그인 유무에 따른 '보고싶어요' Button 처리
                             this.state.isLogged === true ? 
                             <Link to="/favorite">
                                 <a href="localhost:8000/favorite">보고싶어요</a>
                             </Link> : ''
                         }
-                        
                         {
-                            // 로그인 여부에 따른 표시
+                            // 로그인 여부에 따른 '로그인/로그아웃' Button 처리
                             this.state.isLogged === true ?
                             <a href="#" alt="로그아웃" onClick={this.btnLogout}>{this.state.loginId}로그아웃</a>
                             : 
@@ -189,14 +193,9 @@ class Nav extends Component {
                                 <a href="localhost:8000/favorite">로그인</a>
                             </Link>
                         }   
-                            
-                        {/* //rightNav */}
                         </div>
-                {/* //gnbInner */}
                 </div>
-            {/* //gnb */}
             </div> 
-        {/* //nav */}
         </header> 
     );
 }

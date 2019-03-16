@@ -64,7 +64,7 @@ class CommentUpdateSubmit extends Component {
                 </textarea>
                 <a class="btnUpdateSubmit" 
                     onClick={this.btnUpdateSubmit} 
-                    data-userId={this.props.userId}
+                    data-userid={this.props.userId}
                     name={this.props.commentIndex} 
                     href="#" 
                     alt="수정 적용">확인

@@ -1,21 +1,17 @@
 /*videoArea*/
 .videoArea {
-    position: relative;
-    width: 100%;
-    height: 220px;
-    box-sizing: border-box;
-    margin: 0 auto 50px;
-  }
-
+  position: relative;
+  width: 100%;
+  height: 220px;
+  box-sizing: border-box;
+  margin: 0 auto 50px;
+}
 .videoArea .videoList > p {
   color: #888;
   font-size: 20px;
   font-weight: bold;
   margin: 10px 0;
-  
-  
 }
-
 /* btnArea */
 .videoArea .btnArea {
   margin: 0;
@@ -23,7 +19,6 @@
   width: 100%;
   height: 220px;
 }
-
 /* videoList */
 .videoArea .videoList {
   position: relative;
@@ -33,17 +28,14 @@
   box-sizing: border-box;
   overflow: hidden;
 }
-
 .videoList .videoInner {
   position: relative;
   width: 4000px;
   height: 170px;
 }
-
 .videoList > p {
   position: relative;
 }
-
 /* video */
 .video {
   position: relative;
@@ -59,11 +51,9 @@
   overflow: hidden;
   background: red;
 }
-
 .video:nth-child(5) {
   margin-right: 0;
 }
-
 .video > h2 {
   position: absolute;
   left: 10px;
@@ -72,7 +62,6 @@
   font-size: 15px;
   text-shadow: 2px 1px #121212;
 }
-
 .video > .video-bgGradient {
   position: absolute;
   top: 0; 
@@ -81,7 +70,6 @@
   height: 100%;
   background-clip: content-box;
 }
-
 /* videoDesc */
 .video > .videoDesc {
   position: absolute;
@@ -97,22 +85,15 @@
 .videoDesc > h2 {
   font-size: 13px;
 }
-
 .videoDesc > .viewMore {
   width: 100%;
   height: 20px;
   text-align: center;
   cursor: pointer;
 }
-
 .viewMore > .fas {
   transform: rotate(-270deg);
 }
-
-
-
-
-
 /* btnVideoPrev, btnVideoNext */
 .videoArea .btnVideoPrev,
 .videoArea .btnVideoNext {
@@ -124,14 +105,12 @@
   cursor: pointer;
   display: none;
 }
-
 .videoArea .btnVideoPrev {
   left: 2%;
 }
 .videoArea .btnVideoNext {
   right: 2%;
 }
-
 /* videoDetail-container */
 .videoDetail-container {
   display: none;
@@ -141,7 +120,6 @@
   height: 400px;
   background: orange;
 }
-
 .videoDetail-container > .videoDetail-bgGradient {
   position: absolute;
   z-index: 0;
@@ -149,7 +127,6 @@
   height: 100%;
   background: url('../img/videoDetail-bgGradient.png') no-repeat left/100%;
 }
-
 /* videoDetail-contentInfo */
 .videoDetail-container > .videoDetail-contentInfo {
   position: absolute;
@@ -160,19 +137,16 @@
   color: rgb(238, 238, 238);
   font-size: 20px;
 }
-
 .videoDetail-contentInfo > h2 {
   margin-bottom: 20px;
   font-size: 40px;
 }
-
 .videoDetail-contentInfo .videoDetail-ratingLabel {
   border: 2px solid rgb(238, 238, 238);
   font-size: 14px;
   font-weight: bold;
   padding: 7px;
 }
-
 .videoDetail-contentInfo .videoDetail-ratingValue {
   border: 6px solid rgb(238, 238, 238);
   background: rgb(238, 238, 238);
@@ -181,13 +155,11 @@
   font-weight: bold;
   padding: 3px 5px;
 }
-
 .videoDetail-contentInfo .videoDetail-rating {
   color: #888;
   font-weight: bold;
   padding: 5px 15px;
 }
-
 .videoDetail-contentInfo > .videoDetail-synopsis {
   margin: 30px 0;
 }
@@ -195,7 +167,6 @@
 .videoDetail-btnBox {
   width: 100%;
 }
-
 .videoDetail-btnBox > .videoDetail-btnPlay {
     color: white;
     font-size: 18px;
@@ -208,7 +179,6 @@
     text-align: center;
     line-height: 50px;
 }
-
 .videoDetail-btnBox > .videoDetail-btnWish,
 .videoDetail-btnBox > .videoDetail-nop {
   width: 130px;
@@ -221,7 +191,6 @@
     margin-left: 30px;
     border: 0;
 }
-
 .videoDetail-container > .videoDetail-btnClose {
   position: absolute;
   top: 20px;
@@ -231,12 +200,10 @@
   cursor: pointer;
   text-shadow: 1px 1px #121212
 }
-
 .videoArea .leftSide {
   width: 700px;
   height: 100%;
 }
-
 .videoArea .rightSdie {
   float: right;
   width: 660px;
@@ -245,65 +212,56 @@
   box-sizing: border-box;
   overflow: auto;
 }
-
-  
-  .video .videoImg {
-    float: left;
-    width: 200px;
-    height: 130px;
-    background: green;
-  } 
-
-  .video .btnPreview {
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    line-height: 130px;
-    font-size: 60px;
-    color: rgba(255,255,255,0.8);
-    opacity: 0;
-  }
-
-  .video .videoInfo {
-    position: absolute;
-    float: right;
-    width: 410px;
-    height: 130px;
-    box-sizing: border-box;
-  }
-  /* videoInfo */
-  .videoInfo h2 {
-    margin: 10px 20px;
-    font-size: 20px;
-  }
-  .videoInfo p {
-    margin: 10px 20px;
-    font-size: 16px;
-  }
-
-  .videoInfo span {
-    border: 2px solid white;
-    padding: 2px 5px;
-    margin: 0 5px;
-  }
-
-  /* hover */
-  .videoHoverMode:hover > h2 {
-    display: none;
-  }
-
-  .videoHoverMode:hover > .videoDesc {
-    transition-delay: 0.5s;
-    opacity: 1;
-  }
-
-  .videoArea:hover .btnVideoPrev,
-  .videoArea:hover .btnVideoNext {
-    display: block;
-  }
-
-  /* click */
-  .videoClickMode {
-    cursor: pointer;
-  }
+.video .videoImg {
+  float: left;
+  width: 200px;
+  height: 130px;
+  background: green;
+} 
+.video .btnPreview {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 130px;
+  font-size: 60px;
+  color: rgba(255,255,255,0.8);
+  opacity: 0;
+}
+.video .videoInfo {
+  position: absolute;
+  float: right;
+  width: 410px;
+  height: 130px;
+  box-sizing: border-box;
+}
+/* videoInfo */
+.videoInfo h2 {
+  margin: 10px 20px;
+  font-size: 20px;
+}
+.videoInfo p {
+  margin: 10px 20px;
+  font-size: 16px;
+}
+.videoInfo span {
+  border: 2px solid white;
+  padding: 2px 5px;
+  margin: 0 5px;
+}
+/* hover */
+.videoHoverMode:hover > h2 {
+  display: none;
+}
+.videoHoverMode:hover > .videoDesc {
+  transition-delay: 0.5s;
+  opacity: 1;
+}
+.videoArea:hover .btnVideoPrev,
+.videoArea:hover .btnVideoNext {
+  display: block;
+}
+/* click */
+.videoClickMode {
+  cursor: pointer;
+}
   

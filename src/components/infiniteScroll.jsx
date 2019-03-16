@@ -4,7 +4,6 @@ import Progress from './progress.jsx';
 import ModalYoutube from './modalYoutube.jsx';
 import InfiniteVideoList from './infiniteVideoList.jsx';
 // css
-import '../css/infiniteScroll.css';
 // jquery
 import $ from 'jquery';
 window.$ = $;
@@ -71,7 +70,7 @@ class InfiniteScroll extends Component {
         $(".modalYoutube").css({"display": "block"});
     }
     
-    componentDidMount() {
+    componentWillMount() {
         if (this.props.totalIndex < this.defaultVideo) {
             this.defaultVideo = this.props.totalIndex;
         } 
@@ -81,6 +80,11 @@ class InfiniteScroll extends Component {
         this.setState({
             infiniteVideoList: this.videoListTemp
         })
+        
+    }
+
+    componentDidMount() {
+        var $this = this
         // open modalYoutube
         // click이 한 번만 발생하게 하여 여러 번 호출되는 것을 방지
         $(document).on('click', ".infiniteVideo", function() {
@@ -118,8 +122,9 @@ class InfiniteScroll extends Component {
             // modalOn off
         });
         window.addEventListener('scroll', this.onScroll, false)
-
     }
+
+
 
     // 무한스크롤
     onScroll = () => {
@@ -167,22 +172,6 @@ class InfiniteScroll extends Component {
       }
 
     render() {
-        // // 정렬에 따른 처리
-        // if(this.props.changeNum === 3) {
-        //     // 최신 순
-        //     this.videoIndex = 0;
-        //     $(".infiniteVideo").remove();
-        //     for(var i=0; i < this.defaultVideo; i++) {
-        //         this.appendMachine();
-        //     }
-        // } else if(this.props.changeNum === 4) {
-        //     // 러닝타임 긴 순
-        //     this.videoIndex = 0;
-        //     $(".infiniteVideo").remove();
-        //     for(var i=0; i < this.defaultVideo; i++) {
-        //         this.appendMachine();
-        //     }
-        // }
         return (
             <div>
                 <div className="infiniteVideoArea">

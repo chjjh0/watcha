@@ -13,7 +13,6 @@
 .modalYoutube::-webkit-scrollbar {
     display: none;
 }
-
 /* modalYoutubeContent */
 .modalYoutubeContent {
     position: relative;
@@ -30,7 +29,6 @@
     font-weight: 100;
     overflow: hidden;
 }
-
 /* videoInfo common */
 .modalYoutubeContent .videoInfo {
     position: relative;
@@ -41,11 +39,9 @@
 }
 /* videoTitle */
 .videoInfo > h2 {
-    
 }
 /* releaseYear */
 .videoInfo > p {
-
 }
 #btnCloseYoutube {
     position: absolute;
@@ -56,5 +52,3 @@
     font-size: 40px;
     cursor: pointer;
 }
-
-/* test */

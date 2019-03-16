@@ -9,22 +9,15 @@ window.$ = $;
 class ModalPayment extends Component {
     constructor(props) {
         super(props);
-     }
+        this.paymentModalOff = this.paymentModalOff.bind(this);
+    }
 
+    paymentModalOff() {
+        // Close paymentModal
+        $(".modalPayment").css({"display":"none"});
+    }
 
     render() {
-        // paymentModal
-        $(function(){
-            $(".payment-bar").click(function(){
-                $(".modalPayment").css({"display":"block"});
-            });
-        });
-        // closeModal
-        $(function() {
-            $("#btnCloseModal").click(function(){
-                $(".modalPayment").css({"display":"none"});
-            });
-          });
         return (
         <div className="modalPayment">
             <div className="modalContent">
@@ -33,7 +26,7 @@ class ModalPayment extends Component {
                 <hr></hr>
                 <p>
                     <i className="fas fa-tv"></i> Full-HD의 선명한 화질
-                </p>
+                </p> 
                 <p>
                     <i className="fas fa-star"></i> 4억개의 평가 데이터에 기반한 추천 엔진
                 </p>
@@ -61,7 +54,7 @@ class ModalPayment extends Component {
                     <p>첫달 무료</p>
                     <p>이후 월 7,900원</p>
                 </div>
-                <i id="btnCloseModal" className="fas fa-times"></i>    
+                <i id="btnCloseModal" className="fas fa-times" onClick={this.paymentModalOff}></i>    
             {/* //modalContent */}
             </div>
         {/* //paymentModal */}

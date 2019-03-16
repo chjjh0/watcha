@@ -31,7 +31,7 @@ class InfiniteVideoList extends Component {
         return(
             <div 
                 className="infiniteVideo" 
-                data-videoIndex={this.props.videoIndex} 
+                data-videoindex={this.props.videoIndex} 
                 name={this.props.youtubeId}>
                 <div id={"infiniteIndex" + this.props.videoIndex} className="infiniteVideoImgArea">
                         <i className="fab fa-youtube"></i>

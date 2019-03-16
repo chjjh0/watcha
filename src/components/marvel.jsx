@@ -110,10 +110,9 @@ class MarvelArea extends Component {
             $(".marvelMenu").css({"background": "#001118"});
         });
     }
-    
 
-    render() {
-        var newLocal = this;
+    componentDidMount() {
+        var $this = this;
         $(function(){
             // marvel menu 클릭 시
             $(document).on("click", ".marvelPreview", function(){
@@ -126,9 +125,13 @@ class MarvelArea extends Component {
                     "border":"4px solid white",
                     "transition":"all 0.5s"
                 });
-                newLocal.btnMarvelPreview(youtubeId);
+                $this.btnMarvelPreview(youtubeId);
             });
         });
+    }
+    
+
+    render() {
         return (
         <session className="marvelArea">
             <div className="marvelImg"></div>

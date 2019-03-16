@@ -3,8 +3,6 @@
     height: 100%;
     margin: 0 auto;
 }
-
-
 .evaluateVideo {
     position: relative;
     width: 260px;
@@ -13,7 +11,6 @@
     margin: 20px 10px;
     color: #888;
 }
-
 .evaluateVideoImgArea {
     position: absolute;
     top: 0;
@@ -23,7 +20,6 @@
     box-sizing: border-box;
     overflow: hidden;
 }
-
 /* evaluateHover */
 .evaluateHover {
     position: absolute;
@@ -39,17 +35,14 @@
     cursor: pointer;
     overflow: hidden;
 }
-
 .evaluateHover .evaluateVideoTitle {
     color: white;
     font-size: 20px;
 }
-
 .evaluateHover .evaluateReleaseYear {
     color: inherit;
     font-size: 20px;
 }
-
 /* star */
 .evaluateHover p.star {
     position: absolute; 
@@ -75,15 +68,11 @@
 }
 .evaluateHover p.star a.half:after {width: 50%;}
 .evaluateHover p.star a.full:after {width: 100%;}
-
-
-
 /* hover */
 .evaluateVideoImgArea.hoverMode:hover .evaluateHover {
     opacity: 1;
     transition: all 0.4s;
 }
-
 /* click */
 .evaluateVideoImgArea.clickMode .evaluateHover{
     opacity: 1;

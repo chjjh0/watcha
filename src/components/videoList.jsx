@@ -83,7 +83,7 @@ videoSelected(num) {
 
 
 defaultVideoSet() {
-    var newLocal = this;
+    var $this = this;
     // imgAry 0-4
     this.videoImgAry.push("lostnight.jpg");
     this.videoImgAry.push('Carribian.jpg');
@@ -191,12 +191,12 @@ defaultVideoSet() {
 
     $(function(){
         for(var i=0;i<10;i++){
-            var image = newLocal.videoDataAry[i].image;
-            var title = newLocal.videoDataAry[i].title;
-            var releaseYear = newLocal.videoDataAry[i].releaseYear;
-            var ratingAge = newLocal.videoDataAry[i].ratingAge;
-            var runningTime = newLocal.videoDataAry[i].runningTime;
-            var synopsis = newLocal.videoDataAry[i].synopsis;
+            var image = $this.videoDataAry[i].image;
+            var title = $this.videoDataAry[i].title;
+            var releaseYear = $this.videoDataAry[i].releaseYear;
+            var ratingAge = $this.videoDataAry[i].ratingAge;
+            var runningTime = $this.videoDataAry[i].runningTime;
+            var synopsis = $this.videoDataAry[i].synopsis;
             // synopsis 가 80글자 이상일 경우 80자까지 이상은 ... 으로 표기
             if(synopsis.length > 80) {
                 synopsis = synopsis.substr(0, 81)+"...";
@@ -317,8 +317,9 @@ btnNext(){
         } // /else
         // .videoList의 width만큼 이동
         $(".video").animate({"left": -($(".videoList").width())});
-     });
- }
+    });
+}
+
 btnFavorite(e) {
     console.log('btnFavorite===')
     console.log(e.target.name)
@@ -437,18 +438,17 @@ btnFavorite(e) {
             default:
         }
     });
- }
- 
-    render() {
-        
-        var newLocal = this;
+}
+
+componentDidMount() {
+    var $this = this;
         // videoHovered
         $(document).on('mouseenter', ".videoHoverMode", function() {
             // $(this) = .videoHoverMode
             // .videoHoverMode class를 가지고 있는 건 총 5개
             // 5개의 index 0~4에 따라 다른 요소들의 움직임 결정
             var index = $(this).index(".videoHoverMode");
-            newLocal.videoHovered(index);
+            $this.videoHovered(index);
             // .videoHoverMode 영역에서 마우스가 나갔을 때
             // videoHovered() 에서 이동시킨 요소들을 원위치
             $(this).on('mouseleave', function() {
@@ -459,17 +459,17 @@ btnFavorite(e) {
             });
         });
         // videoClickMode
-        $(function() {
             $(".video").click(function(){
                 if($(this).hasClass("videoClickMode")) {
-                var idTemp = $(this).attr("id").valueOf();
-                var indexTemp = idTemp.substring(idTemp.length-1, idTemp.length);
-                newLocal.videoSelected(indexTemp);
-                newLocal.viewMore(indexTemp);
-            }
+                    var idTemp = $(this).attr("id").valueOf();
+                    var indexTemp = idTemp.substring(idTemp.length-1, idTemp.length);
+                    $this.videoSelected(indexTemp);
+                    $this.viewMore(indexTemp);
+                }
             });
-        });
-        //function end
+}
+ 
+    render() {
         return (
             <section className="videoArea">
             {/* categoryTitle */}

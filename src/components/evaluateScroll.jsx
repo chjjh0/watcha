@@ -146,54 +146,20 @@ class infiniteScl extends Component {
     }
 
     componentDidMount() {
-        // defaultVideoSet() 으로 호출 시 렌더링 전이라 .infiniteVideoArea가 없어서 추가가 되지 않음
-        // componentDidMount로 첫 렌더링이 된 .infiniteVideoArea가 만들어진 후여야
-        // 정상적으로 초기 video 들이 동적 할당 됨
-        var newLocal = this;
-        console.log('default')
-        for(var i=0; i < this.defaultVideo; i++) {
-            newLocal.appendMachine();
-        }
-    }
-
-    render() {
-        var newLocal = this;
+        var $this = this;
+        // 링크 default 움직임 방지
         $(document).on('click', "a[href='#']", function(e) {
             e.preventDefault();
         });
-        // infiniteScroll
-        $(window).scroll(function () {
-            if ((parseInt($(window).scrollTop()) + 1) >= ($(document).height() - $(window).height())) {
-                // isScrolling의 용도는 스크롤이 작동 중일 때 
-                // 재 스크롤 조작으로 요청이 중첩됨으로 인한 오작동을 방지
-                if(newLocal.videoIndex < newLocal.props.totalIndex 
-                    && newLocal.isScrolling === false) {
-                    // isScrolling on
-                    newLocal.isScrolling = true;
-                    $(".progress").css({"display": "block"});
-                    // .progress가 보여진 후 위치값을 계산하여
-                    // 스크롤 위치를 .progress가 보이는 위치로 이동
-                    var offset = $(".progress").offset();
-                    $("html, body").animate({scrollTop: offset.top}, 500);
-                    setTimeout(function() {
-                        if(newLocal.videoIndex < newLocal.props.totalIndex) {
-                            for(var i=0; i<5; i++) {
-                                if(newLocal.videoIndex >= newLocal.props.totalIndex) {
-                                    break;
-                                } else {
-                                    newLocal.appendMachine();
-                                }
-                            }
-                        }
-                        // isScrolling off
-                        newLocal.isScrolling = false;
-                        $(".progress").css({"display": "none"});
-                    }, 2000);
-                } else {
-                    // 더 이상 video가 없습니다
-                }
-            }
-        });
+        // defaultVideoSet() 으로 호출 시 렌더링 전이라 .infiniteVideoArea가 없어서 추가가 되지 않음
+        // componentDidMount로 첫 렌더링이 된 .infiniteVideoArea가 만들어진 후여야
+        // 정상적으로 초기 video 들이 동적 할당 됨
+        console.log('default')
+        for(var i=0; i < this.defaultVideo; i++) {
+            $this.appendMachine();
+        }
+        window.addEventListener('scroll', this.onScroll, false)
+
         // starPoint
         $(function() {
             // hoverMode
@@ -211,7 +177,7 @@ class infiniteScl extends Component {
                         var starThis = $(this);
                         var mouseNow = (event.pageX - offset.left);
                         // $(this) = p.star.hoverMode
-                        newLocal.hoverModeStarPoint(mouseNow, starThis);
+                        $this.hoverModeStarPoint(mouseNow, starThis);
                     }); // /mousemove
                 } // /else
                 // p.hoverMode 영역에 마우스가 들어왔다가
@@ -229,7 +195,7 @@ class infiniteScl extends Component {
                     // hoverMode > clickMode 전환
                     var offset = $(this).offset();
                     var mouseNow = (event.pageX - offset.left);
-                    var starPoint = newLocal.clickModeStarPoint(mouseNow);
+                    var starPoint = $this.clickModeStarPoint(mouseNow);
                     console.log('starPoint::: ', starPoint)
                     evaluateVideoImgAreaTemp.removeClass("hoverMode");
                     $(this).removeClass("hoverMode");
@@ -242,6 +208,55 @@ class infiniteScl extends Component {
                 } // /else
             }); // /p.star click
         }); // /function()
+    }
+
+    // 무한스크롤
+    onScroll = () => {
+        //console.log('videoIndex:: ',this.videoIndex)
+        //console.log('totalIndex::: ',this.props.totalIndex)
+        var $this = this
+        // infinite scroll
+        $(window).scroll(function () {
+            if ((parseInt($(window).scrollTop()) + 1) >= ($(document).height() - $(window).height())) {
+                // isScrolling의 용도
+                // 스크롤이 작동 중일 때 재 스크롤 조작으로
+                // 요청이 중첩됨으로 인한 오작동 방지
+                if($this.videoIndex < $this.props.totalIndex 
+                    && $this.isScrolling === false) {
+                    // isScrolling on
+                    $this.isScrolling = true;
+                    $(".progress").css({"display": "block"});
+                    setTimeout(function() {
+                        if($this.videoIndex < $this.props.totalIndex) {
+                            for(var i=0; i<5; i++) {
+                                if($this.videoIndex >= $this.props.totalIndex) {
+                                    break;
+                                } else {
+                                    $this.setState({
+                                        flag: true
+                                    })
+                                    $this.appendMachine();
+                                }
+                            }
+                        }
+                        // isScrolling off
+                        $this.isScrolling = false;
+                        $(".progress").css({"display": "none"});
+                        $this.setState({
+                            infiniteVideoList: $this.videoListTemp
+                        })
+                    }, 2000);
+                } else {
+                    $(window).off('scroll')
+                    console.log('off')
+                    // 더 이상 video가 없습니다
+                }
+        }
+        });
+      }
+
+    render() {
+        
         return (
             <div>
                 <div className="evaluateVideoArea"></div>

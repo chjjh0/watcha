@@ -1,7 +1,6 @@
 .commentArea {
     padding: 50px;
 }
-
 .profile {
     border-radius: 200px;
     margin-right: 20px;
@@ -10,7 +9,6 @@
     float: left;
     background: url("../img/iamsam.jpg") no-repeat center/cover;
 }
-
 .commentInput {
     background: transparent;
     float: right;
@@ -27,18 +25,14 @@
     border-bottom: 3px solid #121212;
     outline-color: transparent;
 }
-
 .commentInput:focus {
     border-bottom: 3px solid white;
     transition: all 0.5s;
 }
-
-
 /* fotter */
 .btnWriteArea {
     display: none;
 }
-
 .btnWriteCancel,
 .btnWriteComment {
     float: right;

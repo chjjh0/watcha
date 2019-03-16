@@ -9,7 +9,6 @@
     box-sizing: border-box;
     overflow: hidden;
 }
-
 .footer .footerArea {
     position: relative;
     box-sizing: border-box;
@@ -17,11 +16,9 @@
     margin: 0 auto;
     padding: 40px;
 }
-
 .footer .footerLinkArea {
     margin-bottom: 50px;
 }
-
 .footer .footerLinkArea span:nth-child(-n+4):after {
     content: '\00a0\00a0\00a0\00a0\00a0\00a0|\00a0\00a0\00a0\00a0\00a0\00a0';
     color: #888;

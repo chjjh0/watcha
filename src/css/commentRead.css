@@ -1,18 +1,16 @@
-/* profile class 관련 CSS는 commentArea.css에 명시
+/* profile class 관련 CSS는 
+상위 컴포넌트인 commentArea.css에 명시
 commentArea 및 commentRead 두 곳 모두에 적용하기 위함 */
-
 .commentReadArea {
     margin: 100px 0 0;
     color: white;
 }
-
 .commentBox {
     margin: 20px 0;
     min-height: 100px;
     max-height: 200px;
     box-sizing: border-box;
 }
-
 /* 댓글 작성자, 작성일 */
 .commentReadArea p {
     /* comment.css의 commentInput과 width 동일 */
@@ -20,7 +18,6 @@ commentArea 및 commentRead 두 곳 모두에 적용하기 위함 */
     float: left;
     line-height: 40px;
 }
-
 .commentBox .commentWriter:after {
     content: '·';
     vertical-align: middle;
@@ -28,7 +25,6 @@ commentArea 및 commentRead 두 곳 모두에 적용하기 위함 */
     font-weight: bold;
     margin: 0 10px;
 }
-
 /* 수정, 삭제 버튼 펼치기 */
 .btnOption {
     display: block;
@@ -39,13 +35,10 @@ commentArea 및 commentRead 두 곳 모두에 적용하기 위함 */
     box-sizing: border-box;
     cursor: pointer;
 }
-
 .btnOption i {
     width: 100%;
     height: 100%;
 }
-
-
 /* 수정, 삭제 버튼 */
 .optionBox {
     display: none;
@@ -81,12 +74,9 @@ commentArea 및 commentRead 두 곳 모두에 적용하기 위함 */
     height: 40px;
     margin: 10px 0;
 }
-
-
 .optionBox.on {
     display: block;
 }
-
 .optionBox a {
     color: white;
     width: 50px;
@@ -94,7 +84,6 @@ commentArea 및 commentRead 두 곳 모두에 적용하기 위함 */
     font-size: 18px;
     padding: 0 5px 0;
 }
-
 /* 댓글 내용 */
 .commentReadArea .commentContent {
     float: left;

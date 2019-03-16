@@ -5,8 +5,9 @@ class YouTube extends Component {
     constructor(props) {
         super(props);
     }
-    
+
     render() {
+        // youtube setting
         var videoSrc = 
             "https://www.youtube.com/embed/" + this.props.video + 
             "?autoplay=" + this.props.autoplay + 
@@ -14,8 +15,7 @@ class YouTube extends Component {
             "&rel=" + this.props.rel + "&loop=1" + 
             "&playlist=" + this.props.video + 
             "&modestbranding=" + this.props.modest +
-            "&enablejsapi=1&version=3&playerapiid=ytplayer"
-            ;
+            "&enablejsapi=1&version=3&playerapiid=ytplayer";
         return(
             <iframe 
                 title='a'

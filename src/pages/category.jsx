@@ -137,6 +137,7 @@ class Category extends Component {
             // });
         }
     }
+    
     changeAlign(value) {
         var $this = this;
         // selected = recommendation, starpoint, new, runningtime
