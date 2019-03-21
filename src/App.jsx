@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
+
+
 // css
 import './css/style.css';
 // components
@@ -27,7 +29,7 @@ class App extends Component {
     render() {
         return (
             <section className="wrap">
-                <Route exact path="/*" component={Nav} /> {/* header */}
+                <Route exact path="/*" component={Nav} />
                 <main id="main">
                   <Route exact path="/" component={SlideArea} />
                   <Route exact path="/" component={VideoList} />
@@ -43,5 +45,7 @@ class App extends Component {
         );
     }
 }
+
+
 
 export default App;

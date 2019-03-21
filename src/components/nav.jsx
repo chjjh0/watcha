@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+// redux
+import { connect } from 'react-redux';
+
+// actions
+import * as actions from '../actions/index'
+
 // components
 import ModalPayment from './modalPayment.jsx';
 import request from 'superagent';
@@ -28,7 +34,19 @@ class Nav extends Component {
         this.isloged = this.isloged.bind(this);
         this.btnLogout = this.btnLogout.bind(this);
         this.modalPaymentOn = this.modalPaymentOn.bind(this);
+        this.login = this.login.bind(this);
+        this.logout = this.logout.bind(this);
         this.isloged();
+    }
+
+    login() {
+        console.log('로그인 함수')
+        this.props.handleLogin();
+    }
+
+    logout() {
+        console.log('로그아웃 함수')
+        this.props.handleLogout();
     }
 
     btnCategory(cateName) {
@@ -53,40 +71,58 @@ class Nav extends Component {
         // 로그인 여부 확인 요청
         console.log('로그인 여부 확인 =========')
         var isLoggedId = sessionStorage.getItem('id');
-        if(isLoggedId) {
-            // sessionStorage에 값이 존재할때만 서버와 통신
-            request.get('/isLogin')
-            .query({
-                id: isLoggedId
-            })
-            .end((err, res) => {
-                if(err) {
-                    console.log('err: '+err.message)
-                    console.log('res.body: '+res.body)
-                    alert(res.body)
-                    return;
+        var aRes = '';
+        var $this = this;
+
+        if (isLoggedId) {
+            checkLogin();
+            async function checkLogin() {
+                try {
+                    aRes = await request.get('/isLogin').query({id: isLoggedId})
+                } catch {
+                    console.log('login error')
                 }
-                // 한 번 대조 요청을 처리할 동안 재요청 처리 방지
-                this.loggingIn = true;
-                if(res.body.message) {
-                    // id 대조 결과 cookie와 다름
-                    // before login message를 출력 후
-                    // sessionStorage에만 남아있는 값을 지움
-                    console.log(res.body.message)
-                    sessionStorage.removeItem('id')
-                } else {
-                    // id 대조 결과 일치
-                    // 로그인 상태로 전환
-                    this.setState({
-                        isLogged: true
-                    })
-                    // sessionStorage setting
-                    sessionStorage.setItem('id', res.body.user[0].id)
-                }
-            });
+                console.log('로그인 ID는::: ', aRes.body.user[0].id)
+                sessionStorage.setItem('id', aRes.body.user[0].id);
+
+                $this.props.handleLogin(sessionStorage.getItem('id'));
+            }
         }
-        // 작업이 끝나면 요청이 들어올 수 있게 false로 전환
-        this.loggingIn = false;
+        
+        // if(isLoggedId) {
+        //     // sessionStorage에 값이 존재할때만 서버와 통신
+        //     request.get('/isLogin')
+        //     .query({
+        //         id: isLoggedId
+        //     })
+        //     .end((err, res) => {
+        //         if(err) {
+        //             console.log('err: '+err.message)
+        //             console.log('res.body: '+res.body)
+        //             alert(res.body)
+        //             return;
+        //         }
+        //         // 한 번 대조 요청을 처리할 동안 재요청 처리 방지
+        //         this.loggingIn = true;
+        //         if(res.body.message) {
+        //             // id 대조 결과 cookie와 다름
+        //             // before login message를 출력 후
+        //             // sessionStorage에만 남아있는 값을 지움
+        //             console.log(res.body.message)
+        //             sessionStorage.removeItem('id')
+        //         } else {
+        //             // id 대조 결과 일치
+        //             // 로그인 상태로 전환
+        //             this.setState({
+        //                 isLogged: true
+        //             })
+        //             // sessionStorage setting
+        //             sessionStorage.setItem('id', res.body.user[0].id)
+        //         }
+        //     });
+        // }
+        // // 작업이 끝나면 요청이 들어올 수 있게 false로 전환
+        // this.loggingIn = false;
     }
 
     btnLogout() {
@@ -144,6 +180,8 @@ class Nav extends Component {
     }
 
     render() {
+        console.log('확인:::',this.props.loginId)
+        console.log('확인:::',this.props.isLogged)
         return (
         <header id="header" className="nav">
             <ModalPayment />
@@ -179,15 +217,15 @@ class Nav extends Component {
                                                 
                         {
                             // 로그인 유무에 따른 '보고싶어요' Button 처리
-                            this.state.isLogged === true ? 
+                            this.props.isLogged === true ? 
                             <Link to="/favorite">
                                 <a href="localhost:8000/favorite">보고싶어요</a>
                             </Link> : ''
                         }
                         {
                             // 로그인 여부에 따른 '로그인/로그아웃' Button 처리
-                            this.state.isLogged === true ?
-                            <a href="#" alt="로그아웃" onClick={this.btnLogout}>{this.state.loginId}로그아웃</a>
+                            this.props.isLogged === true ?
+                            <a href="#" alt="로그아웃" onClick={this.btnLogout}>로그아웃</a>
                             : 
                             <Link to="/login">
                                 <a href="localhost:8000/favorite">로그인</a>
@@ -201,4 +239,18 @@ class Nav extends Component {
 }
 }
 
-export default Nav;
+const mapStateToProps = (state) => {
+    return {
+        isLogged: state.checkLogin.isLogged,
+        loginId: state.checkLogin.loginId
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleLogin: (loginId) => { dispatch(actions.login(loginId)) },
+        handleLogout: () => { dispatch(actions.logout()) }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Nav);

@@ -10,9 +10,15 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-infinite-scroll-component": "^4.2.0",
+    "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
     "reactstrap": "^6.5.0",
+    "redux": "^4.0.1",
+    "redux-actions": "^2.6.5",
+    "redux-logger": "^3.0.6",
+    "redux-pender": "^2.0.12",
+    "redux-thunk": "^2.3.0",
     "superagent": "^4.1.0"
   },
   "babel": {
