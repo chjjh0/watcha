@@ -13,9 +13,49 @@
  <div>
   <img src="./p_image/watcha_main.png" />
  </div>
- <br><br><br><br>
+ <br><br>
+ 
+ <div>
+  <img src="./p_image/main_newContent.png" />
+ </div>
+ <br><br>
  
  <div>
   <img src="./p_image/watcha_main_2.png" />
+ </div>
+ <br><br><br><br>
+
+■ Login page
+
+ <div>
+  <img src="./p_image/loginPage.png" />
+ </div>
+ <br><br><br><br>
+ 
+■ Category page
+
+ <div>
+  <img src="./p_image/categoryPage.png" />
+ </div>
+ <br><br>
+ 
+■ Evaluate page
+
+ <div>
+  <img src="./p_image/evaluatePage.png" />
+ </div>
+ <br><br><br><br>
+
+■ Favorite page
+
+ <div>
+  <img src="./p_image/favoritePage.png" />
+ </div>
+ <br><br><br><br>
+ 
+■ LayerPopup
+
+ <div>
+  <img src="./p_image/layerPopup.png" />
  </div>
  <br><br><br><br>
