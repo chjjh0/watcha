@@ -6,7 +6,6 @@ import '../css/login.css';
 
 
 // img
-import Logo from '../img/logo.png';
 import LegoBack from '../img/login.jpg'
 // jQuery
 import $ from 'jquery';

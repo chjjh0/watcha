@@ -362,7 +362,7 @@ btnFavorite(e) {
                 $(".videoHoverMode:eq(0)").css({
                     "transform": "translate(90px, 0) scale(1.7)",
                     "transition": "all 0.5s"});
-                for(var j=1;j<5;j++) {
+                for(let j=1;j<5;j++) {
                     $(".videoHoverMode:eq("+j+")").css({
                         "transform": "translate(180px, 0)",
                         "transition": "all 0.5s"});
@@ -379,7 +379,7 @@ btnFavorite(e) {
                     "transform": "scale(1.7)",
                     "transition": "all 0.5s"});
                 // 2~4번 오른쪽 이동
-                for(var j=2;j<5;j++) {
+                for(let j=2;j<5;j++) {
                     $(".videoHoverMode:eq("+j+")").css({
                         "transform": "translate(80px, 0)", 
                         "transition": "all 0.5s"})
@@ -387,7 +387,7 @@ btnFavorite(e) {
             break;
             case 2:
                 // 0~1번 왼쪽 이동
-                for(var i=0;i<2;i++) {
+                for(let i=0;i<2;i++) {
                     $(".videoHoverMode:eq("+i+")").css({
                         "transform": "translate(-80px, 0)",
                         "transition": "all 0.5s"
@@ -398,7 +398,7 @@ btnFavorite(e) {
                     "transform": "scale(1.7)",
                     "transition": "all 0.5s"});
                 // 3~4번 오른쪽 이동
-                for(var j=3;j<5;j++) {
+                for(let j=3;j<5;j++) {
                     $(".videoHoverMode:eq("+j+")").css({
                         "transform": "translate(80px, 0)", 
                         "transition": "all 0.5s"})
@@ -406,7 +406,7 @@ btnFavorite(e) {
             break;
             case 3:
                 // 0~2번 왼쪽 이동
-                for(var i=0;i<3;i++) {
+                for(let i=0;i<3;i++) {
                     $(".videoHoverMode:eq("+i+")").css({
                         "transform": "translate(-80px, 0)",
                         "transition": "all 0.5s"
@@ -428,7 +428,7 @@ btnFavorite(e) {
                     "transform": "translate(-90px, 0) scale(1.7)",
                     "transition": "all 0.5s"});
                 // 0~3번 왼쪽 이동
-                for(var i=0;i<4;i++) {
+                for(let i=0;i<4;i++) {
                     $(".videoHoverMode:eq("+i+")").css({
                         "transform": "translate(-180px, 0)",
                         "transition": "all 0.5s"

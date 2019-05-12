@@ -199,14 +199,10 @@ class Nav extends Component {
                     <ul className="leftNav">
                         <h1><a href="/" alt="logo" className="logo">로고</a></h1>
                         <li className="btnCategory">
-                            <Link to="/category">
                                 <a href="/category" alt="카테고리">카테고리</a>
-                            </Link>
                         </li>
                         <li className="evaluation">
-                            <Link to="/evaluate">
                                 <a href="/evaluate" alt="평가하기">평가하기</a>
-                            </Link>
                         </li>
                         </ul>
                         <div className="rightNav">
@@ -227,9 +223,7 @@ class Nav extends Component {
                             this.props.isLogged === true ?
                             <a href="#" alt="로그아웃" onClick={this.btnLogout}>로그아웃</a>
                             : 
-                            <Link to="/login">
                                 <a href="localhost:8000/favorite">로그인</a>
-                            </Link>
                         }   
                         </div>
                 </div>

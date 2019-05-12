@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import request from 'superagent';
 
+
 // css
 import '../css/footer.css';
-
+import $ from 'jquery';
+window.$ = $;
 class CommentUpdateSubmit extends Component {
     constructor(props) {
         super(props);

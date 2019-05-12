@@ -19,7 +19,8 @@ import CategoryPage from './pages/category.jsx';
 import EvaluatePage from './pages/evaluate.jsx';
 import FavoritePage from './pages/favorite.jsx';
 // jQuery
-import Jquery from 'jquery';
+import $ from 'jquery';
+window.$ = $;
 
 class App extends Component {
     constructor(props) {

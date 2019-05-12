@@ -47,7 +47,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "babel-loader": "^8.0.5",
     "css-loader": "^2.1.0",
     "style-loader": "^0.23.1",
     "webpack-cli": "^3.2.0"

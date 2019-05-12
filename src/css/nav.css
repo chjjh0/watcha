@@ -78,7 +78,7 @@
   height: 90px;
   color: transparent;
   font-size: 1px;
-  background: url('../img/logo.png') no-repeat center/cover;
+  /* background: url('../img/logo.png') no-repeat center/cover; */
 }
 .leftNav > .btnCategory,
 .leftNav > .evaluation {

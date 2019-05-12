@@ -4,7 +4,6 @@ import {Redirect} from 'react-router-dom';
 // css
 import '../css/join.css';
 // img
-import Logo from '../img/logo.png';
 import LegoBack from '../img/login.jpg'
 // jQuery
 import $ from 'jquery';

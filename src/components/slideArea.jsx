@@ -84,13 +84,15 @@ class SlideArea extends Component {
         var synopsis = this.slideAry[num[0]].synopsis;
         var videoIndex = this.slideAry[num[0]].videoIndex;
         $(function(){
-            $(".slideArea").css("display","none");
-            $(".slideArea").css("background", "url('img/"+slideImg+"') no-repeat right 50px/55%")
-            $(".slideEle").find("h2").html(title);
-            $(".slideEle").find(".ratingValue").html(ratingValue);
-            $(".slideEle").find(".rating").html(rating);
-            $(".slideEle").find(".synopsis").html(synopsis);
-            $(".slideEle").find(".btnBox").find(".btnWish").attr('name', videoIndex);
+            $(".slideArea")
+                .css("display","none")
+                .css("background", "url('img/"+slideImg+"') no-repeat right 50px/55%")
+            $(".slideEle")
+                .find("h2").html(title)
+                .find(".ratingValue").html(ratingValue)
+                .find(".rating").html(rating)
+                .find(".synopsis").html(synopsis)
+                .find(".btnBox").find(".btnWish").attr('name', videoIndex);
             $(".slideArea").fadeIn("slow");
         });
     }

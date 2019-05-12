@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 // css
 import '../css/infiniteVideoList.css';
-
+import $ from 'jquery';
+window.$ = $;
 class InfiniteVideoList extends Component {
     constructor(props) {
         super(props);
